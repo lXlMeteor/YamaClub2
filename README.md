@@ -1,6 +1,6 @@
 新規作成は
 /waratte_kuyou　ディレクトリで
-> `make init'
+> ```make init```
 
 
 docker-compose.yml
