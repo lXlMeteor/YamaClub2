@@ -1,13 +1,13 @@
 新規作成は /YamaClub2ディレクトリで
-> `make init`
+> ```make init```
 
 -MacOS-                  
-> `make mac-next` 
-> `make mac-flask` 
+> ```make mac-next```    
+> ```make mac-flask```   
 
 -LinuxOS-
-> `make linux-next` 
-> `make linux-flask` 
+> ```make linux-next```    
+> ```make linux-flask```    
 
 でブラウザを確認(nextは外部画像が正しく読み込まれていません)
 
