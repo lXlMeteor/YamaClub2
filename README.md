@@ -1,5 +1,5 @@
-HackUのわきさかのブランチ。
-健康的なハッカソン。
+まず、/YmaClub2/nextディレクトリに移動し
+>```npm install```
 
 新規作成は /YamaClub2ディレクトリで
 > ```make init```
