@@ -1,0 +1,11 @@
+services:
+  app:
+    build:
+      context: ./next
+      dockerfile: Dockerfile  # 本番用のDockerfileを指定
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./next:/next
+    environment:
+      - NODE_ENV=production

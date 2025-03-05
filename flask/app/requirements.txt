@@ -1,0 +1,6 @@
+flask
+google
+google.genai
+google.generativeai
+pillow
+datetime
