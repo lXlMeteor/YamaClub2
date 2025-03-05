@@ -1,5 +1,4 @@
-新規作成は
-/YamaClub2ディレクトリで
+新規作成は /YamaClub2ディレクトリで
 > ```make init```
 
 -MacOS-                  
@@ -9,6 +8,7 @@
 -LinuxOS-
 > ```make linux-next```
 > ```make linux-flask```
+
 でブラウザを確認(nextは外部画像が正しく読み込まれていません)
 
 ライブラリなどのインストールは
