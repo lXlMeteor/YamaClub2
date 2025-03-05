@@ -25,11 +25,11 @@ start:  #コンテナの再起動
 down:  #コンテナ削除
 	docker-compose down --remove-orphans
 
-restart:
+retart:
 	@make stop
 	@make up
 
-resmake:  #コンテナの再生成
+remake:  #コンテナの再生成
 	@make down
 	@make up
 
@@ -43,10 +43,10 @@ reset:  #全てのデータを削除し、新規ビルド(成果物は消えな�
 
 #イメージ、ボリューム、その他コンテナを全て削除します
 destroy:
-	docker compose down --rmi all --volumes --remove-orphans
+	docker-compose down --rmi all --volumes --remove-orphans
 #ボリューム、その他コンテナを削除します
 destroy-volumes:
-	docker compose down --volumes --remove-orphans
+	docker-compose down --volumes --remove-orphans
 
 app:  #appコンテナ(nextのコンテナ)に入る
 	docker-compose exec app sh
@@ -69,4 +69,78 @@ mac-flask:
 linux-next:  #LinuxOSの場合はこれでブラウザが開く
 	xdg-open http://localhost:3000
 linux-flask:
+	edg-open http://127.0.0.1:5001
+
+#------------------------------------
+
+init-s:  #新規のビルド
+	docker compose -f docker-compose.yml up -d --build
+
+init-mac-s:  #新規ビルド後にブラウザを開く(MacOS)
+	@make init
+	@make mac-open
+
+init-linux-s:  #新規ビルド後にブラウザを開く(LinuxOS)
+	@make init
+	@make linux-open
+
+up-s:  #セットアップや既存イメージの再ビルド
+	docker compose -f docker-compose.yml up -d
+
+build-s:  #キャッシュを使わないビルド,起動はしない
+	docker compose -f docker-compose.yml build --no-cache
+
+stop-s:  #コンテナの停止
+	docker compose stop
+
+start-s:  #コンテナの再起動
+	docker compose -f docker-compose.yml start
+
+down-s:  #コンテナ削除
+	docker compose down --remove-orphans
+
+retart-s:
+	@make stop
+	@make up
+
+remake-s:  #コンテナの再生成
+	@make down
+	@make up
+
+reupdate-s:  #コンテナを更新
+	@make down
+	@make init
+
+reset-s:  #全てのデータを削除し、新規ビルド(成果物は消えない)
+	@make destroy
+	@make init
+
+#イメージ、ボリューム、その他コンテナを全て削除します
+destroy-s:
+	docker compose down --rmi all --volumes --remove-orphans
+#ボリューム、その他コンテナを削除します
+destroy-volumes-s:
+	docker compose down --volumes --remove-orphans
+
+app-s:  #appコンテナ(nextのコンテナ)に入る
+	docker compose exec app sh
+back-s:  #flaskコンテナに入る
+	docker compose exec flask sh
+
+ps-s:  #現在稼働中のコンテナを表示
+	docker compose ps
+
+npm-dev-s:  #サーバーを起動(コンテナ起動時にport:3000は使われているため、あまり意味はない)
+	docker compose exec app npm run dev
+python-s:
+	docker compose exec flask python main.py
+
+mac-next-s:  #MacOSの場合はこれでブラウザが開く
+	open http://localhost:3000
+mac-flask-s:
+	open http://127.0.0.1:5001
+
+linux-next-s:  #LinuxOSの場合はこれでブラウザが開く
+	xdg-open http://localhost:3000
+linux-flask-s:
 	edg-open http://127.0.0.1:5001
