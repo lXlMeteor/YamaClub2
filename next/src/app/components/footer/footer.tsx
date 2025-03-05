@@ -1,4 +1,4 @@
-import styles from '@/app/static/styles/footer.module.css'
+import styles from '@/app/statics/styles/footer.module.css'
 
 export default function Footer () {
     return (
