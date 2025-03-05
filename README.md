@@ -1,6 +1,21 @@
 新規作成は
 /waratte_kuyou　ディレクトリで
 > ```make init```
+-MacOS-                  -LinuxOS-
+> ```make mac-next```    > ```make linux-next```
+> ```make mac-flask```   > ```make linux-flask```
+でブラウザを確認(nextは外部画像が正しく読み込まれていません)
+
+ライブラリなどのインストールは
+```make app```や```make back```
+でコンテナに入って実行すること
+
+ホスト環境(ローカル環境)で
+```npm run dev```や```python main.py```
+をなるべく使用しないこと
+
+```make app```や```make back```
+などでコンテナに入り、実行すること
 
 
 docker-compose.yml
