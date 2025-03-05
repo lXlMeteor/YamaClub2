@@ -65,11 +65,22 @@ mac-next:  #MacOSの場合はこれでブラウザが開く
 	open http://localhost:3000
 mac-flask:
 	open http://127.0.0.1:5001
+mac-prisma:
+	open http://localhost:5555
 
 linux-next:  #LinuxOSの場合はこれでブラウザが開く
 	xdg-open http://localhost:3000
 linux-flask:
-	edg-open http://127.0.0.1:5001
+	xdg-open http://127.0.0.1:5001
+linux-prisma:
+	xdg-open http://localhost:5555
+
+win-next:  #WindowsOSの場合はこれでブラウザが開く
+	start http://localhost:3000
+win-flask:
+	start http://127.0.0.1:5001
+win-prisma:
+	start http://localhost:5555
 
 #------------------------------------
 
@@ -139,8 +150,19 @@ mac-next-s:  #MacOSの場合はこれでブラウザが開く
 	open http://localhost:3000
 mac-flask-s:
 	open http://127.0.0.1:5001
+mac-prisma-s:
+	open http://localhost:5555
 
 linux-next-s:  #LinuxOSの場合はこれでブラウザが開く
 	xdg-open http://localhost:3000
 linux-flask-s:
 	edg-open http://127.0.0.1:5001
+linux-prisma-s:
+	xdg-open http://localhost:5555
+
+win-next-s:  #WindowsOSの場合はこれでブラウザが開く
+	start http://localhost:3000
+win-flask-s:
+	start http://127.0.0.1:5001
+win-prisma-s:
+	start http://localhost:5555
