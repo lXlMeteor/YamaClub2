@@ -1,28 +1,25 @@
-import { useState } from "react";
 import { TextField } from "@mui/material";
 
-export default function EmailField () {
-    const [email, setEmail] = useState<string>("");
+type EmailFieldProps = {
+    email: string;
+    setEmail: React.Dispatch<React.SetStateAction<string>>;
+};
+
+export default function EmailField({ email, setEmail } : EmailFieldProps) {
+
+    const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+        setEmail(event.target.value);
+        // console.log(email);
+    };
 
     return (
         <TextField
-            // id="outlined-textarea"
-            // value = {email}
-            // // onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
-            // //     if (e.target.value.length <= 255) {
-            // //         handleEmail(e);
-            // //     }
-            // // }}
-            // label="メールアドレスを記入してください。"
-            // multiline
-            // rows={1}
-            // slotProps={{
-            //     inputLabel: { shrink: true } // これを使う
-            // }}
-            // sx={{
-            //     width: '75vw',
-            //     backgroundColor: 'white',
-            // }}
+            label="メールアドレス"
+            value={email}
+            onChange={handleChange}
+            sx = {{
+                width: "60vw",
+            }}
         />
-    )
+    );
 }
