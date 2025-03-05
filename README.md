@@ -1,5 +1,5 @@
 新規作成は
-/waratte_kuyou　ディレクトリで
+/YamaClub2ディレクトリで
 > ```make init```
 
 -MacOS-                  
