@@ -1,0 +1,92 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id             String    @id @default(uuid())
+  name           String    @unique
+  mail           String    @unique
+  hashedPassword String
+  image          String?
+  intro          String?
+  createdAt      DateTime  @default(now())
+  updatedAt      DateTime  @updatedAt
+
+  sessions      Session[]
+  posts         Post[]
+  reactions     Reaction[]
+  comments      Comment[]
+}
+
+model Session {
+  id           String    @id @default(uuid())
+  sessionToken String    @unique
+  userId       String
+  expires      DateTime
+
+  user         User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+model Post {
+  id          String    @id @default(uuid())
+  title       String
+  category    String
+  content     String
+  image       String?
+  userId      String
+  status      String
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+
+  user        User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  reactions   Reaction[]
+  comments    Comment[]
+}
+
+model Reaction {
+  id          String    @id @default(uuid())
+  userId      String
+  postId      String
+  type        ReactionType
+  createdAt   DateTime  @default(now())
+
+  user        User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  post        Post      @relation(fields: [postId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, postId, type]) // 同じユーザーが同じ投稿に同じリアクションを複数回できない
+}
+
+enum ReactionType {
+  EMPATHY
+  LOL
+  BIGLOL
+}
+
+model Comment {
+  id          String    @id @default(uuid())
+  userId      String
+
+  postId      String? //投稿に対するコメント
+  replyId     String? //コメントへのコメント(返信)
+  content     String //コメント内容
+
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+
+  user        User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  post        Post?     @relation(fields: [postId], references: [id], onDelete: Cascade)
+  reply       Comment?  @relation("CommentReplies", fields: [replyId], references: [id], onDelete: Cascade)
+
+  replies     Comment[] @relation("CommentReplies")
+}
