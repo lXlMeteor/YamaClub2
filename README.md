@@ -1,9 +1,14 @@
 新規作成は
 /waratte_kuyou　ディレクトリで
 > ```make init```
--MacOS-                  -LinuxOS-
-> ```make mac-next```    > ```make linux-next```
-> ```make mac-flask```   > ```make linux-flask```
+
+-MacOS-                  
+> ```make mac-next```    
+> ```make mac-flask```   
+
+-LinuxOS-
+> ```make linux-next```
+> ```make linux-flask```
 でブラウザを確認(nextは外部画像が正しく読み込まれていません)
 
 ライブラリなどのインストールは
