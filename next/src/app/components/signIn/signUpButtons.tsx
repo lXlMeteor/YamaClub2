@@ -1,15 +1,17 @@
 import { Button } from "@mui/material";
 
 type SignUpButtonProps = {
+    setIsBlank: React.Dispatch<React.SetStateAction<boolean>>;
     setAuthSwitch: React.Dispatch<React.SetStateAction<boolean>>;
     setEmail: React.Dispatch<React.SetStateAction<string>>;
     setUserName: React.Dispatch<React.SetStateAction<string>>;
     setPassWord: React.Dispatch<React.SetStateAction<string>>;
 }
 
-export function SignUpButton ({ setAuthSwitch, setEmail, setUserName, setPassWord } : SignUpButtonProps) {
+export function SignUpButton ({ setIsBlank, setAuthSwitch, setEmail, setUserName, setPassWord } : SignUpButtonProps) {
 
     const handleClick = () => {
+        setIsBlank(false);
         setAuthSwitch(true);
         setEmail("");
         setUserName("");
@@ -41,15 +43,17 @@ export function SignUpButton ({ setAuthSwitch, setEmail, setUserName, setPassWor
 
 
 type LoginButtonProps = {
+    setIsBlank: React.Dispatch<React.SetStateAction<boolean>>;
     setAuthSwitch: React.Dispatch<React.SetStateAction<boolean>>;
     setEmail: React.Dispatch<React.SetStateAction<string>>;
     setUserName: React.Dispatch<React.SetStateAction<string>>;
     setPassWord: React.Dispatch<React.SetStateAction<string>>;
 }
 
-export function LoginButton ({ setAuthSwitch, setEmail, setUserName, setPassWord } : LoginButtonProps) {
+export function LoginButton ({ setIsBlank, setAuthSwitch, setEmail, setUserName, setPassWord } : LoginButtonProps) {
 
     const handleClick = () => {
+        setIsBlank(false);
         setAuthSwitch(false);
         setEmail("");
         setUserName("");
@@ -82,6 +86,7 @@ export function LoginButton ({ setAuthSwitch, setEmail, setUserName, setPassWord
 
 
 type SignInPostButton = {
+    setIsBlank: React.Dispatch<React.SetStateAction<boolean>>;
     email: string;
     setEmail: React.Dispatch<React.SetStateAction<string>>;
     userName: string;
@@ -90,7 +95,7 @@ type SignInPostButton = {
     setPassWord: React.Dispatch<React.SetStateAction<string>>;
 }
 
-export function SignInPostButton ({ email, setEmail, userName, setUserName, passWord, setPassWord } : SignInPostButton) {
+export function SignInPostButton ({ setIsBlank, email, setEmail, userName, setUserName, passWord, setPassWord } : SignInPostButton) {
 
     const handleClick = async() => {
         console.log("送信(サインっぷ)");
@@ -117,6 +122,53 @@ export function SignInPostButton ({ email, setEmail, userName, setUserName, pass
             }
         } catch (error) {
             console.error(error);
+        }
+    }
+
+    return (
+        <Button
+            variant="contained"
+            onClick={handleClick}
+            sx={{
+                width: '13rem',
+                height: '4rem',
+                borderRadius: '10px',
+                backgroundColor: '#FF9B83',
+                color: '#FFFFFF',
+                fontWeight: 'bold',
+                fontSize: '1.2rem',
+                '&:hover': {
+                    backgroundColor: 'rgba(224, 129, 109, 0.2)',
+                    },
+                }}
+            >
+            確定
+        </Button>
+    )
+}
+
+
+
+type LogInPostButton = {
+    setIsBlank: React.Dispatch<React.SetStateAction<boolean>>;
+    email: string;
+    setEmail: React.Dispatch<React.SetStateAction<string>>;
+    passWord: string;
+    setPassWord: React.Dispatch<React.SetStateAction<string>>;
+}
+
+export function LogInPostButton ({ setIsBlank, email, setEmail, passWord, setPassWord } : LogInPostButton) {
+
+    const handleClick = () => {
+        if (email && passWord) {
+            setIsBlank(false);
+            console.log("送信");
+            console.log(`メールアドレス：${email}`);
+            console.log(`パスワード：${passWord}`);
+            setEmail("");
+            setPassWord("");
+        } else {
+            setIsBlank(true);
         }
     }
 
