@@ -1,6 +1,6 @@
 import { Button } from "@mui/material";
 
-type SignUpButtonProps = {
+type LoginButtonProps = {
     setIsBlank: React.Dispatch<React.SetStateAction<boolean>>;
     setAuthSwitch: React.Dispatch<React.SetStateAction<boolean>>;
     setEmail: React.Dispatch<React.SetStateAction<string>>;
@@ -8,15 +8,15 @@ type SignUpButtonProps = {
     setPassWord: React.Dispatch<React.SetStateAction<string>>;
 }
 
-export function SignUpButton ({ setIsBlank, setAuthSwitch, setEmail, setUserName, setPassWord } : SignUpButtonProps) {
+export function LoginButton ({ setIsBlank, setAuthSwitch, setEmail, setUserName, setPassWord } : LoginButtonProps) {
 
     const handleClick = () => {
         setIsBlank(false);
-        setAuthSwitch(true);
+        setAuthSwitch(false);
         setEmail("");
         setUserName("");
         setPassWord("");
-        console.log("サインアップを選択中。");
+        console.log("ログインを選択中。");
     }
 
     return (
@@ -27,42 +27,40 @@ export function SignUpButton ({ setIsBlank, setAuthSwitch, setEmail, setUserName
                 width: '13rem',
                 height: '4rem',
                 borderRadius: '10px',
-                backgroundColor: '#FF9B83',
-                color: '#FFFFFF',
+                backgroundColor: 'rgba(255, 155, 131, 0.04)',
+                color: '#FF9B83',
                 fontWeight: 'bold',
-                fontSize: '1.2rem', 
+                fontSize: '1.2rem',
+                border: '2px solid #EF6C00',
                 '&:hover': {
-                    backgroundColor: '#E0816D',
-                },
-            }}
-        >
-            サインアップ
+                    backgroundColor: 'rgba(224, 129, 109, 0.2)',
+                    },
+                }}
+            >
+            ログイン
         </Button>
     )
 }
 
 
-type SignUpPostButton = {
+
+type LogInPostButton = {
     setIsBlank: React.Dispatch<React.SetStateAction<boolean>>;
     email: string;
     setEmail: React.Dispatch<React.SetStateAction<string>>;
-    userName: string;
-    setUserName: React.Dispatch<React.SetStateAction<string>>;
     passWord: string;
     setPassWord: React.Dispatch<React.SetStateAction<string>>;
 }
 
-export function SignUpPostButton ({ setIsBlank, email, setEmail, userName, setUserName, passWord, setPassWord } : SignUpPostButton) {
+export function LogInPostButton ({ setIsBlank, email, setEmail, passWord, setPassWord } : LogInPostButton) {
 
     const handleClick = () => {
-        if (email && userName && passWord) {
+        if (email && passWord) {
             setIsBlank(false);
             console.log("送信");
             console.log(`メールアドレス：${email}`);
-            console.log(`ユーザー名：${userName}`);
             console.log(`パスワード：${passWord}`);
             setEmail("");
-            setUserName("");
             setPassWord("");
         } else {
             setIsBlank(true);
