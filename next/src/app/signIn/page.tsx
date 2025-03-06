@@ -7,12 +7,12 @@ import SignUpPanel from '../components/signIn/signUpPanel';
 import LogInPanel from '../components/signIn/logInPanel';
 
 export default function SignIn () {
-
     const [authSwitch, setAuthSwitch] = useState<boolean>(true);
     const [email, setEmail] = useState<string>("");
     const [passWord, setPassWord] = useState<string>("");
     const [userName, setUserName] = useState<string>("");
     const [isBlank, setIsBlank] = useState<boolean>(false);
+
 
     return (
         <div className={styles.signIn}>
