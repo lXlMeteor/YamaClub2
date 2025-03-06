@@ -36,7 +36,7 @@ export const authOptions: NextAuthOptions = {
             async authorize(credentials) {
                 if (!credentials?.email || !credentials?.password) {
                   console.log("メールアドレスまたはパスワードがありません");
-                  return null;
+                  throw new Error('メールアドレスまたはパスワードが存在しません');
                 }
                 
                 // メールアドレスに一致するユーザーをデータベースから取得
@@ -50,16 +50,19 @@ export const authOptions: NextAuthOptions = {
                     const isValid = await bcrypt.compare(credentials.password, user.hashedPassword);
                     if (isValid) {
                         return user;
+                    } else {
+                        throw new Error('パスワードが一致しません');
                     }
                 }
           
                 // 認証失敗
-                return null;
+                throw new Error('ユーザーが見つかりません');
             },
         }),
     ],
     pages: {
         signIn: '/signIn',
+        error: '/signIn',
     },
     session: {
         strategy: "jwt",

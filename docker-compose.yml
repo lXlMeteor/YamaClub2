@@ -10,6 +10,8 @@ services:
       - ./next:/next
     environment:
       - NODE_ENV=development
+    env_file:
+      - ./next/.env.docker
 
   flask:
     build:

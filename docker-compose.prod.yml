@@ -9,5 +9,3 @@ services:
       - ./next:/next
     environment:
       - NODE_ENV=production
-    env_file:
-      - .env.docker
