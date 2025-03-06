@@ -3,6 +3,7 @@ import type { Metadata } from "next";
 import "./globals.css";
 import Header from "./components/header/header";
 import Footer from "./components/footer/footer";
+import AuthContext from './context/AuthContext';
 
 // const geistSans = localFont({
 //   src: "./fonts/GeistVF.woff",
@@ -26,11 +27,13 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="ja">
       <body>
-        <Header/>
-        {children}
-        <Footer/>
+        <AuthContext>
+          <Header/>
+          {children}
+          <Footer/>
+        </AuthContext>
       </body>
     </html>
   );

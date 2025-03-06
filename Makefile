@@ -25,7 +25,7 @@ start:  #コンテナの再起動
 down:  #コンテナ削除
 	docker-compose down --remove-orphans
 
-retart:
+restart:
 	@make stop
 	@make up
 
