@@ -98,17 +98,36 @@ type SignInPostButton = {
 
 export function SignInPostButton ({ isBlank, setIsBlank, email, setEmail, userName, setUserName, passWord, setPassWord } : SignInPostButton) {
 
-    const handleClick = () => {
+    const handleClick = async() => {
 
         if ( email && userName && passWord ) {
             setIsBlank(false);
-            console.log("送信");
+            console.log("送信(サインイン)");
             console.log(`メールアドレス：${email}`);
             console.log(`ユーザー名：${userName}`);
             console.log(`パスワード：${passWord}`);
             setEmail("");
             setUserName("");
             setPassWord("");
+
+            try {
+                const name = "test";
+                const response = await fetch('/api/auth/signUp', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ name, email, passWord }),
+                });
+                const data = await response.json();
+                if (response.ok) {
+                    console.log(data);
+                } else {
+                    console.error(data.error);
+                }
+            } catch (error) {
+                console.error(error);
+            }
         } else {
             setIsBlank(true);
             console.log("記入漏れがあります。")
