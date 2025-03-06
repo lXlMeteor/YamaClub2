@@ -3,7 +3,7 @@ import prisma from '@/app/lib/prisma';
 import bcrypt from 'bcryptjs';
 
 export async function POST(req: NextRequest) {
-    const { name, email, password} = await req.json();
+    const {name, email, password} = await req.json();
 
     if (!name || !email || !password) {
         return NextResponse.json({ message: '必要な情報が不足しています' }, { status: 400 });
