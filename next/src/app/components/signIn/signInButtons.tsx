@@ -1,20 +1,22 @@
 import { Button } from "@mui/material";
 
 type SignUpButtonProps = {
-    email: string;
+    setIsBlank: React.Dispatch<React.SetStateAction<boolean>>;
+    setAuthSwitch: React.Dispatch<React.SetStateAction<boolean>>;
     setEmail: React.Dispatch<React.SetStateAction<string>>;
-    passWord: string;
+    setUserName: React.Dispatch<React.SetStateAction<string>>;
     setPassWord: React.Dispatch<React.SetStateAction<string>>;
 }
 
-export function SignUpButton ({ email, setEmail, passWord, setPassWord } : SignUpButtonProps) {
+export function SignUpButton ({ setIsBlank, setAuthSwitch, setEmail, setUserName, setPassWord } : SignUpButtonProps) {
 
     const handleClick = () => {
-        console.log("サインアップしました。")
-        console.log(`メールアドレス：${email}`);
-        console.log(`パスワード：${passWord}`);
+        setIsBlank(false);
+        setAuthSwitch(true);
         setEmail("");
+        setUserName("");
         setPassWord("");
+        console.log("サインアップを選択中。");
     }
 
     return (
@@ -40,21 +42,23 @@ export function SignUpButton ({ email, setEmail, passWord, setPassWord } : SignU
 }
 
 
-type LogInButtonProps = {
-    email: string;
+type LoginButtonProps = {
+    setIsBlank: React.Dispatch<React.SetStateAction<boolean>>;
+    setAuthSwitch: React.Dispatch<React.SetStateAction<boolean>>;
     setEmail: React.Dispatch<React.SetStateAction<string>>;
-    passWord: string;
+    setUserName: React.Dispatch<React.SetStateAction<string>>;
     setPassWord: React.Dispatch<React.SetStateAction<string>>;
 }
 
-export function LoginButton ({ email, setEmail, passWord, setPassWord } : LogInButtonProps) {
+export function LoginButton ({ setIsBlank, setAuthSwitch, setEmail, setUserName, setPassWord } : LoginButtonProps) {
 
     const handleClick = () => {
-        console.log("ログインしました。");
-        console.log(`メールアドレス：${email}`);
-        console.log(`パスワード：${passWord}`);
+        setIsBlank(false);
+        setAuthSwitch(false);
         setEmail("");
+        setUserName("");
         setPassWord("");
+        console.log("ログインを選択中。");
     }
 
     return (
@@ -77,6 +81,58 @@ export function LoginButton ({ email, setEmail, passWord, setPassWord } : LogInB
             >
             ログイン
         </Button>
+    )
+}
 
+
+type SignInPostButton = {
+    isBlank: boolean;
+    setIsBlank: React.Dispatch<React.SetStateAction<boolean>>;
+    email: string;
+    setEmail: React.Dispatch<React.SetStateAction<string>>;
+    userName: string;
+    setUserName: React.Dispatch<React.SetStateAction<string>>;
+    passWord: string;
+    setPassWord: React.Dispatch<React.SetStateAction<string>>;
+}
+
+export function SignInPostButton ({ isBlank, setIsBlank, email, setEmail, userName, setUserName, passWord, setPassWord } : SignInPostButton) {
+
+    const handleClick = () => {
+
+        if ( email && userName && passWord ) {
+            setIsBlank(false);
+            console.log("送信");
+            console.log(`メールアドレス：${email}`);
+            console.log(`ユーザー名：${userName}`);
+            console.log(`パスワード：${passWord}`);
+            setEmail("");
+            setUserName("");
+            setPassWord("");
+        } else {
+            setIsBlank(true);
+            console.log("記入漏れがあります。")
+        }
+    }
+
+    return (
+        <Button
+            variant="contained"
+            onClick={handleClick}
+            sx={{
+                width: '13rem',
+                height: '4rem',
+                borderRadius: '10px',
+                backgroundColor: '#FF9B83',
+                color: '#FFFFFF',
+                fontWeight: 'bold',
+                fontSize: '1.2rem',
+                '&:hover': {
+                    backgroundColor: 'rgba(224, 129, 109, 0.2)',
+                    },
+                }}
+            >
+            確定
+        </Button>
     )
 }
