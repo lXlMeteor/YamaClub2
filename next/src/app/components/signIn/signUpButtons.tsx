@@ -1,17 +1,15 @@
 import { Button } from "@mui/material";
 
 type SignUpButtonProps = {
-    setIsBlank: React.Dispatch<React.SetStateAction<boolean>>;
     setAuthSwitch: React.Dispatch<React.SetStateAction<boolean>>;
     setEmail: React.Dispatch<React.SetStateAction<string>>;
     setUserName: React.Dispatch<React.SetStateAction<string>>;
     setPassWord: React.Dispatch<React.SetStateAction<string>>;
 }
 
-export function SignUpButton ({ setIsBlank, setAuthSwitch, setEmail, setUserName, setPassWord } : SignUpButtonProps) {
+export function SignUpButton ({ setAuthSwitch, setEmail, setUserName, setPassWord } : SignUpButtonProps) {
 
     const handleClick = () => {
-        setIsBlank(false);
         setAuthSwitch(true);
         setEmail("");
         setUserName("");
@@ -43,17 +41,15 @@ export function SignUpButton ({ setIsBlank, setAuthSwitch, setEmail, setUserName
 
 
 type LoginButtonProps = {
-    setIsBlank: React.Dispatch<React.SetStateAction<boolean>>;
     setAuthSwitch: React.Dispatch<React.SetStateAction<boolean>>;
     setEmail: React.Dispatch<React.SetStateAction<string>>;
     setUserName: React.Dispatch<React.SetStateAction<string>>;
     setPassWord: React.Dispatch<React.SetStateAction<string>>;
 }
 
-export function LoginButton ({ setIsBlank, setAuthSwitch, setEmail, setUserName, setPassWord } : LoginButtonProps) {
+export function LoginButton ({ setAuthSwitch, setEmail, setUserName, setPassWord } : LoginButtonProps) {
 
     const handleClick = () => {
-        setIsBlank(false);
         setAuthSwitch(false);
         setEmail("");
         setUserName("");
@@ -86,8 +82,6 @@ export function LoginButton ({ setIsBlank, setAuthSwitch, setEmail, setUserName,
 
 
 type SignInPostButton = {
-    isBlank: boolean;
-    setIsBlank: React.Dispatch<React.SetStateAction<boolean>>;
     email: string;
     setEmail: React.Dispatch<React.SetStateAction<string>>;
     userName: string;
@@ -96,41 +90,33 @@ type SignInPostButton = {
     setPassWord: React.Dispatch<React.SetStateAction<string>>;
 }
 
-export function SignInPostButton ({ isBlank, setIsBlank, email, setEmail, userName, setUserName, passWord, setPassWord } : SignInPostButton) {
+export function SignInPostButton ({ email, setEmail, userName, setUserName, passWord, setPassWord } : SignInPostButton) {
 
     const handleClick = async() => {
+        console.log("送信(サインっぷ)");
+        console.log(`メールアドレス：${email}`);
+        console.log(`ユーザー名：${userName}`);
+        console.log(`パスワード：${passWord}`);
+        setEmail("");
+        setUserName("");
+        setPassWord("");
 
-        if ( email && userName && passWord ) {
-            setIsBlank(false);
-            console.log("送信(サインイン)");
-            console.log(`メールアドレス：${email}`);
-            console.log(`ユーザー名：${userName}`);
-            console.log(`パスワード：${passWord}`);
-            setEmail("");
-            setUserName("");
-            setPassWord("");
-
-            try {
-                const name = "test";
-                const response = await fetch('/api/auth/signUp', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
-                    body: JSON.stringify({ name, email, passWord }),
-                });
-                const data = await response.json();
-                if (response.ok) {
-                    console.log(data);
-                } else {
-                    console.error(data.error);
-                }
-            } catch (error) {
-                console.error(error);
+        try {
+            const response = await fetch('/api/auth/signUp', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ userName, email, passWord }),
+            });
+            const data = await response.json();
+            if (response.ok) {
+                console.log(data);
+            } else {
+                console.error(data.error);
             }
-        } else {
-            setIsBlank(true);
-            console.log("記入漏れがあります。")
+        } catch (error) {
+            console.error(error);
         }
     }
 
