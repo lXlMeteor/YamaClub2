@@ -15,20 +15,17 @@ type PostDecideButtonProps = {
 export function PostDecideButton ({ setIsBlank, title, setTitle, category, setCategory, content, setContent, customCategory, setCutomCategory} : PostDecideButtonProps) {
 
     const handleClick = () => {
-        if( title && (category || customCategory) && content ) {
+        if (customCategory) {
+            setCategory(customCategory);
+        }
+        if( title && category && content ) {
             console.log("投稿内容を確定しました。")
             console.log(`タイトル：${title}`);
-
-            if (category === "その他") {
-                console.log(`カスタムカテゴリ：${customCategory}`);
-            } else {
-                console.log(`カテゴリ：${category}`);
-            }
-
+            console.log(`カテゴリ：${category}`);
             console.log(`本文：${content}`);
             
             setTitle("");
-            setCategory("");
+            setCategory(null);
             setContent("");
             setCutomCategory("");
             setIsBlank(false);

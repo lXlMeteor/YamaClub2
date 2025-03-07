@@ -1,7 +1,7 @@
 import { TextField } from "@mui/material";
 
 type CustomCategoryFieldProps = {
-    category: string | null;
+    category: string;
     setCategory: React.Dispatch<React.SetStateAction<string | null>>;
 }
 
