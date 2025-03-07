@@ -36,8 +36,6 @@ export default function CreatePost () {
                 setTitle = {setTitle}
                 category = {category}
                 setCategory = {setCategory}
-                customCategory = {customCategory}
-                setCutomCategory = {setCustomCategory}
                 content = {content}
                 setContent = {setContent}
             />
