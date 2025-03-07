@@ -4,5 +4,8 @@
     gap: 3vh;
     align-items: center;
     margin-bottom: 3vh;
-    margin-top: 4vh;
+}
+
+.signUpPanel p {
+    color: rgb(255, 65, 65);
 }

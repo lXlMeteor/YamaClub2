@@ -13,7 +13,7 @@ type LogInPanelProps = {
 export default function LogInPanel ({ isBlank, email, setEmail, passWord, setPassWord} : LogInPanelProps) {
     return (
         <div className={styles.logInPanel}>
-            { isBlank ? <p>入力漏れがあります。</p> : <p></p>}
+            { isBlank ? <p>入力漏れがあります。</p> : <br></br>}
             <EmailField
                 email = {email}
                 setEmail = {setEmail}

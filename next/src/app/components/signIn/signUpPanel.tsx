@@ -15,8 +15,8 @@ type SignUpPanelProps = {
 
 export default function SignUpPanel ({ isBlank, email, setEmail, userName, setUserName, passWord, setPassWord} : SignUpPanelProps) {
     return (
-        <div className={styles.signUpPanel}>
-            { isBlank ? <p>入力漏れがあります。</p> : <p></p>}
+        <div  className={styles.signUpPanel}>
+            { isBlank ? <p>入力漏れがあります。</p> : <br></br>}
             <EmailField
                 email = {email}
                 setEmail = {setEmail}

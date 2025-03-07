@@ -1,8 +1,11 @@
 .logInPanel {
     display: flex;
     flex-direction: column;
-    gap: 6vh;
+    gap: 5vh;
     align-items: center;
     margin-bottom: 5vh;
-    margin-top: 3vh;
+}
+
+.logInPanel p {
+    color: rgb(255, 65, 65);
 }

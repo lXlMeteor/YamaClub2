@@ -22,11 +22,25 @@ export default function EmailField({ userName, setUserName } : UserNameFieldProp
                     inputLabel: { shrink: true }
                 }}
                 sx={{
-                    "& .MuiInputBase-root": {
-                        height: "6vh",
+                    backgroundColor: 'rgba(255, 255, 255, 0.8)',
+                    "& .MuiOutlinedInput-root": {
+                        borderColor: '#FF9B83',
+                        "&:hover .MuiOutlinedInput-notchedOutline": {
+                            borderColor: '#FF9B83',
+                            borderWidth: 2,
+                        },
+                        "&.Mui-focused .MuiOutlinedInput-notchedOutline": {
+                            borderColor: '#FF9B83',
+                            borderWidth: 2,
+                        },
                     },
-                    "& .MuiInputBase-input": {
-                        fontSize: "2vh",
+                    "& .MuiFormLabel-root": {
+                        color: '#4DAFFF',
+                        fontWeight: 'bold',
+                    },
+                    "& .MuiInputLabel-root.Mui-focused": {
+                        color: '#4DAFFF',
+                        fontWeight: 'bold',
                     },
                 }}
             />

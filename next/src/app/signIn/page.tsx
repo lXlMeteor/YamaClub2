@@ -16,60 +16,70 @@ export default function SignIn () {
 
 
     return (
-        <div className={styles.signIn}>
-            <LogInButton
-                setIsBlank = {setIsBlank}
-                setAuthSwitch = {setAuthSwitch}
-                setEmail = {setEmail}
-                setUserName = {setUserName}
-                setPassWord = {setPassWord}
-            />
-            <SignUpButton
-                setIsBlank = {setIsBlank}
-                setAuthSwitch = {setAuthSwitch}
-                setEmail = {setEmail}
-                setUserName = {setUserName}
-                setPassWord = {setPassWord}
-            />
-            { authSwitch ? 
-                <div>
-                    <SignUpPanel
-                        isBlank = {isBlank}
-                        email = {email}
-                        setEmail = {setEmail}
-                        userName = {userName}
-                        setUserName = {setUserName}
-                        passWord = {passWord}
-                        setPassWord = {setPassWord}
-                    />
-                    <SignUpPostButton
+        <div className={styles.backImage}>
+            <div className={styles.signIn}>
+                <div className={styles.panel}>
+                    <LogInButton
                         setIsBlank = {setIsBlank}
-                        email = {email}
+                        authSwitch = {authSwitch}
+                        setAuthSwitch = {setAuthSwitch}
                         setEmail = {setEmail}
-                        userName = {userName}
                         setUserName = {setUserName}
-                        passWord = {passWord}
                         setPassWord = {setPassWord}
                     />
-                </div>
-            :
-                <div>
-                    <LogInPanel
-                        isBlank = {isBlank}
-                        email = {email}
-                        setEmail = {setEmail}
-                        passWord = {passWord}
-                        setPassWord = {setPassWord}
-                    />
-                    <LogInPostButton
+                    <SignUpButton
                         setIsBlank = {setIsBlank}
-                        email = {email}
+                        authSwitch = {authSwitch}
+                        setAuthSwitch = {setAuthSwitch}
                         setEmail = {setEmail}
-                        passWord = {passWord}
+                        setUserName = {setUserName}
                         setPassWord = {setPassWord}
                     />
+                    { authSwitch ? 
+                        <div>
+                            <SignUpPanel
+                                isBlank = {isBlank}
+                                email = {email}
+                                setEmail = {setEmail}
+                                userName = {userName}
+                                setUserName = {setUserName}
+                                passWord = {passWord}
+                                setPassWord = {setPassWord}
+                            />
+                            <div className={styles.signUpPostButton}>
+                                <SignUpPostButton
+                                    setIsBlank = {setIsBlank}
+                                    email = {email}
+                                    setEmail = {setEmail}
+                                    userName = {userName}
+                                    setUserName = {setUserName}
+                                    passWord = {passWord}
+                                    setPassWord = {setPassWord}
+                                />
+                            </div>
+                        </div>
+                    :
+                        <div>
+                            <LogInPanel
+                                isBlank = {isBlank}
+                                email = {email}
+                                setEmail = {setEmail}
+                                passWord = {passWord}
+                                setPassWord = {setPassWord}
+                            />
+                            <div className={styles.signUpPostButton}>
+                                <LogInPostButton
+                                    setIsBlank = {setIsBlank}
+                                    email = {email}
+                                    setEmail = {setEmail}
+                                    passWord = {passWord}
+                                    setPassWord = {setPassWord}
+                                />
+                            </div>
+                        </div>
+                    }
                 </div>
-            }
+            </div>
         </div>
     )
 }
