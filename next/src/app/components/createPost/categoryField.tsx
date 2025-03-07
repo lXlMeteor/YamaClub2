@@ -4,11 +4,9 @@ import CustomCategoryField from "./customCategoryField";
 type CategoryFieldProps = {
     category: string | null;
     setCategory: React.Dispatch<React.SetStateAction<string | null>>;
-    customCategory: string;
-    setCustomCategory: React.Dispatch<React.SetStateAction<string>>;
 }
 
-export default function CategoryField({ category, setCategory, customCategory, setCustomCategory } : CategoryFieldProps) {
+export default function CategoryField({ category, setCategory } : CategoryFieldProps) {
 
     const handleCategoryChange = (selectedCategory: string) => {
         if (selectedCategory === category) {
@@ -55,17 +53,17 @@ export default function CategoryField({ category, setCategory, customCategory, s
             <FormControlLabel
                 control = {
                     <Checkbox
-                        checked = {category === "その他"}
+                        checked = {category !== null && !["学校", "恋愛", "仕事"].includes(category)}
                         onChange = {() => handleCategoryChange("その他")}
                     />
                 }
                 label = "その他"
             />
 
-            {category === "その他" && (
+            {category !== null && !["学校", "恋愛", "仕事"].includes(category) && (
                 <CustomCategoryField
-                    customCategory = {customCategory}
-                    setCustomCategory = {setCustomCategory}
+                    category = {category}
+                    setCategory = {setCategory}
                 />
             )}
         </div>

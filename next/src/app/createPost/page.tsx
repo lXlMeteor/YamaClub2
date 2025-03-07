@@ -25,8 +25,6 @@ export default function CreatePost () {
             <CategoryField
                 category = {category}
                 setCategory = {setCategory}
-                customCategory = {customCategory}
-                setCustomCategory = {setCustomCategory}
             />
             <ContentField
                 content = {content}
