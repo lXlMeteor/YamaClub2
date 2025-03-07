@@ -130,12 +130,12 @@ export function SignUpPostButton ({ setIsBlank, email, setEmail, userName, setUs
             variant="contained"
             onClick={handleClick}
             sx={{
-                width: '11vw',
-                height: '7vh',
+                width: '10vw',
+                height: '5.5vh',
                 borderRadius: '10px',
                 backgroundColor: '#FF9B83',
                 color: '#FFFFFF',
-                fontSize: '3.3vh', 
+                fontSize: '3vh', 
                 '&:hover': {
                     backgroundColor: '#E0816D',
                     },

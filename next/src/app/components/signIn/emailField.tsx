@@ -24,6 +24,12 @@ export default function EmailField({ email, setEmail } : EmailFieldProps) {
                 }}
                 sx={{
                     backgroundColor: 'rgba(255, 255, 255, 0.8)',
+                    "& .MuiInputBase-root": {
+                        height: "6vh",
+                    },
+                    "& .MuiInputBase-input": {
+                        fontSize: "2vh",
+                    },
                     "& .MuiOutlinedInput-root": {
                         borderColor: '#FF9B83',
                         "&:hover .MuiOutlinedInput-notchedOutline": {

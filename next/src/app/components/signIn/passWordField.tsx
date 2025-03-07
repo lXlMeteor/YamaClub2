@@ -24,14 +24,20 @@ export default function PassWordField({ passWord, setPassWord } : PassWordFieldP
                 }}
                 sx={{
                     backgroundColor: 'rgba(255, 255, 255, 0.8)',
+                    "& .MuiInputBase-root": {
+                        height: "6vh",
+                    },
+                    "& .MuiInputBase-input": {
+                        fontSize: "2vh",
+                    },
                     "& .MuiOutlinedInput-root": {
-                        borderColor: '#FF9B83', // 枠線の色を設定
+                        borderColor: '#FF9B83',
                         "&:hover .MuiOutlinedInput-notchedOutline": {
-                            borderColor: '#FF9B83', // ホバー時の枠線の色を設定
+                            borderColor: '#FF9B83',
                             borderWidth: 2,
                         },
                         "&.Mui-focused .MuiOutlinedInput-notchedOutline": {
-                            borderColor: '#FF9B83', // フォーカス時の枠線の色を設定
+                            borderColor: '#FF9B83',
                             borderWidth: 2,
                         },
                     },
