@@ -50,8 +50,12 @@ destroy-volumes:
 
 app:  #appコンテナ(nextのコンテナ)に入る
 	docker-compose exec app sh
+app-bash:  #appコンテナ(nextのコンテナ)に入る(bash)
+	docker-compose exec app bash
 back:  #flaskコンテナに入る
 	docker-compose exec flask sh
+back-bash:  #flaskコンテナに入る(bash)
+	docker-compose exec flask bash
 
 ps: . #現在稼働中のコンテナを表示
 	docker-compose ps
@@ -135,8 +139,12 @@ destroy-volumes-s:
 
 app-s:  #appコンテナ(nextのコンテナ)に入る
 	docker compose exec app sh
+app-bash-s:  #appコンテナ(nextのコンテナ)に入る(bash)
+	docker compose exec app bash
 back-s:  #flaskコンテナに入る
 	docker compose exec flask sh
+back-bash-s:  #flaskコンテナに入る(bash)
+	docker compose exec flask bash
 
 ps-s:  #現在稼働中のコンテナを表示
 	docker compose ps
