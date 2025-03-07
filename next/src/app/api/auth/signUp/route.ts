@@ -2,6 +2,14 @@ import { NextRequest, NextResponse } from 'next/server';
 import prisma from '@/app/lib/prisma';
 import bcrypt from 'bcryptjs';
 
+/*
+*
+* userName: ユーザー名
+* email: メールアドレス
+* passWord: パスワード
+* 
+* これらをフロントから受け取る
+*/
 export async function POST(req: NextRequest) {
     const {userName: name, email, passWord: password} = await req.json();
 
