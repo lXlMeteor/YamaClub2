@@ -9,7 +9,6 @@ export default function ContentField ({ content, setContent } : ContentFieldProp
 
     const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         setContent(event.target.value);
-        console.log(content);
     }
 
     return (

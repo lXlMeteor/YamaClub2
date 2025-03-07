@@ -1,0 +1,8 @@
+.signUpPanel {
+    display: flex;
+    flex-direction: column;
+    gap: 3vh;
+    align-items: center;
+    margin-bottom: 3vh;
+    margin-top: 4vh;
+}

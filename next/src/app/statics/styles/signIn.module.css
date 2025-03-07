@@ -1,3 +1,24 @@
 .signIn {
     height: 90vh;
+    display: flex;
+    justify-content: center; /* 水平方向の中央配置 */
+    align-items: center; /* 垂直方向の中央配置 */
+    transform: translateY(-4%);
+}
+
+.panel {
+    background-color: rgba(255, 255, 255, 0.6);
+    border-radius: 30px;
+    height: 52vh;
+    width: 52vw;
+}
+
+.switchButton {
+    display: flex;
+    justify-content: center;
+}
+
+.signInPostButton {
+    display: flex;
+    justify-content: center
 }

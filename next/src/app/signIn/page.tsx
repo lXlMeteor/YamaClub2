@@ -2,22 +2,22 @@
 
 import styles from '@/app/statics/styles/signIn.module.css';
 import { SignUpPostButton, SignUpButton } from '../components/signIn/signUpButtons';
-import { LogInPostButton, LoginButton } from '../components/signIn/logInButtons';
 import { useState } from 'react';
 import SignUpPanel from '../components/signIn/signUpPanel';
 import LogInPanel from '../components/signIn/logInPanel';
+import { LogInButton, LogInPostButton } from '../components/signIn/logInButtons';
 
 export default function SignIn () {
-
     const [authSwitch, setAuthSwitch] = useState<boolean>(true);
     const [email, setEmail] = useState<string>("");
     const [passWord, setPassWord] = useState<string>("");
     const [userName, setUserName] = useState<string>("");
     const [isBlank, setIsBlank] = useState<boolean>(false);
 
+
     return (
         <div className={styles.signIn}>
-            <LoginButton
+            <LogInButton
                 setIsBlank = {setIsBlank}
                 setAuthSwitch = {setAuthSwitch}
                 setEmail = {setEmail}

@@ -25,7 +25,7 @@ start:  #コンテナの再起動
 down:  #コンテナ削除
 	docker-compose down --remove-orphans
 
-retart:
+restart:
 	@make stop
 	@make up
 
@@ -66,21 +66,21 @@ mac-next:  #MacOSの場合はこれでブラウザが開く
 mac-flask:
 	open http://127.0.0.1:5001
 mac-prisma:
-	open http://localhost:5555
+	docker-compose exec app npx prisma studio
 
 linux-next:  #LinuxOSの場合はこれでブラウザが開く
 	xdg-open http://localhost:3000
 linux-flask:
 	xdg-open http://127.0.0.1:5001
 linux-prisma:
-	xdg-open http://localhost:5555
+	docker-compose exec app npx prisma studio
 
 win-next:  #WindowsOSの場合はこれでブラウザが開く
 	start http://localhost:3000
 win-flask:
 	start http://127.0.0.1:5001
 win-prisma:
-	start http://localhost:5555
+	docker-compose exec app npx prisma studio
 
 #------------------------------------
 
@@ -88,12 +88,12 @@ init-s:  #新規のビルド
 	docker compose -f docker-compose.yml up -d --build
 
 init-mac-s:  #新規ビルド後にブラウザを開く(MacOS)
-	@make init
-	@make mac-open
+	@make init-s
+	@make mac-open-s
 
 init-linux-s:  #新規ビルド後にブラウザを開く(LinuxOS)
-	@make init
-	@make linux-open
+	@make init-s
+	@make linux-open-s
 
 up-s:  #セットアップや既存イメージの再ビルド
 	docker compose -f docker-compose.yml up -d
@@ -111,20 +111,20 @@ down-s:  #コンテナ削除
 	docker compose down --remove-orphans
 
 retart-s:
-	@make stop
-	@make up
+	@make stop-s
+	@make up-s
 
 remake-s:  #コンテナの再生成
-	@make down
-	@make up
+	@make down-s
+	@make up-s
 
 reupdate-s:  #コンテナを更新
-	@make down
-	@make init
+	@make down-s
+	@make init-s
 
 reset-s:  #全てのデータを削除し、新規ビルド(成果物は消えない)
-	@make destroy
-	@make init
+	@make destroy-s
+	@make init-s
 
 #イメージ、ボリューム、その他コンテナを全て削除します
 destroy-s:
@@ -151,18 +151,18 @@ mac-next-s:  #MacOSの場合はこれでブラウザが開く
 mac-flask-s:
 	open http://127.0.0.1:5001
 mac-prisma-s:
-	open http://localhost:5555
+	docker compose exec app npx prisma studio
 
 linux-next-s:  #LinuxOSの場合はこれでブラウザが開く
 	xdg-open http://localhost:3000
 linux-flask-s:
 	edg-open http://127.0.0.1:5001
 linux-prisma-s:
-	xdg-open http://localhost:5555
+	docker compose exec app npx prisma studio
 
 win-next-s:  #WindowsOSの場合はこれでブラウザが開く
 	start http://localhost:3000
 win-flask-s:
 	start http://127.0.0.1:5001
 win-prisma-s:
-	start http://localhost:5555
+	docker compose exec app npx prisma studio
