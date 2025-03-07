@@ -1,4 +1,4 @@
-import { TextField } from "@mui/material";
+import { FormControl, TextField } from "@mui/material";
 
 type UserNameFieldProps = {
     userName: string;
@@ -13,13 +13,23 @@ export default function EmailField({ userName, setUserName } : UserNameFieldProp
     };
 
     return (
-        <TextField
-            label="ユーザー名"
-            value={userName}
-            onChange={handleChange}
-            sx = {{
-                width: "60vw",
-            }}
-        />
+        <FormControl sx={{ width: "45vw" }}>
+            <TextField
+                label="ユーザー名"
+                value={userName}
+                onChange={handleChange}
+                slotProps={{
+                    inputLabel: { shrink: true }
+                }}
+                sx={{
+                    "& .MuiInputBase-root": {
+                        height: "6vh",
+                    },
+                    "& .MuiInputBase-input": {
+                        fontSize: "2vh",
+                    },
+                }}
+            />
+        </FormControl>
     );
 }

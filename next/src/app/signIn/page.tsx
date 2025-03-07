@@ -1,10 +1,11 @@
 'use client'
 
 import styles from '@/app/statics/styles/signIn.module.css';
-import { LoginButton, LogInPostButton, SignInPostButton, SignUpButton } from '../components/signIn/signUpButtons';
+import { SignUpPostButton, SignUpButton } from '../components/signIn/signUpButtons';
 import { useState } from 'react';
 import SignUpPanel from '../components/signIn/signUpPanel';
 import LogInPanel from '../components/signIn/logInPanel';
+import { LogInButton, LogInPostButton } from '../components/signIn/logInButtons';
 
 export default function SignIn () {
     const [authSwitch, setAuthSwitch] = useState<boolean>(true);
@@ -16,7 +17,7 @@ export default function SignIn () {
 
     return (
         <div className={styles.signIn}>
-            <LoginButton
+            <LogInButton
                 setIsBlank = {setIsBlank}
                 setAuthSwitch = {setAuthSwitch}
                 setEmail = {setEmail}
@@ -41,7 +42,7 @@ export default function SignIn () {
                         passWord = {passWord}
                         setPassWord = {setPassWord}
                     />
-                    <SignInPostButton
+                    <SignUpPostButton
                         setIsBlank = {setIsBlank}
                         email = {email}
                         setEmail = {setEmail}

@@ -1,4 +1,4 @@
-import { TextField } from "@mui/material";
+import { FormControl, TextField } from "@mui/material";
 
 type EmailFieldProps = {
     email: string;
@@ -13,13 +13,25 @@ export default function EmailField({ email, setEmail } : EmailFieldProps) {
     };
 
     return (
-        <TextField
-            label="メールアドレス"
-            value={email}
-            onChange={handleChange}
-            sx = {{
-                width: "60vw",
-            }}
-        />
+        <FormControl sx={{ width: "45vw" }}>
+            <TextField
+                label = "メールアドレス"
+                id="outlined-textarea"
+                value={email}
+                onChange={handleChange}
+                slotProps={{
+                    inputLabel: { shrink: true }
+                }}
+                sx={{
+                "& .MuiInputBase-root": {
+                    height: "6vh",
+                },
+                "& .MuiInputBase-input": {
+                    fontSize: "2vh",
+                },
+                }}
+            />
+        </FormControl>
+
     );
 }
