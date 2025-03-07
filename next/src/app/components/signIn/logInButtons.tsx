@@ -1,7 +1,8 @@
 import { Button } from "@mui/material";
-import { signIn } from 'next-auth/react';
+import { signIn } from "next-auth/react";
 
-type SignUpButtonProps = {
+
+type LoginButtonProps = {
     setIsBlank: React.Dispatch<React.SetStateAction<boolean>>;
     setAuthSwitch: React.Dispatch<React.SetStateAction<boolean>>;
     setEmail: React.Dispatch<React.SetStateAction<string>>;
@@ -9,15 +10,15 @@ type SignUpButtonProps = {
     setPassWord: React.Dispatch<React.SetStateAction<string>>;
 }
 
-export function SignUpButton ({ setIsBlank, setAuthSwitch, setEmail, setUserName, setPassWord } : SignUpButtonProps) {
+export function LogInButton ({ setIsBlank, setAuthSwitch, setEmail, setUserName, setPassWord } : LoginButtonProps) {
 
     const handleClick = () => {
         setIsBlank(false);
-        setAuthSwitch(true);
+        setAuthSwitch(false);
         setEmail("");
         setUserName("");
         setPassWord("");
-        console.log("サインアップを選択中。");
+        console.log("ログインを選択中。");
     }
 
     return (
@@ -27,42 +28,40 @@ export function SignUpButton ({ setIsBlank, setAuthSwitch, setEmail, setUserName
             sx={{
                 width: '50%',
                 height: '8vh',
-                borderRadius: '0 25px 0 0',
-                backgroundColor: '#FF9B83',
-                color: '#FFFFFF',
+                borderRadius: '25px 0 0 0',
+                backgroundColor: 'rgba(255, 155, 131, 0.04)',
+                color: '#FF9B83',
                 fontWeight: 'bold',
                 fontSize: '2vh', 
+                border: '2px solid #EF6C00',
                 '&:hover': {
-                    backgroundColor: '#E0816D',
-                },
-            }}
-        >
-            サインアップ
+                    backgroundColor: 'rgba(224, 129, 109, 0.2)',
+                    },
+                }}
+            >
+            ログイン
         </Button>
     )
 }
 
 
-type SignInPostButton = {
+type LogInPostButton = {
     setIsBlank: React.Dispatch<React.SetStateAction<boolean>>;
     email: string;
     setEmail: React.Dispatch<React.SetStateAction<string>>;
-    userName: string;
-    setUserName: React.Dispatch<React.SetStateAction<string>>;
     passWord: string;
     setPassWord: React.Dispatch<React.SetStateAction<string>>;
 }
 
-export function SignInPostButton ({ setIsBlank, email, setEmail, userName, setUserName, passWord, setPassWord } : SignInPostButton) {
+export function LogInPostButton ({ setIsBlank, email, setEmail, passWord, setPassWord } : LogInPostButton) {
 
-    const handleLogin = async() => {
+    const handleClick = async() => {
         if (email && passWord) {
             setIsBlank(false);
             console.log("送信：ログイン開始");
             console.log(`メールアドレス：${email}`);
             console.log(`パスワード：${passWord}`);
             setEmail("");
-            setUserName("");
             setPassWord("");
 
             const responce = await signIn('credentials', {
@@ -79,45 +78,19 @@ export function SignInPostButton ({ setIsBlank, email, setEmail, userName, setUs
             setIsBlank(true);
         }
     }
-    
-    const handleClick = async() => {
-        console.log("送信：サインアップ開始");
-        console.log(`メールアドレス：${email}`);
-        console.log(`ユーザー名：${userName}`);
-        console.log(`パスワード：${passWord}`);
-
-        try {
-            const response = await fetch('/api/auth/signUp', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({ userName, email, passWord }),
-            });
-            const data = await response.json();
-            if (response.ok) {
-                console.log(data);
-                handleLogin();
-            } else {
-                console.error(data.error);
-            }
-        } catch (error) {
-            console.error(error);
-        }
-    }
 
     return (
         <Button
             variant="contained"
             onClick={handleClick}
             sx={{
-                width: '13vw',
+                width: '13vh',
                 height: '7vh',
                 borderRadius: '10px',
                 backgroundColor: '#FF9B83',
                 color: '#FFFFFF',
                 fontWeight: 'bold',
-                fontSize: '2vh', 
+                fontSize: '2vh',
                 '&:hover': {
                     backgroundColor: 'rgba(224, 129, 109, 0.2)',
                     },
