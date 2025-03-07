@@ -1,18 +1,18 @@
 import { TextField } from "@mui/material";
 
 type CustomCategoryFieldProps = {
-    customCategory: string;
-    setCustomCategory: React.Dispatch<React.SetStateAction<string>>;
+    category: string;
+    setCategory: React.Dispatch<React.SetStateAction<string | null>>;
 }
 
-export default function CustomCategoryField ({ customCategory, setCustomCategory } : CustomCategoryFieldProps) {
+export default function CustomCategoryField ({ category, setCategory } : CustomCategoryFieldProps) {
     return (
         <TextField
             label = "その他のカテゴリ"
             variant = "outlined"
             fullWidth
-            value = {customCategory}
-            onChange = {(e) => setCustomCategory(e.target.value)}
+            value = {category}
+            onChange = {(e) => setCategory(e.target.value)}
             margin = "normal"
             sx = {{
             width: "75vw",
