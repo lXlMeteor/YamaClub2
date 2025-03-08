@@ -10,7 +10,7 @@ import { v4 as uuidv4 } from 'uuid';
  */
 export async function uploadImageToSupabase(
   base64Image: string,
-  bucket: 'postImages' | 'profileImages' = 'postImages', // バケット名を更新
+  bucket: 'post-images' | 'profile-images' = 'post-images', // バケット名を更新
   folder = ''  // フォルダ名を指定しない
 ): Promise<string | null> {  // 返り値の型を更新
   try {

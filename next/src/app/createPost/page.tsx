@@ -11,7 +11,7 @@ export default function CreatePost () {
     const [title, setTitle] = useState<string>("");
     const [content, setContent] = useState<string>("");
     const [category, setCategory] = useState<string | null>(null);
-    const [customCategory, setCustomCategory] = useState<string>("");
+    const [image, setImage] = useState<string | null>(null);
     const [isBlank, setIsBlank] = useState<boolean>(false);
 
     return (
@@ -36,11 +36,24 @@ export default function CreatePost () {
                 setTitle = {setTitle}
                 category = {category}
                 setCategory = {setCategory}
-                customCategory = {customCategory}
-                setCutomCategory = {setCustomCategory}
                 content = {content}
                 setContent = {setContent}
+                image = {image} 
+                setImage = {setImage}
             />
+            {image ? (
+                <img src={image} style={{ width: 200 }} />
+            ) : null}
+            <input type="file" accept="image/*" onChange={(e) => {
+                const file = e.target.files?.[0];
+                if (file) {
+                    const reader = new FileReader();
+                    reader.onload = () => {
+                        setImage(reader.result as string);
+                    }
+                    reader.readAsDataURL(file);
+                }
+            }} />
         </div>
     )
 }

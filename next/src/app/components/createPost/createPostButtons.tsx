@@ -1,4 +1,6 @@
 import { Button } from "@mui/material";
+import { useState } from "react";
+import { uploadImageToSupabase } from '@/app/utils/uploadImage';
 
 type PostDecideButtonProps = {
     setIsBlank: React.Dispatch<React.SetStateAction<boolean>>;
@@ -8,26 +10,67 @@ type PostDecideButtonProps = {
     setCategory: React.Dispatch<React.SetStateAction<string | null>>;
     content: string;
     setContent: React.Dispatch<React.SetStateAction<string>>;
-    customCategory: string;
-    setCutomCategory: React.Dispatch<React.SetStateAction<string>>;
+    image: string | null;
+    setImage: React.Dispatch<React.SetStateAction<string | null>>;
 }
 
-export function PostDecideButton ({ setIsBlank, title, setTitle, category, setCategory, content, setContent, customCategory, setCutomCategory} : PostDecideButtonProps) {
+export function PostDecideButton ({ setIsBlank, title, setTitle, category, setCategory, content, setContent, image, setImage} : PostDecideButtonProps) {
+    const [isSubmitting, setIsSubmitting] = useState(false);
 
-    const handleClick = () => {
-        if (customCategory) {
-            setCategory(customCategory);
-        }
+    const handleClickCreatePost = async () => {
         if( title && category && content ) {
-            console.log("投稿内容を確定しました。")
-            console.log(`タイトル：${title}`);
-            console.log(`カテゴリ：${category}`);
-            console.log(`本文：${content}`);
+            try {
+                setIsSubmitting(true);
+                console.log("投稿内容を確定しました。");
+                console.log(`タイトル：${title}`);
+                console.log(`カテゴリ：${category}`);
+                console.log(`本文：${content}`);
+                console.log("画像：", image);
+                console.log("-----------------");
+
+                let imageUrl = null;
+
+                // 画像がある場合はアップロード
+                if (image) {
+                    console.log("画像をアップロード中...");
+                    
+                    // Supabaseストレージに画像をアップロード
+                    imageUrl = await uploadImageToSupabase(
+                        image,
+                        'post-images',  // 画像のバケット名を指定
+                    );
+                    
+                    if (!imageUrl) {
+                        throw new Error("画像のアップロードに失敗しました");
+                    }
+                    
+                    console.log("画像のアップロード成功:", imageUrl);
+                }
+
+                const response = await fetch('/api/sendPost', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ title, category, content, image: imageUrl }),
+                });
+                const data = await response.json();
+                
+                // レスポンスが成功でない場合はエラー処理
+                if (!response.ok) {
+                    throw new Error(data.error || '投稿の作成に失敗しました');
+                } else {
+                    console.log("投稿成功：", data);
+                }
+            } catch (error) {
+                console.error("投稿エラー：", error);
+            } finally {
+                setIsSubmitting(false);
+            }
             
             setTitle("");
             setCategory(null);
             setContent("");
-            setCutomCategory("");
             setIsBlank(false);
         } else {
             setIsBlank(true);
@@ -37,7 +80,8 @@ export function PostDecideButton ({ setIsBlank, title, setTitle, category, setCa
     return(
         <Button
             variant="contained"
-            onClick={handleClick}
+            onClick={handleClickCreatePost}
+            disabled={isSubmitting}
             sx={{
                 width: '13rem',
                 height: '4rem',
@@ -49,9 +93,13 @@ export function PostDecideButton ({ setIsBlank, title, setTitle, category, setCa
                 '&:hover': {
                     backgroundColor: '#E0816D',
                 },
+                ...(isSubmitting && {
+                    opacity: 0.7,
+                    cursor: 'not-allowed'
+                })
             }}
         >
-            画像生成
+            {isSubmitting ? '送信中...' : '投稿する'}
         </Button>
     )
 }

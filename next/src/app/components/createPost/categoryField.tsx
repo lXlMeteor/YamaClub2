@@ -6,7 +6,7 @@ type CategoryFieldProps = {
     setCategory: React.Dispatch<React.SetStateAction<string | null>>;
 }
 
-export default function CategoryField({ category, setCategory,} : CategoryFieldProps) {
+export default function CategoryField({ category, setCategory } : CategoryFieldProps) {
 
     const handleCategoryChange = (selectedCategory: string) => {
         if (selectedCategory === category) {
