@@ -234,6 +234,7 @@ export default function TopPage() {
                         alt={currentPost.title}
                         fill
                         style={{ objectFit: 'cover' }}
+                        sizes="100%, 100%, 100%"
                         priority  //必須(これないと読み込み遅い)
                       />
                     </Box>
