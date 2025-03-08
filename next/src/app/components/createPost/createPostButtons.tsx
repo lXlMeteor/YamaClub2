@@ -1,6 +1,12 @@
 import { Button } from "@mui/material";
 import { useState } from "react";
 import { uploadImageToSupabase } from '@/app/utils/uploadImage';
+import { Zen_Maru_Gothic } from "next/font/google";
+
+const ZenMaruGothicFont = Zen_Maru_Gothic({
+  weight: "700",
+  subsets: ["latin"],
+});
 
 type PostDecideButtonProps = {
     setIsBlank: React.Dispatch<React.SetStateAction<boolean>>;
@@ -83,15 +89,19 @@ export function PostDecideButton ({ setIsBlank, title, setTitle, category, setCa
             onClick={handleClickCreatePost}
             disabled={isSubmitting}
             sx={{
-                width: '13rem',
-                height: '4rem',
-                borderRadius: '10px',
-                backgroundColor: '#FF9B83',
+                width: '14vw',
+                height: '7vh',
+                borderRadius: '60px',
+                backgroundColor: '#71BFFF',
                 color: '#FFFFFF',
                 fontWeight: 'bold',
-                fontSize: '1.2rem', 
+                fontSize: '2.5vw',
+                transition: 'background-color 0.2s ease-in-out',
                 '&:hover': {
-                    backgroundColor: '#E0816D',
+                    backgroundColor: isSubmitting ? '#71BFFF' : '#5aa7e8', // ホバー時に少し濃い青に変更（送信中は変更しない）
+                },
+                '&:active': {
+                    backgroundColor: '#4792d1', // クリック時はさらに濃い青
                 },
                 ...(isSubmitting && {
                     opacity: 0.7,
@@ -99,7 +109,9 @@ export function PostDecideButton ({ setIsBlank, title, setTitle, category, setCa
                 })
             }}
         >
-            {isSubmitting ? '送信中...' : '投稿する'}
+            <div className={ZenMaruGothicFont.className}>
+                {isSubmitting ? '送信中...' : '投稿する'}
+            </div>
         </Button>
     )
 }

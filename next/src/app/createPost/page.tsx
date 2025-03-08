@@ -5,6 +5,13 @@ import ContentField from "../components/createPost/contentField";
 import TitleField from "../components/createPost/titleField";
 import { PostDecideButton } from "../components/createPost/createPostButtons";
 import CategoryField from "../components/createPost/categoryField";
+import styles from "@/app/statics/styles/createPost.module.css";
+import { Zen_Maru_Gothic } from "next/font/google";
+
+const ZenMaruGothicFont = Zen_Maru_Gothic({
+  weight: "700",
+  subsets: ["latin"],
+});
 
 export default function CreatePost () {
 
@@ -15,9 +22,11 @@ export default function CreatePost () {
     const [isBlank, setIsBlank] = useState<boolean>(false);
 
     return (
-        <div>
-            投稿ページ
-            { isBlank ? <p>記入漏れがあります。</p> : <p></p>}
+        <div className={styles.postCreate}>
+            <h1 className={ZenMaruGothicFont.className}>
+                君の黒歴史を教えてネ！！
+            </h1>
+            { isBlank ? <p>全ての項目を記入してください。</p> : <p></p>}
             <TitleField
                 title = {title}
                 setTitle = {setTitle}
@@ -26,21 +35,25 @@ export default function CreatePost () {
                 category = {category}
                 setCategory = {setCategory}
             />
-            <ContentField
-                content = {content}
-                setContent = {setContent}
-            />
-            <PostDecideButton
-                setIsBlank = {setIsBlank}
-                title = {title}
-                setTitle = {setTitle}
-                category = {category}
-                setCategory = {setCategory}
-                content = {content}
-                setContent = {setContent}
-                image = {image} 
-                setImage = {setImage}
-            />
+            <div className={styles.contentField}>
+                <ContentField
+                    content = {content}
+                    setContent = {setContent}
+                />
+            </div>
+            <div className={styles.postDecideButton}>
+                <PostDecideButton
+                    setIsBlank = {setIsBlank}
+                    title = {title}
+                    setTitle = {setTitle}
+                    category = {category}
+                    setCategory = {setCategory}
+                    content = {content}
+                    setContent = {setContent}
+                    image = {image} 
+                    setImage = {setImage}
+                />
+            </div>
             {image ? (
                 <img src={image} style={{ width: 200 }} />
             ) : null}
