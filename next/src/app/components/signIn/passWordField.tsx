@@ -23,7 +23,7 @@ export default function PassWordField({ passWord, setPassWord } : PassWordFieldP
                     inputLabel: { shrink: true }
                 }}
                 sx={{
-                    backgroundColor: 'rgba(255, 255, 255, 0.8)',
+                    backgroundColor: 'rgba(255, 255, 255, 1)',
                     "& .MuiInputBase-root": {
                         height: "6vh",
                     },
