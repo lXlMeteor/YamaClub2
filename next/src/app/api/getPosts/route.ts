@@ -6,8 +6,8 @@ export async function GET(request: Request) {
     const { searchParams } = new URL(request.url);
     
     // クエリパラメータの取得
-    const after = searchParams.get('after');   // これより新しい投稿を取得（この時点より後に作成された投稿）
-    const before = searchParams.get('before'); // これより古い投稿を取得（この時点より前に作成された投稿）
+    const after = searchParams.get('after');   // これより新しい投稿を取得（この時点より後に作成された投稿）例: 2022-01-01T00:00:00.000Z
+    const before = searchParams.get('before'); // これより古い投稿を取得（この時点より前に作成された投稿）例: 2022-01-01T00:00:00.000Z
     const limit = parseInt(searchParams.get('limit') || '5'); // デフォルトは20件
     
     // 基本的なフィルター条件（status=falseの投稿のみ）
@@ -33,7 +33,7 @@ export async function GET(request: Request) {
           return null;
         }
         
-        return date;
+        return date; // Dateオブジェクトを返す
       } catch (error) {
         console.error(`Error parsing date: ${dateTimeStr}`, error);
         return null;
@@ -45,7 +45,7 @@ export async function GET(request: Request) {
     const afterDate = parseDateTime(after);
     
     if (afterDate) {
-      // 指定の日付時間より新しい投稿を取得（この時点より後に作成）
+      // 指定の日付時間より新しい(greater than)投稿を取得（この時点より後に作成）
       paginationWhere = {
         createdAt: {
           gt: afterDate // カーソル(日時)より新しい投稿を取得
@@ -53,7 +53,7 @@ export async function GET(request: Request) {
       };
       orderDirection = 'desc'; // 新→古
     } else if (beforeDate) {
-      // 指定の日付時間より古い投稿を取得（この時点より前に作成）
+      // 指定の日付時間より古い(less than)投稿を取得（この時点より前に作成）
       paginationWhere = {
         createdAt: {
           lt: beforeDate // カーソル(日時)より古い投稿を取得
@@ -64,13 +64,13 @@ export async function GET(request: Request) {
     
     // 投稿を取得
     const posts = await prisma.post.findMany({
-      take: limit,
+      take: limit, // 取得件数
       where: {
-        ...baseWhere,
-        ...paginationWhere
+        ...baseWhere, // 基本条件
+        ...paginationWhere // ページネーション条件
       },
       orderBy: {
-        createdAt: orderDirection
+        createdAt: orderDirection // ソート順(基本は新しい順)
       },
       include: {
         user: {
@@ -82,13 +82,13 @@ export async function GET(request: Request) {
         },
         reactions: {
           select: {
-            type: true
+            type: true // リアクションタイプ(後で集計)
           }
         },
         _count: {
           select: {
-            comments: true,
-            reactions: true
+            comments: true, // コメント数
+            reactions: true // リアクション数
           }
         }
       }
@@ -98,8 +98,8 @@ export async function GET(request: Request) {
     const orderedPosts = afterDate ? [...posts].reverse() : posts;
     
     // ページネーションのための情報
-    let oldestPostDate = null;
-    let newestPostDate = null;
+    let oldestPostDate = null; // 最古の投稿日時
+    let newestPostDate = null; // 最新の投稿日時
     
     if (orderedPosts.length > 0) {
       // 日時を秒単位のISO文字列に変換して保存（ミリ秒まで含める）
@@ -116,6 +116,7 @@ export async function GET(request: Request) {
         BIGLOL: 0
       };
       
+      // リアクション数をタイプごとに集計
       post.reactions.forEach(reaction => {
         reactionCounts[reaction.type]++;
       });
