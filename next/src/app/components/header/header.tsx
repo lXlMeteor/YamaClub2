@@ -1,6 +1,7 @@
 import styles from '@/app/statics/styles/header.module.css'
 import { User } from "@prisma/client"
 import { Zen_Maru_Gothic } from "next/font/google";
+import DrawerMenu from './drowerMenu';
 
 const ZenMaruGothicFont = Zen_Maru_Gothic({
   weight: "900",
@@ -14,9 +15,6 @@ type HeaderProps = {
 const Header: React.FC<HeaderProps> = ({ currentUser }) => {
     return(
         <div className={styles.header}>
-            <h1 className={ZenMaruGothicFont.className}>
-                笑ってKUYO
-            </h1>
             {currentUser ? (
                 <div>
                     <p>認証済</p>
@@ -25,6 +23,10 @@ const Header: React.FC<HeaderProps> = ({ currentUser }) => {
             ) : (
                 <p>未認証</p>
             )}
+            <h1 className={ZenMaruGothicFont.className}>
+                笑ってKUYO
+            </h1>
+            <DrawerMenu />
         </div>
     )
 }
