@@ -17,10 +17,9 @@ type PostDecideButtonProps = {
     content: string;
     setContent: React.Dispatch<React.SetStateAction<string>>;
     image: string | null;
-    setImage: React.Dispatch<React.SetStateAction<string | null>>;
 }
 
-export function PostDecideButton ({ setIsBlank, title, setTitle, category, setCategory, content, setContent, image, setImage} : PostDecideButtonProps) {
+export function PostDecideButton ({ setIsBlank, title, setTitle, category, setCategory, content, setContent, image} : PostDecideButtonProps) {
     const [isSubmitting, setIsSubmitting] = useState(false);
 
     const handleClickCreatePost = async () => {

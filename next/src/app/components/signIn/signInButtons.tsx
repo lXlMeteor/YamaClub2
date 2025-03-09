@@ -1,3 +1,4 @@
+'use client';
 import { Button } from "@mui/material";
 import { signIn } from "next-auth/react";
 
@@ -54,7 +55,7 @@ type LogInPostButton = {
 }
 
 export function LogInPostButton ({ setIsBlank, email, setEmail, passWord, setPassWord } : LogInPostButton) {
-
+    
     const handleClick = async() => {
         if (email && passWord) {
             setIsBlank(false);

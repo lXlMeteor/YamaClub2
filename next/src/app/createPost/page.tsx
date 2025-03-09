@@ -50,8 +50,7 @@ export default function CreatePost () {
                     setCategory = {setCategory}
                     content = {content}
                     setContent = {setContent}
-                    image = {image} 
-                    setImage = {setImage}
+                    image = {image}
                 />
             </div>
             {image ? (

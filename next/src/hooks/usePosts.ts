@@ -69,9 +69,13 @@ export function usePosts() {
       // 取得したページネーション情報をセット
       setPaginationInfo(data.pagination);
       return data;
-    } catch (err: any) {
+    } catch (err) {
       console.error('投稿の読み込みエラー:', err);
-      setError(err.message || '投稿の読み込みに失敗しました');
+      if (err instanceof Error) {
+        setError(err.message);
+      } else {
+        setError('投稿の読み込みに失敗しました');
+      }
       return null;
     } finally {
       setLoading(false);
@@ -107,9 +111,13 @@ export function usePosts() {
       }
       
       return data;
-    } catch (err: any) {
+    } catch (err) {
       console.error('新しい投稿の読み込みエラー:', err);
-      setError(err.message || '新しい投稿の読み込みに失敗しました');
+      if (err instanceof Error) {
+        setError(err.message);
+      } else {
+        setError('新しい投稿の読み込みに失敗しました');
+      }
       return null;
     } finally {
       setLoading(false);
@@ -145,9 +153,13 @@ export function usePosts() {
       }
       
       return data;
-    } catch (err: any) {
+    } catch (err) {
       console.error('古い投稿の読み込みエラー:', err);
-      setError(err.message || '古い投稿の読み込みに失敗しました');
+      if (err instanceof Error) {
+        setError(err.message);
+      } else {
+        setError('古い投稿の読み込みに失敗しました');
+      }
       return null;
     } finally {
       setLoading(false);
@@ -171,9 +183,13 @@ export function usePosts() {
       const data: PostsResponse = await response.json();
       // 新しい投稿がある場合は新着投稿を返す
       return data;
-    } catch (err: any) {
+    } catch (err) {
       console.error('新着投稿の確認エラー:', err);
-      setError(err.message || '新着投稿の確認に失敗しました');
+      if (err instanceof Error) {
+        setError(err.message);
+      } else {
+        setError('新着投稿の確認に失敗しました');
+      }
       return null;
     } finally {
       setLoading(false);
