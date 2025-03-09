@@ -7,6 +7,26 @@ import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
 import Image from 'next/image';
 import { usePosts } from '@/hooks/usePosts';
 
+// コメントの作成
+// 渡す値は 
+//
+// 投稿に対するコメントは:postId
+// コメントに対するコメントは:replyId
+// どちらかを選択して渡す
+//
+// コメント内容:content
+//
+// この二つを渡してコメントを作成する
+//
+// await fetch('/api/createComment', {
+//   method: 'POST',
+//   headers: { 'Content-Type': 'application/json' },
+//   body: JSON.stringify({
+//     postId: '...', // あるいは replyId: '...'
+//     content: 'コメント内容',
+//   }),
+// });
+
 export default function TopPage() {
   const { 
     posts, 
