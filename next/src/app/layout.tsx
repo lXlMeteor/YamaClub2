@@ -2,7 +2,8 @@ import type { Metadata } from "next";
 //import localFont from "next/font/local";
 import "./globals.css";
 import Header from "./components/header/header";
-import Footer from "./components/footer/footer";
+// import Footer from "./components/footer/footer";
+import FooterWrapper from './components/footer/footerWrapper';
 import AuthContext from './context/AuthContext';
 import getCurrentUser from './actions/getCurrentUser';
 
@@ -20,7 +21,7 @@ export default async function RootLayout({ children }: Readonly<{ children: Reac
         <AuthContext>
           <Header currentUser={currentUser}/>
           {children}
-          <Footer/>
+          <FooterWrapper />
         </AuthContext>
       </body>
     </html>

@@ -1,12 +1,12 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { Box, Typography, CircularProgress, Avatar, Chip, IconButton, Button, Card } from '@mui/material';
-import { usePosts, Post } from '@/hooks/usePosts';
+import { Box, Typography, CircularProgress, Button } from '@mui/material';
+import { usePosts } from '@/hooks/usePosts';
 import NextPostButton from '../components/top/nextPostButton';
 import PreviousPostButton from '../components/top/previousPostButton';
-import LoadNewPostsButton from '../components/top/loadNewPostButton';
-import PaginationInfo from '../components/top/pagenationInfo';
+// import LoadNewPostsButton from '../components/top/loadNewPostButton';
+// import PaginationInfo from '../components/top/pagenationInfo';
 import NewPostsButton from '../components/top/newPostButton';
 import PostCard from '../components/top/postCard';
 
@@ -133,7 +133,7 @@ export default function TopPage() {
 
         // 現在表示中の投稿
         const currentPost = posts.length > 0 ? posts[currentIndex] : null;
-        console.log(currentPost);
+        // console.log(currentPost);
 
         return (
             <div>
