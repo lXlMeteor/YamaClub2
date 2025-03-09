@@ -1,6 +1,7 @@
 import { Button } from "@mui/material";
 import { useRouter } from "next/navigation";
 import { Zen_Maru_Gothic } from "next/font/google";
+import { signOut } from 'next-auth/react';
 
 const ZenMaruGothicFont = Zen_Maru_Gothic({
   weight: "900",
@@ -8,9 +9,17 @@ const ZenMaruGothicFont = Zen_Maru_Gothic({
 });
 
 export function LogOutButton () {
+    const router = useRouter();
     
-    const handleClick = () => {
-        console.log("ログアウトしました。");
+    const handleClick = async () => {
+        try {
+            await signOut({ redirect: false });
+            router.push('/signIn');
+            router.refresh();
+          } catch (error) {
+            console.error('ログアウトエラー:', error);
+            alert('ログアウトに失敗しました。もう一度お試しください。');
+          }
     }
 
     return (
