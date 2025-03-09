@@ -36,7 +36,13 @@ export async function POST(request: NextRequest) {
         });
 
         if (existingReaction) {
-            console.error("すでに同じリアクションをしています。")
+            // すでに同じリアクションがある場合は削除（トグル機能）
+            await prisma.reaction.delete({
+                where: {
+                    id: existingReaction.id
+                }
+            });
+            return NextResponse.json({ message: "リアクションを削除しました" });
         }
 
         await prisma.reaction.create({
