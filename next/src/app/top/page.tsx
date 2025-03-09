@@ -39,7 +39,8 @@ export default function TopPage() {
   }, [loadInitialPosts]);
   useEffect(() => {
     console.log(posts); 
-  }, [posts]);
+    console.log(paginationInfo)
+  }, [posts, paginationInfo]);
 
   // 自動データロードの設定
   useEffect(() => {

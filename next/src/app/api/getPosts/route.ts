@@ -41,6 +41,7 @@ export async function GET(request: Request) {
     };
     
     // before/afterパラメータをDateオブジェクトに変換
+    // after指定の場合は新しい順に取得するため、afterDateが指定されている場合はbeforeDateは無視
     const beforeDate = parseDateTime(before);
     const afterDate = parseDateTime(after);
     
@@ -139,6 +140,27 @@ export async function GET(request: Request) {
     
     // 現在のサーバー時刻をISO形式で取得（新規投稿チェック用）
     const currentServerTime = new Date().toISOString();
+
+    // 次の投稿が存在するかどうかを確認するための追加クエリ
+    // リミットいっぱいの場合、さらに古い投稿があるかをチェック
+    const hasOlder = orderedPosts.length === limit && oldestPostDate ? await prisma.post.count({
+      where: {
+        ...baseWhere,
+        createdAt: {
+          lt: new Date(oldestPostDate)
+        }
+      }
+    }) > 0 : false;
+    
+    // after指定がある場合、さらに新しい投稿があるかをチェック
+    const hasNewer = afterDate ? await prisma.post.count({
+      where: {
+        ...baseWhere,
+        createdAt: {
+          gt: newestPostDate ? new Date(newestPostDate) : new Date()
+        }
+      }
+    }) > 0 : false;
     
     return NextResponse.json({
       posts: postsWithFormattedReactions,
@@ -146,8 +168,8 @@ export async function GET(request: Request) {
         oldestPostDate, // 古い方の日付（後のデータ取得用）
         newestPostDate, // 新しい方の日付（前のデータ取得用）
         currentServerTime, // 現在のサーバー時刻（新しい投稿のチェック用）
-        hasOlder: orderedPosts.length === limit, // 古い投稿がまだある可能性
-        hasNewer: Boolean(afterDate) // after指定がある場合、新しい投稿がある可能性
+        hasOlder, // 古い投稿がまだある可能性
+        hasNewer, // after指定がある場合、新しい投稿がある可能性
       }
     });
     
