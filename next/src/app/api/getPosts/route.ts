@@ -1,8 +1,12 @@
 import { NextResponse } from 'next/server';
 import prisma from '@/app/lib/prisma';
+import { getServerSession } from 'next-auth';
+import { authOptions } from '@/app/lib/nextAuth';
 
 export async function GET(request: Request) {
   try {
+    const session = await getServerSession(authOptions);
+    const userId = session?.user?.id || null;
     const { searchParams } = new URL(request.url);
     
     // クエリパラメータの取得
@@ -83,7 +87,9 @@ export async function GET(request: Request) {
         },
         reactions: {
           select: {
-            type: true // リアクションタイプ(後で集計)
+            //全ユーザーのリアクションを取得
+            userId: true,
+            type: true
           }
         },
         _count: {
@@ -108,7 +114,7 @@ export async function GET(request: Request) {
       newestPostDate = orderedPosts[0].createdAt.toISOString();
     }
     
-    // リアクションタイプごとに集計
+    // リアクションタイプごとに集計 & ログイン中のユーザーのリアクションを抽出
     const postsWithFormattedReactions = orderedPosts.map(post => {
       // リアクションタイプごとに集計
       const reactionCounts = {
@@ -121,6 +127,12 @@ export async function GET(request: Request) {
       post.reactions.forEach(reaction => {
         reactionCounts[reaction.type]++;
       });
+
+      const myReaction = userId
+        ? post.reactions
+            .filter(r => r.userId === userId)
+            .map(r => r.type) // ['EMPATHY', ...] のような配列
+        : [];
       
       // createdAt と updatedAt を ISO 形式に変換して確実に正確なタイムスタンプを返す
       const formattedPost = {
@@ -135,7 +147,8 @@ export async function GET(request: Request) {
       
       return {
         ...restPost,
-        reactionCounts
+        reactionCounts,
+        myReaction
       };
     });
     
