@@ -129,7 +129,7 @@ export async function GET(request: Request) {
       };
       
       // 返却するデータからreactionsプロパティを削除し、集計したreactionCountsに置き換える
-      const { reactions, ...restPost } = formattedPost;
+      const { ...restPost } = formattedPost;
       
       return {
         ...restPost,

@@ -1,11 +1,11 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { Box, Typography, CircularProgress, Avatar, Chip, IconButton, Button, Card } from '@mui/material';
+import { Box, Typography, CircularProgress, Avatar, IconButton, Button } from '@mui/material';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
 import Image from 'next/image';
-import { usePosts, Post } from '@/hooks/usePosts';
+import { usePosts } from '@/hooks/usePosts';
 
 export default function TopPage() {
   const { 
