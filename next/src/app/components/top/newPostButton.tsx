@@ -8,11 +8,11 @@ type NewPostsButtonProps = {
 const NewPostsButton: React.FC<NewPostsButtonProps> = ({ newPostsCount, handleLoadNewPosts }) => {
   return (
         <button 
-            style={{
+            style = {{
                 width: '100%',
                 backgroundColor: 'rgba(0, 0, 255, 0.5)',
             }}
-            onClick={handleLoadNewPosts}
+            onClick = {handleLoadNewPosts}
         >
         <p>{newPostsCount}件の新しい投稿があります。クリックして表示</p>
         </button>

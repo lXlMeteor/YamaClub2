@@ -1,0 +1,15 @@
+.postCard {
+    width: 70vw;
+    height: 90vh;
+}
+
+.bgBrind {
+    background-color: rgba(143, 143, 143, 0.379);
+    height: 90vh;
+}
+
+.postCardFooter {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}

@@ -1,7 +1,7 @@
 import styles from '@/app/statics/styles/header.module.css'
 import { User } from "@prisma/client"
-import { Zen_Maru_Gothic } from "next/font/google";
 import DrawerMenu from './drowerMenu';
+import { Zen_Maru_Gothic } from "next/font/google";
 
 const ZenMaruGothicFont = Zen_Maru_Gothic({
   weight: "900",

@@ -1,25 +1,43 @@
 import { Avatar } from "@mui/material";
+import styles from "@/app/statics/styles/userInfo.module.css"
+import { Zen_Maru_Gothic } from "next/font/google";
+
+const ZenMaruGothicFont = Zen_Maru_Gothic({
+  weight: "900",
+  subsets: ["latin"],
+});
 
 type UserInfoProps = {
     user: {
         name: string;
         image?: string | null; // null も許可する
     };
+    category: string;
     createdAt: string;
     formatDate: (date: string) => string;
 };
 
-const UserInfo: React.FC<UserInfoProps> = ({ user, createdAt, formatDate }) => {
+const UserInfo: React.FC<UserInfoProps> = ({ user, category, createdAt, formatDate }) => {
   return (
-    <div style={{ display: "flex", flexDirection: "column", border: "1px solid black" }}>
-        <p>ユーザー情報</p>
-        <div style={{ display: "flex", alignItems: "center" }}>
-            {/* 投稿ユーザーのアイコン */}
-            <Avatar src={user.image ?? undefined} sx={{ width: 48, height: 48, mr: 2 }} />
-            <div>
-            <p>名前：{user.name}</p>
-            <p>投稿時間：{formatDate(createdAt)}</p>
-            </div>
+    <div className = {styles.userInfo}>
+        <div className = {styles.userStatus}>
+            <Avatar
+                src={user.image ?? undefined}
+                sx = {{
+                    width: '6vh',
+                    height: '6vh',
+                    border: '0.2vh solid #FFE097',
+                }}
+            />
+            <p className = {`${ZenMaruGothicFont.className} ${styles.userName}`}>
+                {user.name}
+            </p>
+            <p className = {`${ZenMaruGothicFont.className} ${styles.category}`}>
+                カテゴリ：{category}
+            </p>
+        </div>
+        <div className = {`${ZenMaruGothicFont.className} ${styles.postDate}`}>
+            {formatDate(createdAt)}
         </div>
     </div>
   );

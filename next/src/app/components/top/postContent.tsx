@@ -1,5 +1,12 @@
 import { Box } from "@mui/material";
-import Image from "next/image";
+import styles from "@/app/statics/styles/postCardContent.module.css"
+import { Zen_Maru_Gothic } from "next/font/google";
+
+const ZenMaruGothicFont = Zen_Maru_Gothic({
+  weight: "400",
+  subsets: ["latin"],
+});
+
 
 type PostContentProps = {
     category: string;
@@ -10,21 +17,18 @@ type PostContentProps = {
 
 const PostContent: React.FC<PostContentProps> = ({ category, title, content, image }) => {
     return (
-        <div style={{ border: "1px solid black", padding: "10px" }}>
-        <p>投稿内容</p>
-        <p>カテゴリー：{category}</p>
-        <p>タイトル：{title}</p>
-        <p>文章：{content}</p>
-        {image && (
-            <Box sx={{ position: "relative", height: 300, mb: 3, borderRadius: 1, overflow: "hidden" }}>
-            <Image
-                src={image}
-                alt={title}
-                fill
-                style={{ objectFit: "cover" }}
-                priority />
-            </Box>
-        )}
+        <div className={styles.postContent}>
+        {/* <p>カテゴリー：{category}</p> */}
+        {/* <p>タイトル：{title}</p> */}
+            <div className = {`${styles.contentBG} ${ZenMaruGothicFont.className}`}>
+                <div className = {styles.contentText}>
+                    {content}
+                </div>
+            </div>
+            {image && (
+                <Box sx = {{ position: "relative", height: 300, mb: 3, borderRadius: 1, overflow: "hidden" }}>
+                </Box>
+            )}
         </div>
     );
 };

@@ -3,16 +3,12 @@
 import { useState, useEffect } from 'react';
 import { Box, Typography, CircularProgress, Avatar, Chip, IconButton, Button, Card } from '@mui/material';
 import { usePosts, Post } from '@/hooks/usePosts';
-import UserInfo from '../components/top/userInfo';
-import PostContent from '../components/top/postContent';
-import PostReactions from '../components/top/postReactions';
-import CommentCloseButton from '../components/top/commentCloseButton';
-import CommentPostButton from '../components/top/commentPostButton';
 import NextPostButton from '../components/top/nextPostButton';
 import PreviousPostButton from '../components/top/previousPostButton';
 import LoadNewPostsButton from '../components/top/loadNewPostButton';
 import PaginationInfo from '../components/top/pagenationInfo';
 import NewPostsButton from '../components/top/newPostButton';
+import PostCard from '../components/top/postCard';
 
 
 export default function TopPage() {
@@ -140,19 +136,17 @@ export default function TopPage() {
 
         return (
             <div>
-                <div style={{marginBottom: '20px'}}>
+                {/* <div>
                     <p>カスタマイズ要素(念の為残しとく)</p>
-                    {/* 最新の投稿を取得して、そこにジャンプ */}
                     <LoadNewPostsButton 
                         handleLoadNewPosts={handleLoadNewPosts} 
                         loading={loading} 
                     />
-                    {/* 今いる場所/全ページ数 */}
                     <PaginationInfo 
                         currentIndex={currentIndex} 
                         postsLength={posts.length} 
                     />
-                </div>
+                </div> */}
               
                 {/* 新着投稿アラート 他の人とかが投稿したら表示される(これは要相談かな？毎回出たらうるさいし) */}
 
@@ -187,7 +181,13 @@ export default function TopPage() {
 
                 ) : (
 
-                    <div style={{display: 'flex', justifyContent:'space-between'}}>
+                    <div
+                        style={{
+                            display: 'flex',
+                            justifyContent: 'space-between',
+                            alignItems: 'center'
+                        }}
+                    >
                         {/* 左矢印（次の投稿） */}
                         <PreviousPostButton 
                             handlePrevPost={handlePrevPost} 
@@ -201,35 +201,15 @@ export default function TopPage() {
                             こっから下は必要そうな情報の出し方とかメモみたいに書いていく*/}
 
                         {currentPost && (
-                            <div style={{display:'flex', flexDirection:'column', gap: 2, flexGrow: 1, border: '1px solid black', paddingBottom: '100px'}}>
-                                <UserInfo
-                                    user={currentPost.user}
-                                    createdAt={currentPost.createdAt}
-                                    formatDate={formatDate} 
+                            <div>
+                                <PostCard
+                                    currentPost={currentPost}
+                                    isShowComments={isShowComments}
+                                    handleHideComments={handleHideComments}
+                                    handleShowComments={handleShowComments}
+                                    formatDate={formatDate}
                                 />
-                                {/* 投稿内容 */}
-                                <PostContent 
-                                    category={currentPost.category} 
-                                    title={currentPost.title} 
-                                    content={currentPost.content} 
-                                    image={currentPost.image ?? undefined} 
-                                />
-                                {/* リアクション・コメント数 */}
-                                <PostReactions 
-                                    reactionCounts={currentPost.reactionCounts} 
-                                    commentCount={currentPost._count.comments} 
-                                />
-                                {/* コメント表示ボタン */}
-                                {isShowComments ? (
-                                    <CommentCloseButton
-                                        handleHideComments={handleHideComments}
-                                    />
-                                ) : (
-                                    <CommentPostButton
-                                        handleShowComments={handleShowComments}
-                                    />
-                                )}
-                            </div>
+                          </div>
                         )}
                     
                         {/* 右矢印（次の投稿） */}
