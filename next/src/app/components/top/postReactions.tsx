@@ -8,35 +8,29 @@ type PostReactionsProps = {
         LOL: number;
         BIGLOL: number;
     };
-    // commentCount: number;
-};
-  
-const PostReactions: React.FC<PostReactionsProps> = ({ reactionCounts, currentPostId/*commentCount*/ }) => {
-return (
-    <div className = {styles.postReactions}>
-
-        {/* <div className={styles.commentCounter}>
-            コメント数：{commentCount}
-        </div> */}
-
-        <EmpathyButton
-            EMPATHY = {reactionCounts.EMPATHY}
-            currentPostId = {currentPostId}
-        />
-
-        <LolButton
-            LOL = {reactionCounts.LOL}
-            currentPostId = {currentPostId}
-        />
-
-        <BigLolButton
-            BIGLOL = {reactionCounts.BIGLOL}
-            currentPostId = {currentPostId}
-        />
-
-    </div>
-);
+    updateReactionCount: (postId: string, type: "EMPATHY" | "LOL" | "BIGLOL") => void;
 };
 
-export default PostReactions;
-  
+export const PostReactions: React.FC<PostReactionsProps> = ({ currentPostId, reactionCounts = { EMPATHY: 0, LOL: 0, BIGLOL: 0 }, updateReactionCount }) => {
+    return (
+        <div className={styles.postReactions}>
+            <EmpathyButton 
+                EMPATHY={reactionCounts.EMPATHY}
+                currentPostId={currentPostId}
+                updateReactionCount={updateReactionCount}
+            />
+
+            <LolButton 
+                LOL={reactionCounts.LOL}
+                currentPostId={currentPostId}
+                updateReactionCount={updateReactionCount}
+            />
+
+            <BigLolButton 
+                BIGLOL={reactionCounts.BIGLOL}
+                currentPostId={currentPostId}
+                updateReactionCount={updateReactionCount}
+            />
+        </div>
+    );
+};

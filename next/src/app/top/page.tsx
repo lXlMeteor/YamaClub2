@@ -5,8 +5,8 @@ import { Box, Typography, CircularProgress, Button } from '@mui/material';
 import { usePosts } from '@/hooks/usePosts';
 import NextPostButton from '../components/top/nextPostButton';
 import PreviousPostButton from '../components/top/previousPostButton';
-// import LoadNewPostsButton from '../components/top/loadNewPostButton';
-// import PaginationInfo from '../components/top/pagenationInfo';
+//import LoadNewPostsButton from '../components/top/loadNewPostButton';
+import PaginationInfo from '../components/top/pagenationInfo';
 import NewPostsButton from '../components/top/newPostButton';
 import PostCard from '../components/top/postCard';
 
@@ -82,7 +82,7 @@ export default function TopPage() {
                 setNewPostsCount(data.posts.length);
                 setShowNewPostsAlert(true);
             }
-        }, 60000); // 1分ごとにチェック
+        }, 6000000);
       
           return () => clearInterval(checkNewPostsInterval);
         }, [paginationInfo, loading, checkForNewPosts]);
@@ -137,17 +137,17 @@ export default function TopPage() {
 
         return (
             <div>
-                {/* <div>
-                    <p>カスタマイズ要素(念の為残しとく)</p>
+                <div>
+                    {/* <p>カスタマイズ要素(念の為残しとく)</p>
                     <LoadNewPostsButton 
                         handleLoadNewPosts={handleLoadNewPosts} 
                         loading={loading} 
-                    />
+                    /> */}
                     <PaginationInfo 
                         currentIndex={currentIndex} 
                         postsLength={posts.length} 
                     />
-                </div> */}
+                </div>
               
                 {/* 新着投稿アラート 他の人とかが投稿したら表示される(これは要相談かな？毎回出たらうるさいし) */}
 
