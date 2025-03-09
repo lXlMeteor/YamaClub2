@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Button } from "@mui/material";
 import styles from "@/app/statics/styles/reactionButtons.module.css";
 import { Zen_Maru_Gothic } from "next/font/google";
@@ -8,81 +8,104 @@ const ZenMaruGothicFont = Zen_Maru_Gothic({
   subsets: ["latin"],
 });
 
+// 共通のリアクション処理
 async function handleReaction(
-    postId: string,
-    type: "EMPATHY" | "LOL" | "BIGLOL",
-    setCount: React.Dispatch<React.SetStateAction<number>>
+  postId: string,
+  type: "EMPATHY" | "LOL" | "BIGLOL",
+  setCount: React.Dispatch<React.SetStateAction<number>>,
+  hasReacted: boolean,
+  setHasReacted: React.Dispatch<React.SetStateAction<boolean>>
 ) {
-    try {
-        const response = await fetch("/api/sendReaction", {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ postId, type }),
-        });
+  try {
+    const response = await fetch("/api/sendReaction", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ postId, type }),
+    });
 
-        const data = await response.json();
-        console.log(`リアクション成功: ${type}`);
+    const data = await response.json();
+    console.log(`リアクション ${hasReacted ? '再押し' : '成功'}: ${type}`);
 
-        if (response.ok) {
-            setCount((prev: number) => prev + 1);
-        } else {
-            console.error("エラー:", data.error);
-        }
-    } catch (error) {
-        console.error("通信エラー:", error);
+    if (response.ok) {
+      // フロント側でカウントを増減
+      setCount((prev: number) => hasReacted ? prev - 1 : prev + 1);
+      setHasReacted(!hasReacted); // リアクション状態のトグル
+    } else {
+      console.error("エラー:", data.error);
     }
+  } catch (error) {
+    console.error("通信エラー:", error);
+  }
 }
 
+// EmpathyButton
 type EmpathyButtonProps = {
-    EMPATHY: number;
-    currentPostId: string;
+  EMPATHY: number;
+  currentPostId: string;
 };
 
 export function EmpathyButton({ EMPATHY, currentPostId }: EmpathyButtonProps) {
-    const [count, setCount] = useState<number>(EMPATHY);
+  const [count, setCount] = useState<number>(EMPATHY);
+  const [hasReacted, setHasReacted] = useState<boolean>(false);
 
-    return (
-        <Button onClick={() => handleReaction(currentPostId, "EMPATHY", setCount)}>
-        <div className={`${styles.reactionButton} ${ZenMaruGothicFont.className}`}>
-            共感したよ:
-            <p>🤝 {count}</p>
-        </div>
-        </Button>
-    );
+  useEffect(() => {
+    setCount(EMPATHY); // 初期カウントの設定
+  }, [EMPATHY]); // EMPATHYが変更されたときに更新
+
+  return (
+    <Button onClick={() => handleReaction(currentPostId, "EMPATHY", setCount, hasReacted, setHasReacted)}>
+      <div className={`${styles.reactionButton} ${ZenMaruGothicFont.className}`}>
+        共感したよ:
+        <p>🤝 {count}</p>
+      </div>
+    </Button>
+  );
 }
 
+// LolButton
 type LolButtonProps = {
-    LOL: number;
-    currentPostId: string;
+  LOL: number;
+  currentPostId: string;
 };
 
 export function LolButton({ LOL, currentPostId }: LolButtonProps) {
-    const [count, setCount] = useState<number>(LOL);
+  const [count, setCount] = useState<number>(LOL); // 個別のカウント管理
+  const [hasReacted, setHasReacted] = useState<boolean>(false); // リアクション状態
 
-    return (
-        <Button onClick={() => handleReaction(currentPostId, "LOL", setCount)}>
-        <div className={`${styles.reactionButton} ${ZenMaruGothicFont.className}`}>
-            成長したね！:
-            <p>🌱 {count}</p>
-        </div>
-        </Button>
-    );
+  useEffect(() => {
+    setCount(LOL); // 初期カウントの設定
+  }, [LOL]); // LOLが変更されたときに更新
+
+  return (
+    <Button onClick={() => handleReaction(currentPostId, "LOL", setCount, hasReacted, setHasReacted)}>
+      <div className={`${styles.reactionButton} ${ZenMaruGothicFont.className}`}>
+        成長したね！:
+        <p>🌱 {count}</p>
+      </div>
+    </Button>
+  );
 }
 
+// BigLolButton
 type BigLolButtonProps = {
-    BIGLOL: number;
-    currentPostId: string;
+  BIGLOL: number;
+  currentPostId: string;
 };
 
 export function BigLolButton({ BIGLOL, currentPostId }: BigLolButtonProps) {
-    const [count, setCount] = useState<number>(BIGLOL);
+  const [count, setCount] = useState<number>(BIGLOL); // 個別のカウント管理
+  const [hasReacted, setHasReacted] = useState<boolean>(false); // リアクション状態
 
-    return (
-        <Button onClick={() => handleReaction(currentPostId, "BIGLOL", setCount)}>
-        <div className={`${styles.reactionButton} ${ZenMaruGothicFont.className}`}>
-            まじおもろい:
-            <p>😂 {count}</p>
-        </div>
-        </Button>
-    );
+  useEffect(() => {
+    setCount(BIGLOL); // 初期カウントの設定
+  }, [BIGLOL]); // BIGLOLが変更されたときに更新
+
+  return (
+    <Button onClick={() => handleReaction(currentPostId, "BIGLOL", setCount, hasReacted, setHasReacted)}>
+      <div className={`${styles.reactionButton} ${ZenMaruGothicFont.className}`}>
+        まじおもろい:
+        <p>😂 {count}</p>
+      </div>
+    </Button>
+  );
 }
