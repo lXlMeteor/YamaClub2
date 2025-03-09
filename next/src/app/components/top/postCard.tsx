@@ -4,9 +4,10 @@ import PostContent from './postContent';
 import PostReactions from './postReactions';
 import styles from '@/app/statics/styles/postCard.module.css'
 import PostTitleBar from './postTitleBar';
+import { Post } from '@/hooks/usePosts';
 
 interface PostCardProps {
-    currentPost: any;
+    currentPost: Post;
     isShowComments: boolean;
     handleHideComments: () => void;
     handleShowComments: () => void;
@@ -45,6 +46,7 @@ const PostCard: React.FC<PostCardProps> = ({
                         handleShowComments = {handleShowComments}
                     />
                     <PostReactions 
+                        currentPostId = {currentPost.id}
                         reactionCounts = {currentPost.reactionCounts} 
                         // commentCount = {currentPost._count.comments} 
                     />
