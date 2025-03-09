@@ -1,0 +1,10 @@
+.postReactions {
+    display: flex;
+    justify-content: end;
+    align-items: center;
+    height: 5.5vh;
+}
+
+.reactionButton p {
+    font-size: 2vh;
+}

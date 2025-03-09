@@ -1,0 +1,20 @@
+.postTitleBar {
+    display: flex;
+}
+
+.postTitle {
+    display: flex;
+    font-size: 2.1vw;
+    margin-bottom: 1vh;
+    color: #FFFFFF;
+    -webkit-text-stroke: 0.15vh #FFE097;
+    margin-left: 2vw;
+    text-decoration: underline; /* 文字の下に線を引く */
+    text-decoration-color: #FFE097; /* 線の色を指定 */
+    text-decoration-thickness: 0.2vh; /* 線の太さを指定 */
+    text-underline-offset: 1vh; 
+}
+
+.commentButton {
+    margin-left: 1vw;
+}

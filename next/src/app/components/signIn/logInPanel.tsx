@@ -1,5 +1,6 @@
 import EmailField from "./emailField";
 import PassField from "./passWordField";
+import styles from "@/app/statics/styles/logInPanel.module.css"
 
 type LogInPanelProps = {
     isBlank: boolean;
@@ -11,8 +12,8 @@ type LogInPanelProps = {
 
 export default function LogInPanel ({ isBlank, email, setEmail, passWord, setPassWord} : LogInPanelProps) {
     return (
-        <div>
-            { isBlank ? <p>入力漏れがあります。</p> : <p></p>}
+        <div className={styles.logInPanel}>
+            { isBlank ? <p>入力漏れがあります。</p> : <br></br>}
             <EmailField
                 email = {email}
                 setEmail = {setEmail}

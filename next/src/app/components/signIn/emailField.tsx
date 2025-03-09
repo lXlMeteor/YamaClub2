@@ -1,4 +1,4 @@
-import { TextField } from "@mui/material";
+import { FormControl, TextField } from "@mui/material";
 
 type EmailFieldProps = {
     email: string;
@@ -13,13 +13,45 @@ export default function EmailField({ email, setEmail } : EmailFieldProps) {
     };
 
     return (
-        <TextField
-            label="メールアドレス"
-            value={email}
-            onChange={handleChange}
-            sx = {{
-                width: "60vw",
-            }}
-        />
+        <FormControl sx={{ width: "45vw" }}>
+            <TextField
+                label = "メールアドレス"
+                id="outlined-textarea"
+                value={email}
+                onChange={handleChange}
+                slotProps={{
+                    inputLabel: { shrink: true }
+                }}
+                sx={{
+                    backgroundColor: 'rgba(255, 255, 255, 1)',
+                    "& .MuiInputBase-root": {
+                        height: "6vh",
+                    },
+                    "& .MuiInputBase-input": {
+                        fontSize: "2vh",
+                    },
+                    "& .MuiOutlinedInput-root": {
+                        borderColor: '#FF9B83',
+                        "&:hover .MuiOutlinedInput-notchedOutline": {
+                            borderColor: '#FF9B83',
+                            borderWidth: 2,
+                        },
+                        "&.Mui-focused .MuiOutlinedInput-notchedOutline": {
+                            borderColor: '#FF9B83',
+                            borderWidth: 2,
+                        },
+                    },
+                    "& .MuiFormLabel-root": {
+                        color: '#4DAFFF',
+                        fontWeight: 'bold',
+                    },
+                    "& .MuiInputLabel-root.Mui-focused": {
+                        color: '#4DAFFF',
+                        fontWeight: 'bold',
+                    },
+                }}
+            />
+        </FormControl>
+
     );
 }
