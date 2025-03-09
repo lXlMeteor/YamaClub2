@@ -8,7 +8,6 @@ const ZenMaruGothicFont = Zen_Maru_Gothic({
   subsets: ["latin"],
 });
 
-// 共通のリアクション処理
 async function handleReaction(
     postId: string,
     type: "EMPATHY" | "LOL" | "BIGLOL",
@@ -16,18 +15,18 @@ async function handleReaction(
 ) {
     try {
         const response = await fetch("/api/sendReaction", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ postId, type }),
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ postId, type }),
         });
 
         const data = await response.json();
         console.log(`リアクション成功: ${type}`);
 
         if (response.ok) {
-        setCount((prev: number) => prev + 1);
+            setCount((prev: number) => prev + 1);
         } else {
-        console.error("エラー:", data.error);
+            console.error("エラー:", data.error);
         }
     } catch (error) {
         console.error("通信エラー:", error);
