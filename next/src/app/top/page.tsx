@@ -133,7 +133,7 @@ export default function TopPage() {
 
         // 現在表示中の投稿
         const currentPost = posts.length > 0 ? posts[currentIndex] : null;
-        console.log(currentPost);
+        // console.log(currentPost);
 
         return (
             <div>

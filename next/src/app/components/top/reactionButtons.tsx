@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Button } from "@mui/material";
 import styles from "@/app/statics/styles/reactionButtons.module.css";
 import { Zen_Maru_Gothic } from "next/font/google";
@@ -40,6 +40,9 @@ type EmpathyButtonProps = {
 
 export function EmpathyButton({ EMPATHY, currentPostId }: EmpathyButtonProps) {
     const [count, setCount] = useState<number>(EMPATHY);
+    useEffect(() => {
+        setCount(EMPATHY);
+    }, [EMPATHY]);
 
     return (
         <Button onClick={() => handleReaction(currentPostId, "EMPATHY", setCount)}>
@@ -58,6 +61,9 @@ type LolButtonProps = {
 
 export function LolButton({ LOL, currentPostId }: LolButtonProps) {
     const [count, setCount] = useState<number>(LOL);
+    useEffect(() => {
+        setCount(LOL);
+    }, [LOL]);
 
     return (
         <Button onClick={() => handleReaction(currentPostId, "LOL", setCount)}>
@@ -76,6 +82,9 @@ type BigLolButtonProps = {
 
 export function BigLolButton({ BIGLOL, currentPostId }: BigLolButtonProps) {
     const [count, setCount] = useState<number>(BIGLOL);
+    useEffect(() => {
+        setCount(BIGLOL);
+    }, [BIGLOL]);
 
     return (
         <Button onClick={() => handleReaction(currentPostId, "BIGLOL", setCount)}>
