@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { Button } from "@mui/material";
 import styles from "@/app/statics/styles/reactionButtons.module.css";
 import { Zen_Maru_Gothic } from "next/font/google";
+import { set } from "zod";
 
 const ZenMaruGothicFont = Zen_Maru_Gothic({
   weight: "900",
@@ -16,6 +17,7 @@ async function handleReaction(
   hasReacted: boolean,
   setHasReacted: React.Dispatch<React.SetStateAction<boolean>>
 ) {
+    console.log(postId);
   try {
     const response = await fetch("/api/sendReaction", {
       method: "POST",
@@ -50,6 +52,7 @@ export function EmpathyButton({ EMPATHY, currentPostId }: EmpathyButtonProps) {
 
   useEffect(() => {
     setCount(EMPATHY); // 初期カウントの設定
+    setHasReacted(false); // リアクション状態の初期化
   }, [EMPATHY]); // EMPATHYが変更されたときに更新
 
   return (
@@ -74,6 +77,7 @@ export function LolButton({ LOL, currentPostId }: LolButtonProps) {
 
   useEffect(() => {
     setCount(LOL); // 初期カウントの設定
+    setHasReacted(false); // リアクション状態の初期化
   }, [LOL]); // LOLが変更されたときに更新
 
   return (
@@ -98,6 +102,7 @@ export function BigLolButton({ BIGLOL, currentPostId }: BigLolButtonProps) {
 
   useEffect(() => {
     setCount(BIGLOL); // 初期カウントの設定
+    setHasReacted(false); // リアクション状態の初期化
   }, [BIGLOL]); // BIGLOLが変更されたときに更新
 
   return (
