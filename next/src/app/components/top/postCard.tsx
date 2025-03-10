@@ -44,8 +44,7 @@ const PostCard: React.FC<PostCardProps> = ({
       
     const [reactionCounts, setReactionCounts] = useState<Record<string, { EMPATHY: number; LOL: number; BIGLOL: number }>>({
         [currentPost.id]: currentPost.reactionCounts || { EMPATHY: 0, LOL: 0, BIGLOL: 0 } // デフォルト値を設定
-    });
-    
+    }); 
     // 指定の `postId` のカウントを更新する関数
     const updateReactionCount = (postId: string, type: "EMPATHY" | "LOL" | "BIGLOL") => {
         setReactionCounts((prevCounts) => ({
