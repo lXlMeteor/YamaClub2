@@ -1,6 +1,7 @@
 import { Button } from "@mui/material";
 import styles from "@/app/statics/styles/reactionButtons.module.css";
 import { Zen_Maru_Gothic } from "next/font/google";
+import { useState } from "react";
 
 // Googleフォントの設定
 const ZenMaruGothicFont = Zen_Maru_Gothic({
@@ -18,7 +19,6 @@ type ReactionButtonProps = {
   emoji: string;
 };
 
-// **共通のリアクションボタンコンポーネント**
 const ReactionButton: React.FC<ReactionButtonProps> = ({ count, currentPostId, type, updateReactionCount, label, emoji }) => {
   return (
     <Button onClick={() => updateReactionCount(currentPostId, type)}>
@@ -89,3 +89,36 @@ export function BigLolButton({ BIGLOL, currentPostId, updateReactionCount }: Big
     />
   );
 }
+
+// **PostReactionsコンポーネント**
+type PostReactionsProps = {
+  currentPostId: string;
+  reactionCounts: {
+    EMPATHY: number;
+    LOL: number;
+    BIGLOL: number;
+  };
+  updateReactionCount: (postId: string, type: "EMPATHY" | "LOL" | "BIGLOL") => void;
+};
+
+export const PostReactions: React.FC<PostReactionsProps> = ({ currentPostId, reactionCounts, updateReactionCount }) => {
+  return (
+    <div className={styles.postReactions}>
+      <EmpathyButton 
+        EMPATHY={reactionCounts.EMPATHY}
+        currentPostId={currentPostId}
+        updateReactionCount={updateReactionCount}
+      />
+      <LolButton 
+        LOL={reactionCounts.LOL}
+        currentPostId={currentPostId}
+        updateReactionCount={updateReactionCount}
+      />
+      <BigLolButton 
+        BIGLOL={reactionCounts.BIGLOL}
+        currentPostId={currentPostId}
+        updateReactionCount={updateReactionCount}
+      />
+    </div>
+  );
+};

@@ -6,6 +6,7 @@ import PostTitleBar from './postTitleBar';
 import { Post } from '@/hooks/usePosts';
 import { PostReactions } from './postReactions';
 
+
 interface PostCardProps {
     currentPost: Post;
     isShowComments: boolean;
@@ -22,6 +23,25 @@ const PostCard: React.FC<PostCardProps> = ({
     formatDate
 }) => {
 
+
+    async function handleReaction(
+        postId: string,
+        type: "EMPATHY" | "LOL" | "BIGLOL",
+      ) {
+        try {
+          const response = await fetch("/api/sendReaction", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ postId, type }),
+          });
+          if(response) {
+            console.log(`リアクションを保存しました。タイプ：${type}`)
+          }
+        } catch (error) {
+          console.error("通信エラー:", error);
+        }
+      }
+      
     const [reactionCounts, setReactionCounts] = useState<Record<string, { EMPATHY: number; LOL: number; BIGLOL: number }>>({
         [currentPost.id]: currentPost.reactionCounts || { EMPATHY: 0, LOL: 0, BIGLOL: 0 } // デフォルト値を設定
     });
@@ -35,6 +55,7 @@ const PostCard: React.FC<PostCardProps> = ({
                 [type]: (prevCounts[postId]?.[type] || 0) + 1 // `undefined` を防ぐ
             }
         }));
+        handleReaction(postId, type);
     };
     
     return (
