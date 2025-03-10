@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import UserInfo from './userInfo';
 import PostContent from './postContent';
 import styles from '@/app/statics/styles/postCard.module.css'
@@ -44,18 +44,45 @@ const PostCard: React.FC<PostCardProps> = ({
       
     const [reactionCounts, setReactionCounts] = useState<Record<string, { EMPATHY: number; LOL: number; BIGLOL: number }>>({
         [currentPost.id]: currentPost.reactionCounts || { EMPATHY: 0, LOL: 0, BIGLOL: 0 } // デフォルト値を設定
-    }); 
+    });
+
+    const [hasReacted, setHasReacted] = useState<Record<string, {EMPATHY: boolean; LOL: boolean; BIGLOL: boolean}>>({
+        [currentPost.id]: {
+          EMPATHY: currentPost.myReaction.includes("EMPATHY"),
+          LOL: currentPost.myReaction.includes("LOL"),
+          BIGLOL: currentPost.myReaction.includes("BIGLOL")
+        }
+    });
+
+    useEffect(() => {
+        // currentPost.id と currentPost.reactionCounts が変更された時に reactionCounts を更新
+        setReactionCounts(prevState => ({
+          ...prevState,
+          [currentPost.id]: currentPost.reactionCounts || { EMPATHY: 0, LOL: 0, BIGLOL: 0 } // currentPost に基づいて reactionCounts を更新
+        }));
+        setHasReacted(prevState => ({
+            ...prevState,
+            [currentPost.id]: {
+                EMPATHY: currentPost.myReaction.includes("EMPATHY"),
+                LOL: currentPost.myReaction.includes("LOL"),
+                BIGLOL: currentPost.myReaction.includes("BIGLOL")
+            }
+          }));
+      }, [currentPost]); // currentPost が変更されたときに実行される
+    
     // 指定の `postId` のカウントを更新する関数
-    const updateReactionCount = (postId: string, type: "EMPATHY" | "LOL" | "BIGLOL") => {
+    const updateReactionCount = (postId: string, type: "EMPATHY" | "LOL" | "BIGLOL",) => {
         setReactionCounts((prevCounts) => ({
             ...prevCounts,
             [postId]: {
                 ...prevCounts[postId], // 既存データがあれば上書き
-                [type]: (prevCounts[postId]?.[type] || 0) + 1 // `undefined` を防ぐ
+                [type]: hasReacted[postId]?.[type] ? (prevCounts[postId]?.[type] || 0) - 1 : (prevCounts[postId]?.[type] || 0) + 1// `undefined` を防ぐ
             }
         }));
         handleReaction(postId, type);
     };
+
+    
     
     return (
         <div className={styles.postCard} style={{ backgroundImage: `url(${currentPost.image})`, backgroundSize: 'cover', backgroundPosition: 'center' }}>
@@ -68,6 +95,8 @@ const PostCard: React.FC<PostCardProps> = ({
                             currentPostId={currentPost.id}
                             reactionCounts={reactionCounts[currentPost.id]}
                             updateReactionCount={updateReactionCount}
+                            hasReacted={hasReacted}
+                            setHasReacted={setHasReacted}
                         />
                 </div>
             </div>
