@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import { Box, Typography, CircularProgress, Button } from '@mui/material';
-import { usePosts } from '@/hooks/usePosts';
+import { Post, usePosts } from '@/hooks/usePosts';
 import NextPostButton from '../components/top/nextPostButton';
 import PreviousPostButton from '../components/top/previousPostButton';
 //import LoadNewPostsButton from '../components/top/loadNewPostButton';
@@ -133,7 +133,7 @@ export default function TopPage() {
 
         // 現在表示中の投稿
         const currentPost = posts.length > 0 ? posts[currentIndex] : null;
-        // console.log(currentPost);
+        console.log(currentPost?.myReaction);
 
         return (
             <div>
