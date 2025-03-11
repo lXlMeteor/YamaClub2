@@ -10,7 +10,8 @@ const postSchema = z.object({
   title: z.string().min(1, { message: "タイトルは必須です" }),
   category: z.string().min(1, { message: "カテゴリは必須です" }),
   content: z.string().min(1, { message: "内容は必須です" }),
-  image: z.string().optional(), // 画像URL（オプション）
+  // 画像は省略可能、null可能、または文字列
+  image: z.string().nullable().optional(),
 });
 
 /*
@@ -37,6 +38,7 @@ export async function POST(request: NextRequest) {
     
     // リクエストボディの取得
     const body = await request.json();
+    console.log(body);
     
     // バリデーション
     // 上のpostSchemaを使ってリクエストボディを検証
@@ -56,15 +58,17 @@ export async function POST(request: NextRequest) {
     
     // データベースに投稿を保存
     // status は自動的に false を設定
+    const postData = {
+      title,
+      category,
+      content,
+      status: false,
+      userId: session.user.id,
+      image: image || null  // image がない場合は null を設定
+    };
+    
     const post = await prisma.post.create({
-      data: {
-        title,
-        category,
-        content,
-        image, // 画像URLがない場合はnullになる
-        status: false, // 明示的にfalseを設定
-        userId: session.user.id
-      }
+      data: postData
     });
     
     return NextResponse.json({ 

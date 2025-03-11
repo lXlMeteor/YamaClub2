@@ -1,6 +1,7 @@
 'use client';
 
 import { useEffect, useState } from 'react';
+import { getTargetUserId, clearTargetUserId } from '@/app/store/profileStore';
 
 interface ProfileData {
     profiles: {
@@ -36,12 +37,18 @@ export default function ProfilePage() {
   useEffect(() => {
     const fetchProfileData = async () => {
       try {
-        const response = await fetch('/api/profileApis');
+        const targetUserId = getTargetUserId();
+        const endpoint = targetUserId 
+          ? `/api/getUserProfile?userId=${targetUserId}` 
+          : '/api/profileApis';  // 自分のプロフィールAPI
+        const response = await fetch(endpoint);
         if (!response.ok) {
+          clearTargetUserId();
           throw new Error('プロフィールの取得に失敗しました');
         }
         const data = await response.json();
         setProfileData(data);
+        clearTargetUserId();
         console.log(data); // 取得したデータをコンソールに表示
       } catch (error) {
         console.error('エラー:', error);
