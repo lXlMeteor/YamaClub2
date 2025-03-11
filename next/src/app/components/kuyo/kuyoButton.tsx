@@ -30,7 +30,7 @@ export default function KuyoButton ({ isKuyo, setIsKuyo } : KuyoButtonProps) {
             audio.play().catch((error) => console.error("音声の再生に失敗しました:", error));
             setTimeout(() => {
                 router.push('/kuyo/complete');
-            }, 4000);
+            }, 3000);
         }
     };
     
