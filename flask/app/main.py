@@ -13,7 +13,6 @@ API_KEY = os.getenv('API_KEY')
 
 openai.api_key = API_KEY
 
-
 # Google Generative AIのセットアップ（ダミー呼び出し）
 def generate_ai_response():
     # 実際のAPI呼び出しコードをここに追加
