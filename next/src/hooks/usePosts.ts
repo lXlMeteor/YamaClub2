@@ -19,6 +19,7 @@ export interface Post {
   updatedAt: string;
   userId: string;
   user: User;
+  myReaction: string[];
   _count: {
     comments: number;
     reactions: number;

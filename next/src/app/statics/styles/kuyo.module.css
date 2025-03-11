@@ -1,0 +1,31 @@
+.backImage {
+    background-image: url('../images/kuyonoma.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    z-index: -100;
+    height: 90vh;
+}
+
+.kuyoTitle {
+    padding-top: 4.5vh;
+    display: flex;
+    justify-content: center;
+}
+
+.kuyoCard {
+    display: flex;
+    justify-content: center;
+    margin-top: 4vh;
+}
+
+.kuyoFooter {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 4vh;
+}
+
+.kuyoButton {
+    margin-top: 4vh;
+}

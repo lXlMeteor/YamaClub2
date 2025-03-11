@@ -1,5 +1,5 @@
+import styles from "@/app/statics/styles/kuyoCardHeader.module.css"
 import { Avatar } from "@mui/material";
-import styles from "@/app/statics/styles/userInfo.module.css"
 import { Zen_Maru_Gothic } from "next/font/google";
 
 const ZenMaruGothicFont = Zen_Maru_Gothic({
@@ -7,22 +7,12 @@ const ZenMaruGothicFont = Zen_Maru_Gothic({
   subsets: ["latin"],
 });
 
-type UserInfoProps = {
-    user: {
-        name: string;
-        image?: string | null; // null も許可する
-    };
-    category: string;
-    createdAt: string;
-    formatDate: (date: string) => string;
-};
-
-const UserInfo: React.FC<UserInfoProps> = ({ user, category, createdAt, formatDate }) => {
-  return (
-    <div className = {styles.userInfo}>
+export default function KuyoCardHeader () {
+    return (
+        <div className = {styles.userInfo}>
         <div className = {styles.userStatus}>
             <Avatar
-                src={user.image ?? ""}
+                // src={user.image ?? ""}
                 sx = {{
                     width: '6vh',
                     height: '6vh',
@@ -30,17 +20,17 @@ const UserInfo: React.FC<UserInfoProps> = ({ user, category, createdAt, formatDa
                 }}
             />
             <p className = {`${ZenMaruGothicFont.className} ${styles.userName}`}>
-                {user.name}
+                {/* {user.name} */}
+                供養太朗
             </p>
-            <p className = {`${ZenMaruGothicFont.className} ${styles.category}`}>
+            {/*<p className = {`${ZenMaruGothicFont.className} ${styles.category}`}>
                 カテゴリ：{category}
-            </p>
+            </p>*/}
         </div>
         <div className = {`${ZenMaruGothicFont.className} ${styles.postDate}`}>
-            {formatDate(createdAt)}
+            {/* {formatDate(createdAt)} */}
+            2025/03/02 23:37
         </div>
     </div>
-  );
-};
-
-export default UserInfo;
+    )
+}
