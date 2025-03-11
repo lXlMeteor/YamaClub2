@@ -1,0 +1,12 @@
+.kuyoCardTitle {
+    display: flex;
+    font-size: 2.1vw;
+    margin-bottom: 1vh;
+    color: #FFFFFF;
+    -webkit-text-stroke: 0.15vh #FFE097;
+    margin-left: 2vw;
+    text-decoration: underline;
+    text-decoration-color: #FFE097;
+    text-decoration-thickness: 0.2vh;
+    text-underline-offset: 1vh; 
+}

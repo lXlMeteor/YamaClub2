@@ -1,7 +1,6 @@
 import { Button } from "@mui/material";
 import styles from "@/app/statics/styles/reactionButtons.module.css";
 import { Zen_Maru_Gothic } from "next/font/google";
-// import { useState } from "react";
 
 // Googleフォントの設定
 const ZenMaruGothicFont = Zen_Maru_Gothic({
