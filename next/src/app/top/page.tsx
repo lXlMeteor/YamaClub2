@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import { Box, Typography, CircularProgress, Button } from '@mui/material';
-import { Post, usePosts } from '@/hooks/usePosts';
+import { usePosts } from '@/hooks/usePosts';
 import NextPostButton from '../components/top/nextPostButton';
 import PreviousPostButton from '../components/top/previousPostButton';
 //import LoadNewPostsButton from '../components/top/loadNewPostButton';
