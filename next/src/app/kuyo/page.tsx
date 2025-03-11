@@ -91,10 +91,10 @@ export default function Kuyo () {
 
     return (
         <div className={styles.backImage}>
-            <h2>取得結果</h2>
+            {/* <h2>取得結果</h2>
             <pre style={{ whiteSpace: 'pre-wrap', background: '#f5f5f5', padding: '10px', borderRadius: '5px', overflow: 'auto', maxHeight: '500px' }}>
                 {JSON.stringify(data, null, 2)}
-            </pre>
+            </pre> */}
             <div className={styles.kuyoTitle}>
                 <KuyoTitle />
             </div>

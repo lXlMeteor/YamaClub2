@@ -16,7 +16,7 @@ export default function KuyoCard({ isKuyo, data }: KuyoCardProps) {
             style={{
                 width: "70vw",
                 height: "30vh",
-                backgroundImage: `url(/kurorekisi.jpg)`,
+                backgroundImage: `url(${data.post.image})`,
                 backgroundSize: "cover",
                 backgroundPosition: "center",
                 borderRadius: "15px",
