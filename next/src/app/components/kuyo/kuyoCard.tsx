@@ -3,12 +3,14 @@ import KuyoCardTitle from "./kuyoCardTitle";
 import KuyoCardReaction from "./kuyoCardReaction";
 import KuyoStamp from "./kuyoStamp";
 import KuyoCardHeader from "./kuyoCardHeader";
+import { ApiResponse } from "@/app/kuyo/page";
 
 type KuyoCardProps = {
+    data: ApiResponse
     isKuyo: boolean;
 };
 
-export default function KuyoCard({ isKuyo }: KuyoCardProps) {
+export default function KuyoCard({ isKuyo, data }: KuyoCardProps) {
     return (
         <div
             style={{
@@ -22,7 +24,11 @@ export default function KuyoCard({ isKuyo }: KuyoCardProps) {
             }}
         >
             <div className={isKuyo ? styles.isKuyo : styles.kuyoCardBrind}>
-                <KuyoCardHeader />
+                <KuyoCardHeader
+                    userImage = {data.profile.image}
+                    userName = {data.profile.name}
+                    createdAt = {data.post.createdAt}
+                />
                 {isKuyo && (
                     <div
                         style={{
@@ -39,8 +45,12 @@ export default function KuyoCard({ isKuyo }: KuyoCardProps) {
                     </div>
                 )}
                 <div className={styles.kuyoCardFooter}>
-                    <KuyoCardTitle />
-                    <KuyoCardReaction />
+                    <KuyoCardTitle 
+                        title = {data.post.title}
+                    />
+                    <KuyoCardReaction
+                        reactionCounts = {data.post.reactionCounts}
+                    />
                 </div>
             </div>
         </div>

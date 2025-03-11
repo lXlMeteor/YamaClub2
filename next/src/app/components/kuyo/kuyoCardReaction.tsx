@@ -6,18 +6,26 @@ const ZenMaruGothicFont = Zen_Maru_Gothic({
   subsets: ["latin"],
 });
 
+type KuyoCardReactionProps = {
+    reactionCounts: {
+        EMPATHY: number;
+        LOL: number;
+        BIGLOL: number;
+    };
+}
 
-export default function KuyoCardReaction () {
+
+export default function KuyoCardReaction ({ reactionCounts } : KuyoCardReactionProps) {
     return (
         <div className={ `${styles.kuyoCardReaction} ${ZenMaruGothicFont.className}`}>
             <div>
-                🤝 12
+                🤝 {reactionCounts.EMPATHY}
             </div>
             <div>
-                🌱 6
+                🌱 {reactionCounts.LOL}
             </div>
             <div>
-                😂 11
+                😂 {reactionCounts.BIGLOL}
             </div>
         </div>
     )
