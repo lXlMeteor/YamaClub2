@@ -22,7 +22,7 @@ const UserInfo: React.FC<UserInfoProps> = ({ user, category, createdAt, formatDa
     <div className = {styles.userInfo}>
         <div className = {styles.userStatus}>
             <Avatar
-                src={user.image ?? undefined}
+                src={user.image ?? ""}
                 sx = {{
                     width: '6vh',
                     height: '6vh',

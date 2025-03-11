@@ -33,6 +33,10 @@ def generate():
     prompt = data['text']
     name = data['name']
 
+    save_dir = "image"
+    save_path = os.path.join(save_dir, f"{name}.png")
+
+
     response = openai.images.generate(
         model="dall-e-2",  # DALL·E 2 を指定
         prompt=prompt,  # 生成したい画像のプロンプト
@@ -46,12 +50,12 @@ def generate():
 
     # 画像をダウンロードして保存
     image_data = requests.get(image_url).content
-    with open(f"../image/{name}.png", "wb") as file:
+    with open(save_path, "wb") as file:
         file.write(image_data)
 
     print("Image saved as output.png")
 
-    return send_file(f"../image/{name}.png",mimetype='image/png')
+    return send_file(save_path,mimetype='image/png')
 
 
 if __name__ == '__main__':

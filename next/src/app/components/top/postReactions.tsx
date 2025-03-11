@@ -8,35 +8,37 @@ type PostReactionsProps = {
         LOL: number;
         BIGLOL: number;
     };
-    // commentCount: number;
-};
-  
-const PostReactions: React.FC<PostReactionsProps> = ({ reactionCounts, currentPostId/*commentCount*/ }) => {
-return (
-    <div className = {styles.postReactions}>
-
-        {/* <div className={styles.commentCounter}>
-            コメント数：{commentCount}
-        </div> */}
-
-        <EmpathyButton
-            EMPATHY = {reactionCounts.EMPATHY}
-            currentPostId = {currentPostId}
-        />
-
-        <LolButton
-            LOL = {reactionCounts.LOL}
-            currentPostId = {currentPostId}
-        />
-
-        <BigLolButton
-            BIGLOL = {reactionCounts.BIGLOL}
-            currentPostId = {currentPostId}
-        />
-
-    </div>
-);
+    updateReactionCount: (postId: string, type: "EMPATHY" | "LOL" | "BIGLOL") => void;
+    hasReacted: Record<string, { EMPATHY: boolean; LOL: boolean; BIGLOL: boolean }>;
+    setHasReacted: React.Dispatch<React.SetStateAction<Record<string, { EMPATHY: boolean; LOL: boolean; BIGLOL: boolean }>>>;
 };
 
-export default PostReactions;
-  
+export const PostReactions: React.FC<PostReactionsProps> = ({ currentPostId, reactionCounts = { EMPATHY: 0, LOL: 0, BIGLOL: 0 }, updateReactionCount, hasReacted, setHasReacted}) => {
+    return (
+        <div className={styles.postReactions}>
+            <EmpathyButton 
+                EMPATHY={reactionCounts.EMPATHY}
+                currentPostId={currentPostId}
+                updateReactionCount={updateReactionCount}
+                hasReacted={hasReacted}
+                setHasReacted={setHasReacted}
+            />
+
+            <LolButton 
+                LOL={reactionCounts.LOL}
+                currentPostId={currentPostId}
+                updateReactionCount={updateReactionCount}
+                hasReacted={hasReacted}
+                setHasReacted={setHasReacted}
+            />
+
+            <BigLolButton 
+                BIGLOL={reactionCounts.BIGLOL}
+                currentPostId={currentPostId}
+                updateReactionCount={updateReactionCount}
+                hasReacted={hasReacted}
+                setHasReacted={setHasReacted}
+            />
+        </div>
+    );
+};
