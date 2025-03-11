@@ -1,8 +1,18 @@
-from flask import Flask, send_file
+from flask import Flask, send_file, request
 from datetime import datetime
-from PIL import Image, ImageDraw, ImageFont
+import openai
+import requests
+import os
+from dotenv import load_dotenv
 
 app = Flask(__name__)
+
+load_dotenv()
+
+API_KEY = os.getenv('API_KEY')
+
+openai.api_key = API_KEY
+
 
 # Google Generative AIのセットアップ（ダミー呼び出し）
 def generate_ai_response():
@@ -16,20 +26,33 @@ def home():
 
     return f"Hello, Flask with Docker! Current time: {current_time}<br>AI says: {ai_response}"
 
-@app.route('/test')
-def test():
-    img = Image.new('RGB', (200, 100), color = (73, 109, 137))
-    d = ImageDraw.Draw(img)
-    d.text((10,10), "lkajsdf;oijwa;foijaw;eij", fill=(255,255,0))
-    
-    # 一時的に画像を保存
-    img.save('/tmp/hello_flask.png')
-    
-    # 画像をレスポンスとして返す
-    return send_file('/tmp/hello_flask.png', mimetype='image/png')
-
 @app.route('/generate')
 def generate():
+
+    data = request.get_json()
+    prompt = data['text']
+    name = data['name']
+
+    response = openai.images.generate(
+        model="dall-e-2",  # DALL·E 2 を指定
+        prompt=prompt,  # 生成したい画像のプロンプト
+        n=1,  # 生成する画像の数
+        size="1024x1024"  # 画像サイズ
+    )
+
+    # 画像のURLを取得
+    image_url = response.data[0].url
+    print(f"Generated Image URL: {image_url}")
+
+    # 画像をダウンロードして保存
+    image_data = requests.get(image_url).content
+    with open(f"../image/{name}.png", "wb") as file:
+        file.write(image_data)
+
+    print("Image saved as output.png")
+
+    return send_file(f"../image/{name}.png",mimetype='image/png')
+
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=5001, debug=True)

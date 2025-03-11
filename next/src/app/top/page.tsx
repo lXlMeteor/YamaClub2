@@ -82,7 +82,7 @@ export default function TopPage() {
                 setNewPostsCount(data.posts.length);
                 setShowNewPostsAlert(true);
             }
-        }, 60000); // 1分ごとにチェック
+        }, 6000000000); // 1分ごとにチェック
       
           return () => clearInterval(checkNewPostsInterval);
         }, [paginationInfo, loading, checkForNewPosts]);

@@ -4,3 +4,7 @@ google.genai
 google.generativeai
 pillow
 datetime
+openai
+diffusers
+requests
+dotenv
