@@ -25,7 +25,7 @@ def home():
 
     return f"Hello, Flask with Docker! Current time: {current_time}<br>AI says: {ai_response}"
 
-@app.route('/generate')
+@app.route('/generate', methods=['POST'])
 def generate():
 
     data = request.get_json()
@@ -42,6 +42,7 @@ def generate():
         n=1,  # 生成する画像の数
         size="1024x1024"  # 画像サイズ
     )
+    
 
     # 画像のURLを取得
     image_url = response.data[0].url
