@@ -1,5 +1,8 @@
 .completeBG {
     background-image: url('../images/nizi.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
     height: 90vh;
     display: flex;
     flex-direction: column;
