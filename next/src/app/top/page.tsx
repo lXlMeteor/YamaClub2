@@ -9,6 +9,7 @@ import PreviousPostButton from '../components/top/previousPostButton';
 import PaginationInfo from '../components/top/pagenationInfo';
 import NewPostsButton from '../components/top/newPostButton';
 import PostCard from '../components/top/postCard';
+import CommentList from '../components/top/commentList';
 
 
 export default function TopPage() {
@@ -35,7 +36,7 @@ export default function TopPage() {
     const [newPostsCount, setNewPostsCount] = useState(0);
     //////
 
-    const [isShowComments, setIsShowComments] = useState(false);
+    // const [isShowComments, setIsShowComments] = useState(false);
 
     // 初期データのロード
     useEffect(() => {
@@ -124,12 +125,12 @@ export default function TopPage() {
         };
 
         //コメントを表示するかどうか
-        const handleShowComments = () => {
-            setIsShowComments(true);
-        } 
-        const handleHideComments = () => {
-            setIsShowComments(false);
-        }
+        // const handleShowComments = () => {
+        //     setIsShowComments(true);
+        // } 
+        // const handleHideComments = () => {
+        //     setIsShowComments(false);
+        // }
 
         // 現在表示中の投稿
         const currentPost = posts.length > 0 ? posts[currentIndex] : null;
@@ -205,12 +206,9 @@ export default function TopPage() {
                             <div>
                                 <PostCard
                                     currentPost={currentPost}
-                                    isShowComments={isShowComments}
-                                    handleHideComments={handleHideComments}
-                                    handleShowComments={handleShowComments}
                                     formatDate={formatDate}
                                 />
-                          </div>
+                            </div>
                         )}
                     
                         {/* 右矢印（次の投稿） */}
