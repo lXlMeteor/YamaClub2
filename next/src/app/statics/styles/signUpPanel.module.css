@@ -1,0 +1,11 @@
+.signUpPanel {
+    display: flex;
+    flex-direction: column;
+    gap: 3vh;
+    align-items: center;
+    margin-bottom: 3vh;
+}
+
+.signUpPanel p {
+    color: rgb(255, 65, 65);
+}

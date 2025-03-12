@@ -1,0 +1,37 @@
+.backImage {
+    background-image: url('../images/kuyonoma.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    z-index: -100;
+}
+
+.logOut {
+    height: 90vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.logOutPanel {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 50vh;
+    width: 50vw;
+    background-color: rgba(255, 255, 255, 0.7);
+    border-radius: 20px;
+    gap: 7vh;
+}
+
+.logOut h1 {
+    font-size: 6vh;
+    color: #FF9B83;
+    -webkit-text-stroke: 0.1vh white;
+}
+
+.buttons {
+    display: flex;
+    gap: 4vw;
+}

@@ -1,0 +1,17 @@
+.drawerMenuButton {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    width: 5vw;
+    padding: 5px 0;
+    cursor: pointer;
+    gap: 0.7vh;
+}
+
+.hamburgerLine {
+    width: 4vw;
+    height: 1vh;
+    background-color: #FF9B83;
+    border: 0.3vh solid white;
+    border-radius: 5px;
+}

@@ -1,0 +1,31 @@
+.reactionButton {
+    display: flex;
+    justify-content: center; /* 水平方向の中央揃え */
+    align-items: center; /* 垂直方向の中央揃え */
+    font-size: 1.2vh;
+    background-color: #FFF8EE;
+    color: #FF9B83;
+    padding: 0.3vh;
+    border-radius: 50px;
+    width: 8vw;
+}
+
+.reactionButton p {
+    font-size: 1.8vh;
+}
+
+.hasReacted {
+    display: flex;
+    justify-content: center; /* 水平方向の中央揃え */
+    align-items: center; /* 垂直方向の中央揃え */
+    font-size: 1.2vh;
+    background-color: #fff8ee7f;
+    color: #ff9c837e;
+    padding: 0.3vh;
+    border-radius: 50px;
+    width: 8vw;
+}
+
+.hasReacted p {
+    font-size: 1.8vh;
+}

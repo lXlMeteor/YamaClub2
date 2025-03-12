@@ -1,0 +1,33 @@
+/* kuyoStamp.module.css */
+
+.kuyoStamp {
+    background-color: rgba(255, 183, 165, 0.5);
+    font-size: 4vw;
+    z-index: 10;
+    width: 15vw;
+    height: 15vw;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+    border: 0.5vw solid #FF7350;
+    opacity: 0; /* 初期状態で透明 */
+    transform: rotate(-35deg);
+    transition: opacity 1s ease-in-out, transform 1s ease-in-out;
+}
+
+.kuyoStamp.show {
+    opacity: 1;
+    transform: rotate(-25deg);
+}
+/* 
+.kuyoStamp p {
+    font-size: 4vw;
+    color: #FF0000;
+    opacity: 0;
+    transition: opacity 3s ease-in-out;
+}
+
+.showText {
+    opacity: 1;
+} */

@@ -1,0 +1,60 @@
+.rankerCard {
+    height: 8vh;
+    width: 100%;
+    background-color: rgba(255, 236, 189, 0.24);
+    border: 1px solid #FF9B83;
+    border-radius: 50px;
+    margin-bottom: 3vh;
+    padding: 5px 35px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.currentUser {
+    border: 2px solid #FF9B83;
+    box-shadow: 0 0 10px rgba(255, 155, 131, 0.5);
+}
+
+.rank_and_user {
+    display: flex;
+    align-items: center;
+    justify-content: start;
+    flex-grow: 1;
+}
+
+.rank {
+    font-size: 5.3vh;
+    font-weight: 700;
+    color: #FF9B83;
+    -webkit-text-stroke: 1px white;
+    margin-bottom: 0.4vh;
+    margin-right: 10vh;
+}
+
+.user {
+    display: flex;
+    align-items: center;
+    justify-content: start;
+    gap: 2vh
+}
+
+.name {
+    font-size: 5vh;
+    font-weight: 900;
+    color: white;
+    -webkit-text-stroke: 2px #FF9B83;
+    margin-bottom: 0.4vh;
+}
+
+.level {
+    font-size: 2vh;
+    font-weight: 900;
+    color: #FF9B83;
+}
+
+.count {
+    font-size: 3.2vh;
+    font-weight: 700;
+    color: #FF9B83;
+    margin-bottom: 0.4vh;
+}

@@ -1,0 +1,19 @@
+.header {
+    background: rgb(248, 175, 0);
+    background: linear-gradient(180deg, rgba(248, 175, 0, 0.34) 0%, rgba(255, 195, 52, 0.34) 50%, rgba(255, 195, 52, 0.34) 100%);
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.15);
+    display: flex;
+    justify-content: column;
+    justify-content: center;
+    justify-content: space-between;
+    align-items: center;
+    height: 8vh;
+}
+
+.header h1 {
+    font-size: 5vh;
+    align-items: center;
+    font-weight: 900;
+    color: #FF9B83;
+    -webkit-text-stroke: 0.25vh white;
+}

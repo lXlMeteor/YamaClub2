@@ -1,0 +1,37 @@
+.userInfo {
+    display: flex;
+    justify-content: space-between;
+    padding-top: 3vh;
+    padding-bottom: 1vh;
+}
+
+.userStatus {
+    display: flex;
+    align-items: center;
+}
+
+.userStatus {
+    display: flex;
+    margin-left: 1vw;
+    gap: 0.8vw;
+}
+
+.userName {
+    color: #FFFFFF;
+    font-size: 4vh;
+    -webkit-text-stroke: 0.2vh #FFE097; /* 枠線の色と太さ */
+    margin-bottom: 1vh;
+}
+
+.category {
+    font-size: 2.8vh;
+    color: #FF9B83;
+    margin-left: 1.5vw;
+}
+
+.postDate {
+    color: #FFFFFF;
+    font-size: 2.8vh;
+    -webkit-text-stroke: 0.1vh #FFE097; /* 枠線の色と太さ */
+    margin-right: 1vw;
+}

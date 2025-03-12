@@ -1,0 +1,32 @@
+.kuyoButton {
+    display: flex;
+}
+
+.kuyoButtonBG {
+    background-image: url(../images/mokugyo.png);
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: center;
+    width: 27vh;
+    height: 27vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.kuyoButtonCircle {
+    background-color: rgba(255, 183, 165, 0.5);
+    border: 0.8vh solid rgba(255, 115, 80, 0.9);
+    width: 20vh;
+    height: 20vh;
+    border-radius: 50%;
+    display: flex;
+    justify-content: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.kuyoButtonText {
+    font-size: 3vw;
+    color: #000;
+}

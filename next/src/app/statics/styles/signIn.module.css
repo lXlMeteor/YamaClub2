@@ -1,0 +1,38 @@
+.backImage {
+    background-image: url('../images/kuyonoma.jpg');
+    background-size: cover; /* 画像をコンテナに合わせて拡大・縮小 */
+    background-position: center; /* 画像を中央に配置 */
+    background-repeat: no-repeat; /* 画像が繰り返されないように */
+    z-index: -100;
+}
+
+.signIn {
+    height: 90vh;
+    display: flex;
+    justify-content: column;
+    justify-content: center;
+    align-items: center;
+    transform: translateY(-4%);
+}
+
+.panel {
+    background-color: rgba(255, 255, 255, 0.8);
+    border-radius: 30px;
+    height: 52vh;
+    width: 52vw;
+    border: 10px solid #FF9B83;
+}
+
+.switchButton {
+    display: flex;
+    justify-content: center;
+}
+
+.signUpPostButton {
+    display: flex;
+    justify-content: center;
+}
+
+.selectSignUp {
+    background-color: rgba(255, 155, 131, 0.2);
+}

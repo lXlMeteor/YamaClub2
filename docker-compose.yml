@@ -1,0 +1,27 @@
+services:
+  app:
+    build:
+      context: ./next
+      dockerfile: Dockerfile.dev
+    ports:
+      - "3000:3000"
+      - "5555:5555"
+    volumes:
+      - ./next:/next
+    environment:
+      - NODE_ENV=development
+    env_file:
+      - ./next/.env.docker
+
+  flask:
+    build:
+      context: ./flask
+      dockerfile: Dockerfile
+    ports:
+      - "5001:5001"
+    volumes:
+      - ./flask/app:/app
+    environment:
+      - FLASK_ENV=development
+    depends_on:
+      - app

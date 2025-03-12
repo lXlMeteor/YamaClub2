@@ -1,0 +1,32 @@
+.categoryField {
+    width: 75vw;
+}
+
+.fieldset {
+    border: 0.07rem solid #b6b6b6;
+    border-radius: 5px;
+    padding: 1vh;
+    background-color: #ffffff;
+}
+
+.legend {
+    font-weight: bold;
+    font-size: 0.7rem;
+    color: #4DAFFF;
+}
+
+.isHover {
+    border: 0.3vh solid #FF9B83;
+    border-radius: 5px;
+    padding: 1vh;
+    padding-bottom: 1vh;
+    background-color: #ffffff;
+}
+
+.formControlLabels {
+    display: flex;
+    justify-content: space-between;
+    margin-left: 3vw;
+    margin-right: 3vw;
+    padding-bottom: 1vh;
+}
