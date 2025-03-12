@@ -6,7 +6,7 @@ WORKDIR /app
 
 # 依存ライブラリをコピーしてインストール
 # COPY app/requirements.txt ./
-COPY . .
+COPY app/ .
 RUN pip install --no-cache-dir -r requirements.txt
 
 # Flask アプリのコードをコピー
