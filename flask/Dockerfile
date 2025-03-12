@@ -5,7 +5,7 @@ FROM python:3
 WORKDIR /app
 
 # 依存ライブラリをコピーしてインストール
-COPY app/requirements.txt .
+COPY flask/app/requirements.txt .
 # COPY app/ .
 RUN pip install --no-cache-dir -r requirements.txt
 
