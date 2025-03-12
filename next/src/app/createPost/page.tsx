@@ -55,7 +55,7 @@ export default function CreatePost () {
                 />
             </div>
             {image ? (
-                <Image src={image} style={{ width: 200 }} alt="状況画像"/>
+                <Image src={image} width={0} height={0} sizes="200px" style={{ width: '200px', height:'auto' }} alt="状況画像"/>
             ) : null}
             <input type="file" accept="image/*" onChange={(e) => {
                 const file = e.target.files?.[0];

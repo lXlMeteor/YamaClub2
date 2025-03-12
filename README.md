@@ -1,6 +1,3 @@
-<<<<<<< HEAD
-# YamaClub2
-=======
 まず、/YmaClub2/nextディレクトリに移動し
 >```npm install```
 
@@ -44,4 +41,3 @@ Dockerfile
 Makefile
 --長かったり、数行あるコマンドを一つの短いコマンドで制御できるようにしたファイル    
 -> make + 〇〇  で実行
->>>>>>> 016e2dfebc5854746103e6e052c8cb315ca861bd
