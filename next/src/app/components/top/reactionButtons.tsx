@@ -1,3 +1,7 @@
+<<<<<<< HEAD
+import { useEffect, useState, } from "react";
+=======
+>>>>>>> nao
 import { Button } from "@mui/material";
 import styles from "@/app/statics/styles/reactionButtons.module.css";
 import { Zen_Maru_Gothic } from "next/font/google";
@@ -71,7 +75,13 @@ type EmpathyButtonProps = {
     setHasReacted: React.Dispatch<React.SetStateAction<Record<string, { EMPATHY: boolean; LOL: boolean; BIGLOL: boolean }>>>;
 };
 
+<<<<<<< HEAD
+export function EmpathyButton({ EMPATHY, currentPostId }: EmpathyButtonProps) {
+  const [count, setCount] = useState<number>(EMPATHY);
+  const [hasReacted, setHasReacted] = useState<boolean>(false);
+=======
 export function EmpathyButton({ EMPATHY, currentPostId, updateReactionCount, hasReacted, setHasReacted}: EmpathyButtonProps) {
+>>>>>>> nao
 
     return (
         <ReactionButton
@@ -96,7 +106,13 @@ type LolButtonProps = {
     setHasReacted: React.Dispatch<React.SetStateAction<Record<string, { EMPATHY: boolean; LOL: boolean; BIGLOL: boolean }>>>;
 };
 
+<<<<<<< HEAD
+export function LolButton({ LOL, currentPostId }: LolButtonProps) {
+  const [count, setCount] = useState<number>(LOL); // 個別のカウント管理
+  const [hasReacted, setHasReacted] = useState<boolean>(false); // リアクション状態
+=======
 export function LolButton({ LOL, currentPostId, updateReactionCount, hasReacted, setHasReacted}: LolButtonProps) {
+>>>>>>> nao
 
     return (
         <ReactionButton
@@ -121,7 +137,13 @@ type BigLolButtonProps = {
     setHasReacted: React.Dispatch<React.SetStateAction<Record<string, { EMPATHY: boolean; LOL: boolean; BIGLOL: boolean }>>>;
 };
 
+<<<<<<< HEAD
+export function BigLolButton({ BIGLOL, currentPostId }: BigLolButtonProps) {
+  const [count, setCount] = useState<number>(BIGLOL); // 個別のカウント管理
+  const [hasReacted, setHasReacted] = useState<boolean>(false); // リアクション状態
+=======
 export function BigLolButton({ BIGLOL, currentPostId, updateReactionCount, hasReacted, setHasReacted}: BigLolButtonProps) {
+>>>>>>> nao
 
     return (
             <ReactionButton
