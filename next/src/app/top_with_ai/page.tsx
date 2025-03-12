@@ -11,7 +11,7 @@ import SentimentSatisfiedAltIcon from '@mui/icons-material/SentimentSatisfiedAlt
 import EmojiEmotionsIcon from '@mui/icons-material/EmojiEmotions';
 import Image from 'next/image';
 import Link from 'next/link';
-import { usePosts, Post } from '@/hooks/usePosts';
+import { usePosts } from '@/hooks/usePosts';
 
 export default function TopPage() {
   const { 
@@ -37,7 +37,7 @@ export default function TopPage() {
   const [newPostsCount, setNewPostsCount] = useState(0);
   //////
 
-  const [isShowComments, setIsShowComments] = useState(false);
+  // const [setIsShowComments] = useState(false);
 
   // 初期データのロード
   useEffect(() => {
@@ -126,12 +126,12 @@ export default function TopPage() {
   };
 
   //コメントを表示するかどうか
-  const handleShowComments = () => {
-    setIsShowComments(true);
-  } 
-  const handleHideComments = () => {
-    setIsShowComments(false);
-  }
+  // const handleShowComments = () => {
+  //   setIsShowComments(true);
+  // } 
+  // const handleHideComments = () => {
+  //   setIsShowComments(false);
+  // }
 
   // 現在表示中の投稿
   const currentPost = posts.length > 0 ? posts[currentIndex] : null;

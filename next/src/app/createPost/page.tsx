@@ -7,6 +7,7 @@ import { PostDecideButton } from "../components/createPost/createPostButtons";
 import CategoryField from "../components/createPost/categoryField";
 import styles from "@/app/statics/styles/createPost.module.css";
 import { Zen_Maru_Gothic } from "next/font/google";
+import Image from 'next/image';
 
 const ZenMaruGothicFont = Zen_Maru_Gothic({
   weight: "700",
@@ -54,7 +55,13 @@ export default function CreatePost () {
                 />
             </div>
             {image ? (
-                <img src={image} style={{ width: 200 }} />
+                <Image 
+                    src={image} 
+                    width={200} 
+                    height={200} 
+                    style={{ objectFit: 'contain', height: 'auto' }} 
+                    alt="状況画像"
+                />
             ) : null}
             <input type="file" accept="image/*" onChange={(e) => {
                 const file = e.target.files?.[0];
