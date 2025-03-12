@@ -5,7 +5,7 @@ WORKDIR /next
 
 # 本番用の依存関係を含まない依存関係をインストール
 COPY package.json package-lock.json ./
-RUN npm install --only=production
+RUN npm ci --only=production
 
 # アプリケーションのソースコードをコピー
 COPY . .
