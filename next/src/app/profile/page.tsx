@@ -2,11 +2,15 @@
 
 import { useEffect, useState } from 'react';
 import { getTargetUserId, clearTargetUserId } from '@/app/store/profileStore';
+<<<<<<< HEAD
 import { KuyoRevelButton, PastPostButton } from '../components/profile/profileButtons';
 import styles from '@/app/statics/styles/profile.module.css'
 import UserStatus from '../components/profile/userStatus';
 import ProfilePostCard from '../components/profile/profilePostCard';
 import ProfileAchievement from '../components/profile/profileAchievement';
+=======
+import Image from 'next/image';
+>>>>>>> origin
 
 export interface ProfileData {
     profiles: {
@@ -74,6 +78,7 @@ export default function ProfilePage() {
     }
     , [profileData]);
 
+<<<<<<< HEAD
     return (
         <div style={{padding: "50px 0"}}>
             {profileData && (
@@ -117,6 +122,44 @@ export default function ProfilePage() {
                     }
                 </div>
             )}
+=======
+  return (
+    <div style={{padding: "50px 0"}}>
+      {profileData && (
+        <div>
+          <h2>プロフィール</h2>
+          <ul style={{borderBottom: "1px solid black"}}>
+            <li>名前: {profileData.profiles.name}</li>
+            <li>プロフィール画像: <Image src={profileData.profiles.image} alt="プロフィール画像" fill style={{ objectFit: 'cover' }}/></li>
+            <li>自己紹介: {profileData.profiles.intro}</li>
+          </ul>
+          <h2>投稿</h2>
+          <ul style={{borderBottom: "1px solid black"}}>
+            {profileData.posts.map(post => (
+              <li key={post.id} style={{border: "1px solid black"}}>
+                <h3>タイトル: {post.title}</h3>
+                <p>内容: {post.content}</p>
+                <p>リアクション数:</p>
+                <ul>
+                  <li>EMPATHY: {post.reactionCounts.EMPATHY}</li>
+                  <li>LOL: {post.reactionCounts.LOL}</li>
+                  <li>BIGLOL: {post.reactionCounts.BIGLOL}</li>
+                </ul>
+                <p>コメント数: {post._count.comments}</p>
+              </li>
+            ))}
+          </ul>
+          <h2>アカウントの供養総数やリアクション総数</h2>
+          <ul style={{borderBottom: "1px solid black"}}>
+            <li>供養総数: {profileData.counts.kuyoCount}</li>
+            <li>リアクション総数:</li>
+            <ul>
+              <li>EMPATHY: {profileData.counts.reactionCounts.EMPATHY}</li>
+              <li>LOL: {profileData.counts.reactionCounts.LOL}</li>
+              <li>BIGLOL: {profileData.counts.reactionCounts.BIGLOL}</li>
+            </ul>
+          </ul>
+>>>>>>> origin
         </div>
     );  
 }

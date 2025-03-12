@@ -88,7 +88,8 @@ const PostCard: React.FC<PostCardProps> = ({
         <div className={styles.postCard} style={{ backgroundImage: `url(${currentPost.image})`, backgroundSize: 'cover', backgroundPosition: 'center' }}>
             <div className={styles.bgBrind}>
                 <UserInfo user={currentPost.user} category={currentPost.category} createdAt={currentPost.createdAt} formatDate={formatDate} />
-                <PostContent category={currentPost.category} title={currentPost.title} content={currentPost.content} />
+                <PostContent content={currentPost.content} />
+                {/* <PostContent category={currentPost.category} title={currentPost.title} content={currentPost.content} /> */}
                 <div className={styles.postCardFooter}>
                     <PostTitleBar title={currentPost.title} isShowComments={isShowComments} handleHideComments={handleHideComments} handleShowComments={handleShowComments} />
                         <PostReactions

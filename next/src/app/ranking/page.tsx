@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import TitleField from '../components/ranking/titleField';
 import RankerCard from '../components/ranking/rankerCard';
 import styles from '@/app/statics/styles/ranking.module.css';
@@ -46,7 +46,7 @@ export default function KuyoRankingTestPage() {
   const [error, setError] = useState<string | null>(null);
   const [limit, setLimit] = useState<number>(10);
   
-  const fetchData = async () => {
+  const fetchData = useCallback(async () => {
     try {
       const res = await fetch(`/api/getKuyoCount?limit=${limit}`);
       const data: KuyoRankingData = await res.json();
@@ -58,13 +58,13 @@ export default function KuyoRankingTestPage() {
     } finally {
       setLoading(false);
     }
-  }
+  }, [limit]);
 
   // 初期ロード時にデータを取得
   useEffect(() => {
     setLoading(true);
     fetchData();
-  }, []);
+  }, [fetchData]);
 
   // 再表示ボタンクリック時にデータを再取得
   const handleLoad = () => {
