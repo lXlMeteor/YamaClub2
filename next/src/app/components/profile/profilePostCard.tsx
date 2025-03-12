@@ -3,6 +3,7 @@ import KuyoCardHeader from "../kuyo/kuyoCardHeader";
 import KuyoStamp from "../kuyo/kuyoStamp";
 import KuyoCardTitle from "../kuyo/kuyoCardTitle";
 import KuyoCardReaction from "../kuyo/kuyoCardReaction";
+import { Button } from "@mui/material";
 
 type ProfilePost = {
     id: string;
@@ -26,44 +27,55 @@ type ProfilePostCardProps = {
 };
 
 export default function ProfilePostCard({ data }: ProfilePostCardProps) {
+
+    const handleClick = () : void => {
+        console.log("投稿詳細に移動")
+    }
+
     return (
-        <div
-            style={{
-                width: "70vw",
-                height: "30vh",
-                backgroundImage: `url(${data.image})`,
-                backgroundSize: "cover",
-                backgroundPosition: "center",
-                borderRadius: "15px",
-                position: "relative",
-            }}
-        >
-            <div className={data.status ? styles.isKuyo : styles.kuyoCardBrind}>
-                <KuyoCardHeader
-                    userImage={data.image}
-                    userName={data.title}
-                    createdAt={data.createdAt}
-                />
-                {data.status && (
-                    <div
-                        style={{
-                            position: "absolute",
-                            top: "50%",
-                            left: "50%",
-                            transform: "translate(-50%, -50%)",
-                            zIndex: 10,
-                            display: "flex",
-                            justifyContent: "center",
-                        }}
-                    >
-                        <KuyoStamp />
+        <div className={styles.profilePostCard}>
+            <Button
+                onClick={handleClick}
+            >
+                <div
+                    style={{
+                        width: "70vw",
+                        height: "33vh",
+                        backgroundImage: `url(${data.image})`,
+                        backgroundSize: "cover",
+                        backgroundPosition: "center",
+                        borderRadius: "15px",
+                        position: "relative",
+                    }}
+                >
+                    <div className={data.status ? styles.isKuyo : styles.kuyoCardBrind}>
+                        <KuyoCardHeader
+                            userImage={data.image}
+                            userName={data.title}
+                            createdAt={data.createdAt}
+                        />
+                        {data.status && (
+                            <div
+                                style={{
+                                    position: "absolute",
+                                    top: "50%",
+                                    left: "50%",
+                                    transform: "translate(-50%, -50%)",
+                                    zIndex: 10,
+                                    display: "flex",
+                                    justifyContent: "center",
+                                }}
+                            >
+                                <KuyoStamp />
+                            </div>
+                        )}
+                        <div className={styles.kuyoCardFooter}>
+                            <KuyoCardTitle title={data.title} />
+                            <KuyoCardReaction reactionCounts={data.reactionCounts} />
+                        </div>
                     </div>
-                )}
-                <div className={styles.kuyoCardFooter}>
-                    <KuyoCardTitle title={data.title} />
-                    <KuyoCardReaction reactionCounts={data.reactionCounts} />
                 </div>
-            </div>
+            </Button>
         </div>
     );
 }
