@@ -1,0 +1,10 @@
+[build]
+  command = "npx prisma generate && next build"
+  publish = ".next"
+
+[[plugins]]
+  package = "@netlify/plugin-nextjs"
+
+# 必要に応じて以下の設定も追加できます
+[build.environment]
+  NEXT_USE_NETLIFY_EDGE = "true"

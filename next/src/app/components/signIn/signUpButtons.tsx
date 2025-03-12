@@ -1,6 +1,9 @@
+'use client';
+
 import { Button } from "@mui/material";
 import { signIn } from 'next-auth/react';
 import { Zen_Maru_Gothic } from "next/font/google";
+import { useRouter } from 'next/navigation';
 
 const ZenMaruGothicFont = Zen_Maru_Gothic({
   weight: "700",
@@ -69,6 +72,7 @@ type SignUpPostButton = {
 }
 
 export function SignUpPostButton ({ setIsBlank, email, setEmail, userName, setUserName, passWord, setPassWord } : SignUpPostButton) {
+    const router = useRouter();
 
     const handleLogin = async() => {
         if (email && userName && passWord) {
@@ -86,6 +90,7 @@ export function SignUpPostButton ({ setIsBlank, email, setEmail, userName, setUs
             });
             if (responce?.ok) {
                 console.log("ログイン成功");
+                router.push("/top");
             } else {
                 console.log("ログイン失敗");
             }
