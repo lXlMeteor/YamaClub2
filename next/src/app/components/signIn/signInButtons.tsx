@@ -1,6 +1,8 @@
 'use client';
+
 import { Button } from "@mui/material";
 import { signIn } from "next-auth/react";
+import { useRouter } from "next/navigation";
 
 
 type LoginButtonProps = {
@@ -55,6 +57,7 @@ type LogInPostButton = {
 }
 
 export function LogInPostButton ({ setIsBlank, email, setEmail, passWord, setPassWord } : LogInPostButton) {
+    const router = useRouter();
     
     const handleClick = async() => {
         if (email && passWord) {
@@ -70,7 +73,9 @@ export function LogInPostButton ({ setIsBlank, email, setEmail, passWord, setPas
                 password: passWord,
                 redirect: false,
             });
+            console.log("レスポンス：", responce);
             if (responce?.ok) {
+                router.push("/profile");
                 console.log("ログイン成功");
             } else {
                 console.log("ログイン失敗");
