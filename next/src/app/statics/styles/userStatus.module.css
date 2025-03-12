@@ -1,0 +1,24 @@
+.userStatus {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 60vw;
+}
+
+.userName {
+    font-size: 4vw;
+    color: #FFFFFF;
+    -webkit-text-stroke: 0.25vh #FF9B83;
+}
+
+.kuyoRevel {
+    color: #71BFFF;
+    font-size: 1.5vw;
+}
+
+.userIntro {
+    color: #FF9B83;
+    font-size: 1.2vw;
+    margin-top: 3vh;
+}

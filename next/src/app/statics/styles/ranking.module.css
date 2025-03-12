@@ -1,0 +1,58 @@
+.container {
+    width: 100vw;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.rankings {
+    min-width: 70vw;
+    max-width: 90vw;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: start;
+    flex-grow: 1;
+}
+
+.option {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: end;
+    padding: 0 3vh 0 4vh;
+}
+
+.reView {
+    display: flex;
+    align-items: center;
+}
+
+.text {
+    font-size: 2.2vh;
+    color: #FF9B83;
+}
+
+.input {
+    width: 6vh;
+    min-width: calc(2.4vh + 20px);
+    font-size: 2.4vh;
+    color: #FF9B83;
+    background: transparent;
+    outline: none;
+}
+
+.limit {
+    display: flex;
+    align-items: end;
+}
+
+.viewCount {
+    font-size: 2.2vh;
+    font-weight: 900;
+    color: #FF9B83;
+}
+
+  

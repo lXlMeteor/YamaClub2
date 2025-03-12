@@ -6,10 +6,14 @@ const ZenMaruGothicFont = Zen_Maru_Gothic({
   subsets: ["latin"],
 });
 
-export default function KuyoCardTitle () {
+type KuyoCardTitleProps = {
+    title: string;
+}
+
+export default function KuyoCardTitle ({ title } : KuyoCardTitleProps) {
     return (
         <div className={ `${styles.kuyoCardTitle} ${ZenMaruGothicFont.className}`}>
-            高校生の頃に好きな人にLINEを送った話
+            {title}
         </div>
     )
 }

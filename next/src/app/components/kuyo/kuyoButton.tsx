@@ -26,11 +26,18 @@ export default function KuyoButton ({ isKuyo, setIsKuyo } : KuyoButtonProps) {
         if(isKuyo === false) {
             console.log("供養します。");
             setIsKuyo(true);
-            const audio = new Audio("/sounds/kuyoSound.mp3");
-            audio.play().catch((error) => console.error("音声の再生に失敗しました:", error));
+            const audio1 = new Audio("/sounds/kuyoSound.mp3");
+            audio1.play().catch((error) => console.error("音声の再生に失敗しました:", error));
+
+            // 3秒後に次の音声を再生
+            setTimeout(() => {
+                const audio2 = new Audio("/sounds/angelSound.mp3");
+                audio2.play().catch((error) => console.error("音声の再生に失敗しました:", error));
+            }, 4000); // 3秒後に音声2を再生
+
             setTimeout(() => {
                 router.push('/kuyo/complete');
-            }, 4000);
+            }, 3500);
         }
     };
     

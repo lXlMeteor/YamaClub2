@@ -5,7 +5,7 @@ import { Box, Typography, CircularProgress, Button } from '@mui/material';
 import { usePosts } from '@/hooks/usePosts';
 import NextPostButton from '../components/top/nextPostButton';
 import PreviousPostButton from '../components/top/previousPostButton';
-//import LoadNewPostsButton from '../components/top/loadNewPostButton';
+import LoadNewPostsButton from '../components/top/loadNewPostButton';
 import PaginationInfo from '../components/top/pagenationInfo';
 import NewPostsButton from '../components/top/newPostButton';
 import PostCard from '../components/top/postCard';
@@ -82,7 +82,7 @@ export default function TopPage() {
                 setNewPostsCount(data.posts.length);
                 setShowNewPostsAlert(true);
             }
-        }, 6000000);
+        }, 60000000000000000000); // 1分ごとにチェック 60000
       
           return () => clearInterval(checkNewPostsInterval);
         }, [paginationInfo, loading, checkForNewPosts]);
