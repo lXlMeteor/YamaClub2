@@ -3,6 +3,7 @@
 .kuyoStamp {
     background-color: rgba(255, 183, 165, 0.5);
     font-size: 4vw;
+    color: #000000;
     z-index: 10;
     width: 15vw;
     height: 15vw;
