@@ -64,7 +64,7 @@ export default function KuyoRankingTestPage() {
   useEffect(() => {
     setLoading(true);
     fetchData();
-  }, [fetchData]);
+  }, []);
 
   // 再表示ボタンクリック時にデータを再取得
   const handleLoad = () => {
