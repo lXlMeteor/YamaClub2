@@ -1,10 +1,10 @@
 {
     "$schema": "https://railway.app/railway.schema.json",
     "build": {
-      "builder": "DOCKERFILE",
-      "dockerfilePath": "flask/Dockerfile"
+      "buildCommand": "cd flask && docker build -t app ."
     },
     "deploy": {
+      "startCommand": "docker run -p $PORT:5001 app",
       "restartPolicyType": "ON_FAILURE",
       "restartPolicyMaxRetries": 10
     }
