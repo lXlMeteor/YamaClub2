@@ -1,3 +1,7 @@
+<<<<<<< HEAD
+=======
+import { useEffect, useState, } from "react";
+>>>>>>> origin/nao_sub
 import { Button } from "@mui/material";
 import styles from "@/app/statics/styles/reactionButtons.module.css";
 import { Zen_Maru_Gothic } from "next/font/google";
