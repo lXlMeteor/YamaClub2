@@ -9,11 +9,16 @@ const ZenMaruGothicFont = Zen_Maru_Gothic({
 
 
 type PostContentProps = {
-    category: string;
-    title: string;
     content: string;
     image?: string | null;
 };
+
+// type PostContentProps = {
+//     category: string;
+//     title: string;
+//     content: string;
+//     image?: string | null;
+// };
 
 const PostContent: React.FC<PostContentProps> = ({ content, image }) => {
 // const PostContent: React.FC<PostContentProps> = ({ category, title, content, image }) => {
