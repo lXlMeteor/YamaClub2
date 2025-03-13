@@ -105,7 +105,7 @@ export default function CreatePost () {
                     image = {image}
                 />
             </div>
-            <input type="file" accept="image/*" onChange={(e) => {
+            {/* <input type="file" accept="image/*" onChange={(e) => {
                 const file = e.target.files?.[0];
                 if (file) {
                     const reader = new FileReader();
@@ -114,7 +114,7 @@ export default function CreatePost () {
                     }
                     reader.readAsDataURL(file);
                 }
-            }} />
+            }} /> */}
         </div>
     )
 }
