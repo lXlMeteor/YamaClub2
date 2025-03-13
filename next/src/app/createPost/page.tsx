@@ -21,6 +21,33 @@ export default function CreatePost () {
     const [category, setCategory] = useState<string | null>(null);
     const [image, setImage] = useState<string | null>(null);
     const [isBlank, setIsBlank] = useState<boolean>(false);
+    const [generating, setGenerating] = useState<boolean>(false);
+
+    const handleGenerateImage = async () => {
+        try {
+          console.log("画像作ります");
+          setGenerating(true);
+          const response = await fetch('/api/createAiImage', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ content }),
+          });
+          const data = await response.json();
+          if (!response.ok) {
+            console.error(data.error || '画像生成に失敗しました');
+          }
+          // 取得した Base64 文字列に data URL の頭を付ける
+          const imageDataUrl = `data:image/png;base64,${data.imageBase64}`;
+          setImage(imageDataUrl);
+          console.log("生成された画像名と名前:", data);
+        } catch (error) {
+          console.error("画像生成エラー:", error);
+        } finally {
+          setGenerating(false);
+        }
+    };
 
     return (
         <div className={styles.postCreate}>
@@ -42,6 +69,30 @@ export default function CreatePost () {
                     setContent = {setContent}
                 />
             </div>
+            <button 
+                onClick={handleGenerateImage} 
+                disabled={generating}
+                style={{ 
+                    width: '18vw', 
+                    height: '5.5vh', 
+                    border: 'none',
+                    borderRadius: '10px',
+                    backgroundColor: '#FF9B83',
+                    color: '#FFFFFF',
+                    fontSize: '3vh',
+                }}
+            >
+                {generating ? '画像生成中...' : '画像を生成'}
+            </button>
+            {image ? (
+                <Image 
+                src={image} 
+                width={200} 
+                height={200} 
+                style={{ objectFit: 'contain', height: 'auto' }} 
+                alt="生成された画像"
+                />
+            ) : null}
             <div className={styles.postDecideButton}>
                 <PostDecideButton
                     setIsBlank = {setIsBlank}
@@ -54,15 +105,6 @@ export default function CreatePost () {
                     image = {image}
                 />
             </div>
-            {image ? (
-                <Image 
-                    src={image} 
-                    width={200} 
-                    height={200} 
-                    style={{ objectFit: 'contain', height: 'auto' }} 
-                    alt="状況画像"
-                />
-            ) : null}
             <input type="file" accept="image/*" onChange={(e) => {
                 const file = e.target.files?.[0];
                 if (file) {
