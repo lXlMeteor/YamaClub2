@@ -1,7 +1,14 @@
-import { Box, Button, Modal, Typography, IconButton } from "@mui/material";
+import { Box, Button, Modal, IconButton } from "@mui/material";
 import { useState } from "react";
 import CloseIcon from "@mui/icons-material/Close";
 import CommentField from "./commentField";
+import styles from "@/app/statics/styles/createCommentButton.module.css"
+import { Zen_Maru_Gothic } from "next/font/google";
+
+const ZenMaruGothicFont = Zen_Maru_Gothic({
+    weight: "700",
+    subsets: ["latin"],
+});
 
 type CreateCommentButtonProps = {
     postId: string;
@@ -17,7 +24,7 @@ export default function CreateCommentButton({ postId }: CreateCommentButtonProps
 
     const handleClose = (): void => {
         setOpen(false);
-        setContent(""); // モーダルを閉じたらコメントをリセット
+        setContent("");
     };
 
     const handleSubmit = async (): Promise<void> => {
@@ -45,23 +52,33 @@ export default function CreateCommentButton({ postId }: CreateCommentButtonProps
                 throw new Error("コメントの投稿に失敗しました。");
             }
 
-            alert("コメントが投稿されました！");
-            handleClose(); // 投稿後にモーダルを閉じる
+            console.log("コメントが投稿されました！");
+            handleClose();
+            window.location.reload();
         } catch (error) {
             console.error(error);
             alert("エラーが発生しました。もう一度お試しください。");
         }
+        
     };
 
     return (
         <div>
-            <Button 
-                variant="contained" 
-                color="primary" 
-                onClick={handleClick}
-            >
-                コメントを作成
-            </Button>
+            <div className={styles.createCommentButton}>
+                <Button 
+                    variant="contained" 
+                    color="primary" 
+                    onClick={handleClick}
+                    sx = {{
+                        backgroundColor: "#FF9B83",
+                        borderRadius: "50px",
+                    }}
+                >
+                    <div className={ZenMaruGothicFont.className}>
+                        コメントを作成
+                    </div>
+                </Button>
+            </div>
 
             <Modal
                 open={open}
@@ -75,41 +92,51 @@ export default function CreateCommentButton({ postId }: CreateCommentButtonProps
                         top: "50%",
                         left: "50%",
                         transform: "translate(-50%, -50%)",
-                        width: "80vw",
+                        width: "75vw",
                         maxWidth: "80vw",
-                        height: "60vh",
-                        bgcolor: "background.paper",
+                        height: "65vh",
+                        backgroundColor: "#fbe9be",
                         boxShadow: 24,
                         p: 3,
-                        borderRadius: 2,
+                        borderRadius: "25px",
+                        padding: "5vh",
                     }}
                 >
-                    {/* 閉じるボタン */}
-                    <IconButton
-                        onClick={handleClose}
-                        sx={{
-                            position: "absolute",
-                            top: 8,
-                            right: 8,
-                            color: "grey.600",
-                        }}
-                    >
-                        <CloseIcon />
-                    </IconButton>
+                        {/* 閉じるボタン */}
+                        <IconButton
+                            onClick={handleClose}
+                            sx={{
+                                position: "absolute",
+                                top: 8,
+                                right: 8,
+                                color: "grey.600",
+                            }}
+                        >
+                            <CloseIcon />
+                        </IconButton>
+                    <div className={styles.createField}>
+                        <CommentField
+                            comment={content}
+                            setComment={setContent}
+                        />
 
-                    <CommentField
-                        comment={content}
-                        setComment={setContent}
-                    />
-
-                    <Button 
-                        variant="contained" 
-                        color="primary" 
-                        onClick={handleSubmit} 
-                        sx={{ mt: 2 }}
-                    >
-                        投稿する
-                    </Button>
+                        <Button 
+                            variant="contained" 
+                            color="primary" 
+                            onClick={handleSubmit} 
+                            sx={{
+                                mt: "1.8vh",
+                                backgroundColor: "#FF9B83",
+                                width: "10vw",
+                                fontSize: "1.5vw",
+                                borderRadius: "20px"
+                            }}
+                        >
+                            <div className={ZenMaruGothicFont.className}>
+                                投稿する
+                            </div>
+                        </Button>
+                    </div>
                 </Box>
             </Modal>
         </div>

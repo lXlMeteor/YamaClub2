@@ -1,0 +1,9 @@
+.createCommentButton {
+    margin-top: 2vh;
+}
+
+.createField {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}

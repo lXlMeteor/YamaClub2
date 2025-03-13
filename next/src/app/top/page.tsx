@@ -9,7 +9,6 @@ import PreviousPostButton from '../components/top/previousPostButton';
 import PaginationInfo from '../components/top/pagenationInfo';
 import NewPostsButton from '../components/top/newPostButton';
 import PostCard from '../components/top/postCard';
-import CommentList from '../components/top/commentList';
 
 
 export default function TopPage() {

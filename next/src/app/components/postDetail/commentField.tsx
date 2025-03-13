@@ -18,15 +18,17 @@ export default function CommentField({ comment, setComment } : CommentField) {
             onChange={handleChange}
             label="コメントを記入してください。"
             multiline
-            rows={8}
+            rows={20}
             slotProps={{
                 inputLabel: { shrink: true }
             }}
             sx={{
                 width: "70vw",
+                height: "30%",
+                // maxHeight: "60vh",
                 backgroundColor: 'rgba(255, 255, 255, 0.8)',
                 "& .MuiInputBase-root": {
-                    maxHeight: "28vh",
+                    maxHeight: "60%",
                 },
                 "& .MuiInputBase-input": {
                     fontSize: "2vh",
