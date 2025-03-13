@@ -61,6 +61,7 @@ export default function Kuyo () {
             
             const responseData: ApiResponse = await res.json();
             setData(responseData);
+            setIsKuyo(responseData.post.status);
             console.log('取得したデータ:', responseData);
           } catch (err: unknown) {
             console.error('エラー発生:', err);
@@ -108,6 +109,7 @@ export default function Kuyo () {
                 <Obousan />
                 <div className={styles.kuyoButton}>
                     <KuyoButton
+                        postId = {data.post.id}
                         isKuyo = {isKuyo}
                         setIsKuyo = {setIsKuyo}
                     />
