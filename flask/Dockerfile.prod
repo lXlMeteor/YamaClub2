@@ -5,16 +5,16 @@ FROM python:3
 WORKDIR /app
 
 # 依存ライブラリをコピーしてインストール
-COPY app/requirements.txt .
-# COPY flask/app/requirements.txt .
+# COPY app/requirements.txt .
+COPY flask/app/requirements.txt ./
 # COPY app/ .
-RUN pip install --no-cache-dir -r requirements.txt
+RUN pip install --no-cache-dir -r requirements.txt gunicorn
 
 # Flask アプリのコードをコピー
-COPY app/ .
+COPY flask/app/ ./
 
 # ポートを公開
 EXPOSE 5001
 
 # Flask アプリを実行
-CMD ["python", "main.py"]
+CMD ["gunicorn", "--bind", "0.0.0.0:5001", "main:app"]
