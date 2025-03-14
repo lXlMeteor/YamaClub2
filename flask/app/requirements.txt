@@ -8,3 +8,4 @@ openai
 diffusers
 requests
 dotenv
+flask-cors

@@ -1,4 +1,5 @@
 from flask import Flask, send_file, request
+from flask_cors import CORS
 from datetime import datetime
 import openai
 import requests
@@ -6,6 +7,7 @@ import os
 from dotenv import load_dotenv
 
 app = Flask(__name__)
+CORS(app)
 
 load_dotenv()
 
@@ -33,6 +35,8 @@ def generate():
     name = data['name']
 
     save_dir = "image"
+    # ディレクトリが存在しない場合は作成する
+    os.makedirs(save_dir, exist_ok=True)
     save_path = os.path.join(save_dir, f"{name}.png")
 
 
