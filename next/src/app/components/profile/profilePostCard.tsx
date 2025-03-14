@@ -58,7 +58,7 @@ export default function ProfilePostCard({ data, profile }: ProfilePostCardProps)
 
     return (
         <div className={styles.profilePostCard}>
-            {((data?.counter ?? 0) >= 2 && data.status === false) ? (
+            {((data?.counter ?? 0) >= 3 && data.status === false) ? (
                 <button 
                 style={{
                     backgroundColor: "rgba(255, 183, 165, 0.5)",
