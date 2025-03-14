@@ -4,6 +4,7 @@ import KuyoStamp from "../kuyo/kuyoStamp";
 import KuyoCardTitle from "../kuyo/kuyoCardTitle";
 import KuyoCardReaction from "../kuyo/kuyoCardReaction";
 import { Button } from "@mui/material";
+import { useRouter } from 'next/navigation';
 
 type ProfilePost = {
     id: string;
@@ -20,20 +21,55 @@ type ProfilePost = {
     _count: {
         comments: number;
     };
+    commentCount?: number;
+    counter?: number;
 };
+
+type Profile = {
+    name: string;
+    image: string;
+    intro: string;
+}
 
 type ProfilePostCardProps = {
     data: ProfilePost;
+    profile: Profile;
 };
 
-export default function ProfilePostCard({ data }: ProfilePostCardProps) {
+export default function ProfilePostCard({ data, profile }: ProfilePostCardProps) {
+    const router = useRouter();
 
     const handleClick = () : void => {
         console.log("投稿詳細に移動")
     }
 
+    const handelClickKuyo = () : void => {
+        console.log("供養する");
+        router.push(`/kuyo?postId=${data.id}`);
+    }
+
     return (
         <div className={styles.profilePostCard}>
+            {((data?.counter ?? 0) >= 2 && data.status === false) ? (
+                <button 
+                style={{
+                    backgroundColor: "rgba(255, 183, 165, 0.5)",
+                    color: "black",
+                    height: "7vh",
+                    width: "7vh",
+                    borderRadius: "50%",
+                    border: "0.2vw solid #FF7350",
+                    fontSize: "1.5vh",
+                    lineHeight: "1",
+                }}
+                onClick={handelClickKuyo}
+                >
+                    供養<br />する
+                </button>
+            ) : (
+                <span style={{width:"7vh", height:"7vh"}}></span>
+            )}
+            
             <Button
                 onClick={handleClick}
             >
@@ -50,8 +86,8 @@ export default function ProfilePostCard({ data }: ProfilePostCardProps) {
                 >
                     <div className={data.status ? styles.isKuyo : styles.kuyoCardBrind}>
                         <KuyoCardHeader
-                            userImage={data.image}
-                            userName={data.title}
+                            userImage={profile.image}
+                            userName={profile.name}
                             createdAt={data.createdAt}
                         />
                         {data.status && (
@@ -76,6 +112,7 @@ export default function ProfilePostCard({ data }: ProfilePostCardProps) {
                     </div>
                 </div>
             </Button>
+            <span style={{width:"7vh", height:"7vh"}}></span>
         </div>
     );
 }

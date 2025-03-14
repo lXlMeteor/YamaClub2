@@ -6,6 +6,7 @@ import KuyoCard from '../components/kuyo/kuyoCard';
 import KuyoButton from '../components/kuyo/kuyoButton';
 import Obousan from '../components/kuyo/obousan';
 import { useEffect, useState } from 'react';
+import { useSearchParams } from 'next/navigation';
 
 interface UserProfile {
     id: string;
@@ -46,13 +47,19 @@ export default function Kuyo () {
 
     const [isKuyo, setIsKuyo] = useState<boolean>(false);
 
+    // クエリパラメータから postId を取得
+    const searchParams = useSearchParams();
+    const postId = searchParams.get('postId');
+
     useEffect(() => {
         async function fetchPost() {
           try {
             setLoading(true);
             // 指定した投稿IDで投稿データを取得
-            // postId={ここを取得したい投稿IDに置き換える}
-            const res = await fetch('/api/getShowPost?postId=54e36933-759d-4539-a50e-4e082ce8cf6c');
+            if (!postId) {
+              throw new Error('postId が指定されていません');
+            }
+            const res = await fetch(`/api/getShowPost?postId=${postId}`);
             
             if (!res.ok) {
               const errorData = await res.json();

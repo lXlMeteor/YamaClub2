@@ -29,6 +29,8 @@ export interface ProfileData {
         _count: {
             comments: number;
         };
+        commentCount?: number;
+        counter?: number;
     }[];
     counts: {
         kuyoCount: number;
@@ -102,6 +104,7 @@ export default function ProfilePage() {
                                 <ProfilePostCard
                                     key={index}
                                     data={post}
+                                    profile={profileData.profiles}
                                 />
                             ))}
                         </div>

@@ -35,7 +35,7 @@ export function GoTopButton() {
     const router = useRouter()
 
     const handleClick = () : void => {
-        router.push("/top");
+        router.push("/profile");
     }
 
     return(
@@ -43,7 +43,7 @@ export function GoTopButton() {
             variant="contained"
             onClick={handleClick}
             sx={{
-                width: '12vw',
+                width: '17vw',
                 height: '6vh',
                 borderRadius: '15px',
                 backgroundColor: '#FF9B83',
@@ -56,7 +56,7 @@ export function GoTopButton() {
             }}
         >
             <div className={ShipporiMincho.className}>
-                トップへ戻る→
+                プロフィールに戻る→
             </div>
         </Button>
     )

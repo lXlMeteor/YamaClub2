@@ -55,6 +55,10 @@ export async function GET() {
         post.reactions.forEach(reaction => {
           reactionCounts[reaction.type]++;
         });
+
+        const totalReactions = reactionCounts.EMPATHY + reactionCounts.LOL + reactionCounts.BIGLOL;
+        const commentCount = post._count.comments;
+        const counter = totalReactions + commentCount;  // ← ここで合計値を計算
   
         // reactions プロパティを削除
         const { reactions, ...restPost } = post;
@@ -63,6 +67,8 @@ export async function GET() {
         return {
           ...restPost,
           reactionCounts,
+          commentCount,
+          counter,
         };
       });
 
