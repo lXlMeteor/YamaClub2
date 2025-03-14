@@ -25,7 +25,7 @@ export default function KuyoCard({ isKuyo, data }: KuyoCardProps) {
         >
             <div className={isKuyo ? styles.isKuyo : styles.kuyoCardBrind}>
                 <KuyoCardHeader
-                    userImage = {data.profile.image}
+                    userImage = {data.profile.image ?? ''}
                     userName = {data.profile.name}
                     createdAt = {data.post.createdAt}
                 />

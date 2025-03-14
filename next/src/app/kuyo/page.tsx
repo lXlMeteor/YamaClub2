@@ -7,6 +7,7 @@ import KuyoButton from '../components/kuyo/kuyoButton';
 import Obousan from '../components/kuyo/obousan';
 import { useEffect, useState } from 'react';
 import { useSearchParams } from 'next/navigation';
+import { Suspense } from 'react';
 
 interface UserProfile {
     id: string;
@@ -40,11 +41,10 @@ interface UserProfile {
   }
 
 
-export default function Kuyo () {
+  function KuyoContent() {
     const [data, setData] = useState<ApiResponse | null>(null);
     const [loading, setLoading] = useState<boolean>(true);
     const [error, setError] = useState<string | null>(null);
-
     const [isKuyo, setIsKuyo] = useState<boolean>(false);
 
     // クエリパラメータから postId を取得
@@ -83,7 +83,7 @@ export default function Kuyo () {
           }
         }
         fetchPost();
-      }, []);
+      }, [postId]);
     
       if (loading) {
         return <div>読み込み中...</div>;
@@ -125,4 +125,13 @@ export default function Kuyo () {
             </div>
         </div>
     )
+}
+
+// メインコンポーネントを Suspense でラップ
+export default function Kuyo() {
+  return (
+    <Suspense fallback={<div>読み込み中...</div>}>
+      <KuyoContent />
+    </Suspense>
+  );
 }

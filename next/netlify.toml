@@ -5,6 +5,8 @@
 [[plugins]]
   package = "@netlify/plugin-nextjs"
 
-# 必要に応じて以下の設定も追加できます
+# タイムアウト設定を環境変数で指定
 [build.environment]
   NEXT_USE_NETLIFY_EDGE = "true"
+  AWS_LAMBDA_FUNCTION_TIMEOUT = "26"
+  NODE_OPTIONS = "--max-old-space-size=4096"
