@@ -7,6 +7,7 @@ import styles from '@/app/statics/styles/profile.module.css'
 import UserStatus from '../components/profile/userStatus';
 import ProfilePostCard from '../components/profile/profilePostCard';
 import ProfileAchievement from '../components/profile/profileAchievement';
+import ProfileEditButton from '../components/profile/profileEditButton';
 
 export interface ProfileData {
     profiles: {
@@ -83,6 +84,11 @@ export default function ProfilePage() {
                         userName = {profileData.profiles.name}
                         userIntro = {profileData.profiles.intro}
                         kuyoCount = {profileData.counts.kuyoCount}
+                    />
+                    <ProfileEditButton
+                        profileImage = {profileData.profiles.image}
+                        profileName = {profileData.profiles.name}
+                        profileIntro = {profileData.profiles.intro}
                     />
                     <div className={styles.profileButtons}>
                         <PastPostButton

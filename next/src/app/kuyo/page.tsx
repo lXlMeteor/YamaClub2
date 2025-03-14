@@ -52,7 +52,7 @@ export default function Kuyo () {
             setLoading(true);
             // 指定した投稿IDで投稿データを取得
             // postId={ここを取得したい投稿IDに置き換える}
-            const res = await fetch('/api/getShowPost?postId=54e36933-759d-4539-a50e-4e082ce8cf6c');
+            const res = await fetch('/api/getShowPost?postId=2c44a2d7-74d3-4e0b-a896-4021dd0253f6');
             
             if (!res.ok) {
               const errorData = await res.json();

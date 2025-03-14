@@ -4,6 +4,7 @@ import KuyoStamp from "../kuyo/kuyoStamp";
 import KuyoCardTitle from "../kuyo/kuyoCardTitle";
 import KuyoCardReaction from "../kuyo/kuyoCardReaction";
 import { Button } from "@mui/material";
+import { useRouter } from "next/navigation";
 
 type ProfilePost = {
     id: string;
@@ -28,8 +29,10 @@ type ProfilePostCardProps = {
 
 export default function ProfilePostCard({ data }: ProfilePostCardProps) {
 
+    const router = useRouter()
+
     const handleClick = () : void => {
-        console.log("投稿詳細に移動")
+        router.push(`/top/postDetail/${data.id}`);
     }
 
     return (
