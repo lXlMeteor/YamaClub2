@@ -3,6 +3,11 @@ import prisma from '@/app/lib/prisma';
 import { getServerSession } from 'next-auth';
 import { authOptions } from '@/app/lib/nextAuth';
 
+// 動的レンダリングを強制
+export const dynamic = 'force-dynamic';
+// キャッシュを無効化
+export const fetchCache = 'force-no-store';
+
 export async function GET(request: NextRequest) {
     try {
         const session = await getServerSession(authOptions);
