@@ -1,7 +1,7 @@
 'use client'
 
 import { useState } from "react";
-import { Create, DeleteSweep, Home, Leaderboard, Logout, Person } from '@mui/icons-material';
+import { Create, Home, Leaderboard, Logout, Person } from '@mui/icons-material';
 import { Box, Drawer, List, ListItem, ListItemButton, ListItemIcon,} from "@mui/material";
 import DrawerMenuButton from "./drawerMenuButton";
 import DrawerMenuCloseButton from "./drawerCloseButton";

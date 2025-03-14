@@ -39,20 +39,30 @@ def generate():
     os.makedirs(save_dir, exist_ok=True)
     save_path = os.path.join(save_dir, f"{name}.png")
 
+    client = openai.OpenAI(api_key=API_KEY)
+    messages = [
+        {"role": "system", "content": "あなたは文章を画像生成AIのプロンプトに書き直す天才です。ユーザーの文章をプロンプトに書き直してその文章のみを返答してください。返答は一文でかつ簡潔にしてください。また、公序良俗に反するような内容は含まないでください。"},
+        {"role": "user", "content": prompt}
+    ]
+    
+    response = client.chat.completions.create(
+        model="gpt-4o",
+        messages=messages
+    )
+
+    prompt = response.choices[0].message.content
 
     response = openai.images.generate(
-        model="dall-e-2",  # DALL·E 2 を指定
-        prompt=prompt,  # 生成したい画像のプロンプト
-        n=1,  # 生成する画像の数
-        size="1024x1024"  # 画像サイズ
+        model="dall-e-2",
+        prompt=prompt,
+        n=1,
+        size="1024x1024"
     )
     
 
-    # 画像のURLを取得
     image_url = response.data[0].url
     print(f"Generated Image URL: {image_url}")
 
-    # 画像をダウンロードして保存
     image_data = requests.get(image_url).content
     with open(save_path, "wb") as file:
         file.write(image_data)
