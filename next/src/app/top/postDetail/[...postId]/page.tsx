@@ -6,7 +6,6 @@ import CreateCommentButton from "@/app/components/postDetail/createCommentButton
 import PostDetailCard from "@/app/components/postDetail/postDetailCard";
 import styles from "@/app/statics/styles/postDetail.module.css"
 import CommentElement from "@/app/components/postDetail/commentElement";
-import toast from 'react-hot-toast';
 
 export interface Post {
     id: string;
