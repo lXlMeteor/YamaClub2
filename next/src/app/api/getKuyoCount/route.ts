@@ -3,6 +3,8 @@ import prisma from '@/app/lib/prisma';
 import { getServerSession } from 'next-auth';
 import { authOptions } from '@/app/lib/nextAuth';
 
+export const dynamic = 'force-dynamic';
+
 interface RankedUser {
     id: string;
     name: string;

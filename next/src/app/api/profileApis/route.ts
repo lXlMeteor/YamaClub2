@@ -4,6 +4,8 @@ import prisma from '@/app/lib/prisma'
 import { authOptions } from '@/app/lib/nextAuth'
 import bcrypt from 'bcryptjs';
 
+export const dynamic = 'force-dynamic';
+
 export async function GET() {
     try {
         // セッション情報を取得
