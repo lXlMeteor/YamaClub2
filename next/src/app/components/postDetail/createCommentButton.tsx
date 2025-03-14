@@ -4,6 +4,7 @@ import CloseIcon from "@mui/icons-material/Close";
 import CommentField from "./commentField";
 import styles from "@/app/statics/styles/createCommentButton.module.css"
 import { Zen_Maru_Gothic } from "next/font/google";
+import toast from "react-hot-toast";
 
 const ZenMaruGothicFont = Zen_Maru_Gothic({
     weight: "700",
@@ -29,7 +30,7 @@ export default function CreateCommentButton({ postId }: CreateCommentButtonProps
 
     const handleSubmit = async (): Promise<void> => {
         if (!content.trim()) {
-            alert("コメントを入力してください。");
+            toast.error("コメントを入力してください");
             return;
         }
 
@@ -49,15 +50,16 @@ export default function CreateCommentButton({ postId }: CreateCommentButtonProps
             });
 
             if (!response.ok) {
+                toast.error("コメントの投稿に失敗しました");
                 throw new Error("コメントの投稿に失敗しました。");
             }
 
-            console.log("コメントが投稿されました！");
+            toast.success("コメントを投稿しました");
             handleClose();
             window.location.reload();
         } catch (error) {
             console.error(error);
-            alert("エラーが発生しました。もう一度お試しください。");
+            toast.error("エラーが発生しました。もう一度お試しください。");
         }
         
     };
