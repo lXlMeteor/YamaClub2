@@ -37,10 +37,11 @@ type ProfilePostCardProps = {
 };
 
 export default function ProfilePostCard({ data, profile }: ProfilePostCardProps) {
-    const router = useRouter();
+
+    const router = useRouter()
 
     const handleClick = () : void => {
-        console.log("投稿詳細に移動")
+        router.push(`/top/postDetail/${data.id}`);
     }
 
     const handelClickKuyo = () : void => {
