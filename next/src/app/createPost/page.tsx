@@ -171,24 +171,29 @@ export default function CreatePost () {
                     alt="生成された画像"
                 />
             ) : (
-                <Button
-                    onClick={handleGenerateImage} 
-                    disabled={generating || isAiSuccess || !content}
-                    style={{ 
-                        width: '14vw', 
-                        height: '7vh', 
-                        border: 'none',
-                        borderRadius: '50px',
-                        backgroundColor: '#FF9B83',
-                        color: '#FFFFFF',
-                        fontSize: '2vw',
-                        marginTop: '4vh',
-                    }}
-                >
-                    <div className={ZenMaruGothicFont.className}>
-                        {generating ? '画像生成中...' : '画像を生成'}
+                <div className={styles.ai}>
+                    <Button
+                        onClick={handleGenerateImage} 
+                        disabled={generating || isAiSuccess || !content}
+                        style={{ 
+                            width: '14vw', 
+                            height: '7vh', 
+                            border: 'none',
+                            borderRadius: '50px',
+                            backgroundColor: '#FF9B83',
+                            color: '#FFFFFF',
+                            fontSize: '2vw',
+                            marginTop: '4vh',
+                        }}
+                    >
+                        <div className={ZenMaruGothicFont.className}>
+                            {generating ? '画像生成中...' : '画像を生成'}
+                        </div>
+                    </Button>
+                    <div>
+                        ※AIによって画像を生成します。
                     </div>
-                </Button>
+                </div>
             )}
             <div className={styles.postDecideButton} style={isAiSuccess && image ? { paddingBottom: '10vh' } : undefined}>
                 <PostDecideButton

@@ -8,6 +8,7 @@ import Obousan from '../components/kuyo/obousan';
 import { useEffect, useState } from 'react';
 import { useSearchParams } from 'next/navigation';
 import { Suspense } from 'react';
+import Footer from '../components/footer/footer';
 
 interface UserProfile {
     id: string;
@@ -123,6 +124,7 @@ interface UserProfile {
                 </div>
                 <Obousan />
             </div>
+            <Footer />
         </div>
     )
 }

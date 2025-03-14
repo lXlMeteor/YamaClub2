@@ -96,7 +96,7 @@ export default function CreateCommentButton({ postId }: CreateCommentButtonProps
                         transform: "translate(-50%, -50%)",
                         width: "75vw",
                         maxWidth: "80vw",
-                        height: "65vh",
+                        height: "78vh",
                         backgroundColor: "#fbe9be",
                         boxShadow: 24,
                         p: 3,
