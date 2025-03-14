@@ -2,6 +2,7 @@ import { Button } from "@mui/material";
 import { useRouter } from "next/navigation";
 import { Zen_Maru_Gothic } from "next/font/google";
 import { signOut } from 'next-auth/react';
+import toast from 'react-hot-toast';
 
 const ZenMaruGothicFont = Zen_Maru_Gothic({
   weight: "900",
@@ -14,11 +15,12 @@ export function LogOutButton () {
     const handleClick = async () => {
         try {
             await signOut({ redirect: false });
+            toast.success("ログアウトしました");
             router.push('/signIn');
             router.refresh();
           } catch (error) {
             console.error('ログアウトエラー:', error);
-            alert('ログアウトに失敗しました。もう一度お試しください。');
+            toast.error("ログアウトに失敗しました。もう一度お試しください。");
           }
     }
 
@@ -51,6 +53,7 @@ export function NotLogOutButton () {
     const router = useRouter();
 
     const handleClick = () => {
+        toast.success("ログアウトをキャンセルしました");
         router.push("/top");
     }
 

@@ -8,6 +8,7 @@ import CategoryField from "../components/createPost/categoryField";
 import styles from "@/app/statics/styles/createPost.module.css";
 import { Zen_Maru_Gothic } from "next/font/google";
 import Image from 'next/image';
+import toast from 'react-hot-toast';
 
 const ZenMaruGothicFont = Zen_Maru_Gothic({
   weight: "700",
@@ -26,7 +27,7 @@ export default function CreatePost () {
 
     const handleGenerateImage = async () => {
         try {
-          console.log("画像作ります");
+          toast('画像を作成します');
           setGenerating(true);
           const response = await fetch('/api/createAiImage', {
             method: 'POST',
@@ -38,14 +39,18 @@ export default function CreatePost () {
           const data = await response.json();
           if (!response.ok) {
             console.error(data.error || '画像生成に失敗しました');
+            toast.error("画像の生成に失敗しました");
+            return null;
           }
           // 取得した Base64 文字列に data URL の頭を付ける
           const imageDataUrl = `data:image/png;base64,${data.imageBase64}`;
+          toast.success('画像が作成されました');
           setImage(imageDataUrl);
           setIsAiSuccess(true);
           console.log("生成された画像名と名前:", data);
         } catch (error) {
           console.error("画像生成エラー:", error);
+          toast.error("画像の生成に失敗しました");
         } finally {
           setGenerating(false);
         }
@@ -82,7 +87,7 @@ export default function CreatePost () {
             ) : (
                 <button 
                     onClick={handleGenerateImage} 
-                    disabled={generating || isAiSuccess}
+                    disabled={generating || isAiSuccess || !content}
                     style={{ 
                         width: '18vw', 
                         height: '5.5vh', 

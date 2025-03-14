@@ -2,6 +2,7 @@ import { Button } from "@mui/material";
 import { useState } from "react";
 import { uploadImageToSupabase } from '@/app/utils/uploadImage';
 import { Zen_Maru_Gothic } from "next/font/google";
+import toast from 'react-hot-toast';
 
 const ZenMaruGothicFont = Zen_Maru_Gothic({
   weight: "700",
@@ -24,6 +25,7 @@ export function PostDecideButton ({ setIsBlank, title, setTitle, category, setCa
 
     const handleClickCreatePost = async () => {
         if( title && category && content ) {
+            toast("投稿を作成します");
             try {
                 setIsSubmitting(true);
                 console.log("投稿内容を確定しました。");
@@ -46,6 +48,7 @@ export function PostDecideButton ({ setIsBlank, title, setTitle, category, setCa
                     );
                     
                     if (!imageUrl) {
+                        toast.error("投稿の作成に失敗しました");
                         throw new Error("画像のアップロードに失敗しました");
                     }
                     
@@ -63,12 +66,15 @@ export function PostDecideButton ({ setIsBlank, title, setTitle, category, setCa
                 
                 // レスポンスが成功でない場合はエラー処理
                 if (!response.ok) {
+                    toast.error("投稿の作成に失敗しました");
                     throw new Error(data.error || '投稿の作成に失敗しました');
                 } else {
                     console.log("投稿成功：", data);
+                    toast.success("投稿の作成に成功しました");
                 }
             } catch (error) {
                 console.error("投稿エラー：", error);
+                toast.error("投稿の作成に失敗しました");
             } finally {
                 setIsSubmitting(false);
             }

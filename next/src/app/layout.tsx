@@ -6,6 +6,7 @@ import Header from "./components/header/header";
 import FooterWrapper from './components/footer/footerWrapper';
 import AuthContext from './context/AuthContext';
 import getCurrentUser from './actions/getCurrentUser';
+import ToasterContext from './context/ToastContext';
 
 
 export const metadata: Metadata = {
@@ -19,6 +20,7 @@ export default async function RootLayout({ children }: Readonly<{ children: Reac
     <html lang="ja">
       <body>
         <AuthContext>
+          <ToasterContext />
           <Header currentUser={currentUser}/>
           {children}
           <FooterWrapper />
