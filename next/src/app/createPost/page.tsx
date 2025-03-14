@@ -22,6 +22,7 @@ export default function CreatePost () {
     const [image, setImage] = useState<string | null>(null);
     const [isBlank, setIsBlank] = useState<boolean>(false);
     const [generating, setGenerating] = useState<boolean>(false);
+    const [isAiSuccess, setIsAiSuccess] = useState<boolean>(false);
 
     const handleGenerateImage = async () => {
         try {
@@ -41,6 +42,7 @@ export default function CreatePost () {
           // 取得した Base64 文字列に data URL の頭を付ける
           const imageDataUrl = `data:image/png;base64,${data.imageBase64}`;
           setImage(imageDataUrl);
+          setIsAiSuccess(true);
           console.log("生成された画像名と名前:", data);
         } catch (error) {
           console.error("画像生成エラー:", error);
@@ -69,31 +71,32 @@ export default function CreatePost () {
                     setContent = {setContent}
                 />
             </div>
-            <button 
-                onClick={handleGenerateImage} 
-                disabled={generating}
-                style={{ 
-                    width: '18vw', 
-                    height: '5.5vh', 
-                    border: 'none',
-                    borderRadius: '10px',
-                    backgroundColor: '#FF9B83',
-                    color: '#FFFFFF',
-                    fontSize: '3vh',
-                }}
-            >
-                {generating ? '画像生成中...' : '画像を生成'}
-            </button>
-            {image ? (
+            {isAiSuccess && image ? (
                 <Image 
-                src={image} 
-                width={200} 
-                height={200} 
-                style={{ objectFit: 'contain', height: 'auto' }} 
-                alt="生成された画像"
+                    src={image} 
+                    width={200} 
+                    height={200} 
+                    style={{ objectFit: 'contain', height: 'auto' }} 
+                    alt="生成された画像"
                 />
-            ) : null}
-            <div className={styles.postDecideButton}>
+            ) : (
+                <button 
+                    onClick={handleGenerateImage} 
+                    disabled={generating || isAiSuccess}
+                    style={{ 
+                        width: '18vw', 
+                        height: '5.5vh', 
+                        border: 'none',
+                        borderRadius: '10px',
+                        backgroundColor: '#FF9B83',
+                        color: '#FFFFFF',
+                        fontSize: '3vh',
+                    }}
+                >
+                    {generating ? '画像生成中...' : '画像を生成'}
+                </button>
+            )}
+            <div className={styles.postDecideButton} style={isAiSuccess && image ? { paddingBottom: '10vh' } : undefined}>
                 <PostDecideButton
                     setIsBlank = {setIsBlank}
                     title = {title}
@@ -103,18 +106,9 @@ export default function CreatePost () {
                     content = {content}
                     setContent = {setContent}
                     image = {image}
+
                 />
             </div>
-            <input type="file" accept="image/*" onChange={(e) => {
-                const file = e.target.files?.[0];
-                if (file) {
-                    const reader = new FileReader();
-                    reader.onload = () => {
-                        setImage(reader.result as string);
-                    }
-                    reader.readAsDataURL(file);
-                }
-            }} />
         </div>
     )
 }
