@@ -3,7 +3,7 @@ type calculareRevelProps = {
 }
 
 export const calculateRevel = ({ kuyoCount }: calculareRevelProps): string => {
-
+    
     if (kuyoCount === 0) {
         return "見習い供養僧";
     } else if (kuyoCount >= 1 && kuyoCount < 3) {

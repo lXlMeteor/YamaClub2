@@ -3,7 +3,7 @@ import type { Metadata } from "next";
 import "./globals.css";
 import Header from "./components/header/header";
 // import Footer from "./components/footer/footer";
-import FooterWrapper from './components/footer/footerWrapper';
+//import FooterWrapper from './components/footer/footerWrapper';
 import AuthContext from './context/AuthContext';
 import getCurrentUser from './actions/getCurrentUser';
 import ToasterContext from './context/ToastContext';
@@ -23,7 +23,7 @@ export default async function RootLayout({ children }: Readonly<{ children: Reac
           <ToasterContext />
           <Header currentUser={currentUser}/>
           {children}
-          <FooterWrapper />
+          {/* <FooterWrapper /> */}
         </AuthContext>
       </body>
     </html>

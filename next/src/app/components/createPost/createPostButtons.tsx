@@ -100,7 +100,7 @@ export function PostDecideButton ({ setIsBlank, title, setTitle, category, setCa
                 backgroundColor: '#71BFFF',
                 color: '#FFFFFF',
                 fontWeight: 'bold',
-                fontSize: '2.5vw',
+                fontSize: '2vw',
                 transition: 'background-color 0.2s ease-in-out',
                 '&:hover': {
                     backgroundColor: isSubmitting ? '#71BFFF' : '#5aa7e8', // ホバー時に少し濃い青に変更（送信中は変更しない）

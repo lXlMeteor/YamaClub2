@@ -5,6 +5,13 @@ import KuyoCardTitle from "../kuyo/kuyoCardTitle";
 import KuyoCardReaction from "../kuyo/kuyoCardReaction";
 import { Button } from "@mui/material";
 import { useRouter } from 'next/navigation';
+import { Zen_Maru_Gothic } from "next/font/google";
+
+const ZenMaruGothicFont = Zen_Maru_Gothic({
+    weight: "500",
+    subsets: ["latin"],
+});
+
 
 type ProfilePost = {
     id: string;
@@ -65,7 +72,8 @@ export default function ProfilePostCard({ data, profile }: ProfilePostCardProps)
                 }}
                 onClick={handelClickKuyo}
                 >
-                    供養<br />する
+                    <p className={ZenMaruGothicFont.className}>供養</p>
+                    <p className={ZenMaruGothicFont.className}>する</p>
                 </button>
             ) : (
                 <span style={{width:"7vh", height:"7vh"}}></span>

@@ -16,8 +16,12 @@ type HeaderProps = {
 const Header: React.FC<HeaderProps> = ({ currentUser }) => {
     return(
         <div className={styles.header}>
+            <DrawerMenu />
+            <h1 className={ZenMaruGothicFont.className}>
+                笑ってKUYO!
+            </h1>
             {currentUser ? (
-                <div style={{ display: "flex", alignItems: "center", marginLeft: "1vw" }}>
+                <div style={{ display: "flex", alignItems: "center", marginLeft: "1vw", marginRight: "0.6vw" }}>
                     <Avatar
                         src={currentUser.image ?? ""}
                         alt={`${currentUser.name}のアイコン`}
@@ -27,15 +31,11 @@ const Header: React.FC<HeaderProps> = ({ currentUser }) => {
                             border: "0.2vh solid #FFE097",
                         }}
                     />
-                    <p>{currentUser.name}</p>
+                    {/* <p>{currentUser.name}</p> */}
                 </div>
             ) : (
                 <p>未認証</p>
             )}
-            <h1 className={ZenMaruGothicFont.className}>
-                笑ってKUYO
-            </h1>
-            <DrawerMenu />
         </div>
     )
 }

@@ -9,6 +9,7 @@ import styles from "@/app/statics/styles/createPost.module.css";
 import { Zen_Maru_Gothic } from "next/font/google";
 import Image from 'next/image';
 import toast from 'react-hot-toast';
+import { Button } from "@mui/material";
 
 const ZenMaruGothicFont = Zen_Maru_Gothic({
   weight: "700",
@@ -80,26 +81,29 @@ export default function CreatePost () {
                 <Image 
                     src={image} 
                     width={200} 
-                    height={200} 
-                    style={{ objectFit: 'contain', height: 'auto' }} 
+                    height={200}
+                    style={{ objectFit: 'contain', height: 'auto', borderRadius: '15px' }} 
                     alt="生成された画像"
                 />
             ) : (
-                <button 
+                <Button
                     onClick={handleGenerateImage} 
                     disabled={generating || isAiSuccess || !content}
                     style={{ 
-                        width: '18vw', 
-                        height: '5.5vh', 
+                        width: '14vw', 
+                        height: '7vh', 
                         border: 'none',
-                        borderRadius: '10px',
+                        borderRadius: '50px',
                         backgroundColor: '#FF9B83',
                         color: '#FFFFFF',
-                        fontSize: '3vh',
+                        fontSize: '2vw',
+                        marginTop: '4vh',
                     }}
                 >
-                    {generating ? '画像生成中...' : '画像を生成'}
-                </button>
+                    <div className={ZenMaruGothicFont.className}>
+                        {generating ? '画像生成中...' : '画像を生成'}
+                    </div>
+                </Button>
             )}
             <div className={styles.postDecideButton} style={isAiSuccess && image ? { paddingBottom: '10vh' } : undefined}>
                 <PostDecideButton
