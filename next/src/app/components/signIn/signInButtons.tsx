@@ -1,6 +1,10 @@
 'use client';
+
 import { Button } from "@mui/material";
 import { signIn } from "next-auth/react";
+import { useRouter } from "next/navigation";
+import { useState } from "react";
+import toast from 'react-hot-toast';
 
 
 type LoginButtonProps = {
@@ -55,8 +59,11 @@ type LogInPostButton = {
 }
 
 export function LogInPostButton ({ setIsBlank, email, setEmail, passWord, setPassWord } : LogInPostButton) {
+    const router = useRouter();
+    const [isLoading, setIsLoading] = useState<boolean>(false);
     
     const handleClick = async() => {
+        setIsLoading(true);
         if (email && passWord) {
             setIsBlank(false);
             console.log("送信：ログイン開始");
@@ -70,10 +77,14 @@ export function LogInPostButton ({ setIsBlank, email, setEmail, passWord, setPas
                 password: passWord,
                 redirect: false,
             });
+            console.log("レスポンス：", responce);
             if (responce?.ok) {
-                console.log("ログイン成功");
+                toast.success("ログイン成功");
+                setIsLoading(false);
+                router.push("/top");
             } else {
-                console.log("ログイン失敗");
+                setIsLoading(false);
+                toast.error("ログインに失敗しました");
             }
         } else {
             setIsBlank(true);
@@ -97,7 +108,7 @@ export function LogInPostButton ({ setIsBlank, email, setEmail, passWord, setPas
                     },
                 }}
             >
-            確定
+            {isLoading ? "認証中" : "確定"}
         </Button>
     )
 }

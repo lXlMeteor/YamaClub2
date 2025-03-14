@@ -1,6 +1,5 @@
 import styles from '@/app/statics/styles/postTitleBar.module.css';
 import { Zen_Maru_Gothic } from "next/font/google";
-import CommentCloseButton from './commentCloseButton';
 import CommentPostButton from './commentPostButton';
 
 const ZenMaruGothicFont = Zen_Maru_Gothic({
@@ -10,13 +9,11 @@ const ZenMaruGothicFont = Zen_Maru_Gothic({
 
 
 type PostTitleProps = {
+    currentPostId: string;
     title: string;
-    isShowComments: boolean
-    handleHideComments: () => void;
-    handleShowComments: () => void;
 }
 
-export default function PostTitleBar ({ title, isShowComments, handleHideComments, handleShowComments } : PostTitleProps) {
+export default function PostTitleBar ({ currentPostId, title, } : PostTitleProps) {
     return (
         <div className = {styles.postTitleBar}>
             <div className = {`${styles.postTitle} ${ZenMaruGothicFont.className}`}>
@@ -24,15 +21,9 @@ export default function PostTitleBar ({ title, isShowComments, handleHideComment
                     {title}
                 </div>
                 <div className = {styles.commentButton}>
-                    {isShowComments ? (
-                        <CommentCloseButton
-                            handleHideComments = {handleHideComments}
-                        />
-                    ) : (
-                        <CommentPostButton
-                            handleShowComments = {handleShowComments}
-                        />
-                    )}
+                    <CommentPostButton 
+                        currentPostId = {currentPostId}
+                    />
                 </div>
             </div>
         </div>

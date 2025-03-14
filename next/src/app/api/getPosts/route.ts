@@ -3,6 +3,8 @@ import prisma from '@/app/lib/prisma';
 import { getServerSession } from 'next-auth';
 import { authOptions } from '@/app/lib/nextAuth';
 
+export const dynamic = 'force-dynamic';
+
 export async function GET(request: Request) {
   try {
     const session = await getServerSession(authOptions);
@@ -12,7 +14,7 @@ export async function GET(request: Request) {
     // クエリパラメータの取得
     const after = searchParams.get('after');   // これより新しい投稿を取得（この時点より後に作成された投稿）例: 2022-01-01T00:00:00.000Z
     const before = searchParams.get('before'); // これより古い投稿を取得（この時点より前に作成された投稿）例: 2022-01-01T00:00:00.000Z
-    const limit = parseInt(searchParams.get('limit') || '5'); // デフォルトは20件
+    const limit = parseInt(searchParams.get('limit') || '20'); // デフォルトは20件
     
     // 基本的なフィルター条件（status=falseの投稿のみ）
     const baseWhere = {

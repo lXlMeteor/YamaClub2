@@ -1,0 +1,30 @@
+.profilePostCard {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.kuyoCardBrind {
+    background-color: rgba(143, 143, 143, 0.379);
+    height: 100%;
+    border-radius: 15px;
+    border: 0.5vh solid #FFE097;
+}
+
+.isKuyo {
+    background-color: rgba(0, 0, 0, 0.7);
+    height: 100%;
+    border-radius: 15px;
+    border: 0.5vh solid #FFE097;
+    z-index: 100;
+    position: relative;
+    transition: background-color 0.5s ease;
+}
+
+.kuyoCardFooter {
+    display: flex;
+    justify-content: space-between;
+    margin-right: 2vw;
+    margin-top: 11vh;
+    position: relative;
+}

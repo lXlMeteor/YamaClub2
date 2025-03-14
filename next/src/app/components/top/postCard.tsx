@@ -9,17 +9,11 @@ import { PostReactions } from './postReactions';
 
 interface PostCardProps {
     currentPost: Post;
-    isShowComments: boolean;
-    handleHideComments: () => void;
-    handleShowComments: () => void;
     formatDate: (date: string) => string;
 }
 
 const PostCard: React.FC<PostCardProps> = ({
     currentPost,
-    isShowComments,
-    handleHideComments,
-    handleShowComments,
     formatDate
 }) => {
 
@@ -88,9 +82,13 @@ const PostCard: React.FC<PostCardProps> = ({
         <div className={styles.postCard} style={{ backgroundImage: `url(${currentPost.image})`, backgroundSize: 'cover', backgroundPosition: 'center' }}>
             <div className={styles.bgBrind}>
                 <UserInfo user={currentPost.user} category={currentPost.category} createdAt={currentPost.createdAt} formatDate={formatDate} />
-                <PostContent category={currentPost.category} title={currentPost.title} content={currentPost.content} />
+                <PostContent content={currentPost.content} />
+                {/* <PostContent category={currentPost.category} title={currentPost.title} content={currentPost.content} /> */}
                 <div className={styles.postCardFooter}>
-                    <PostTitleBar title={currentPost.title} isShowComments={isShowComments} handleHideComments={handleHideComments} handleShowComments={handleShowComments} />
+                    <PostTitleBar
+                        currentPostId={currentPost.id}
+                        title={currentPost.title}
+                    />
                         <PostReactions
                             currentPostId={currentPost.id}
                             reactionCounts={reactionCounts[currentPost.id]}

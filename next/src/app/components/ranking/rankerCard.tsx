@@ -5,6 +5,7 @@ import { Avatar } from '@mui/material';
 import { Zen_Maru_Gothic } from "next/font/google";
 import { useRouter } from 'next/navigation';
 import { setTargetUserId } from '@/app/store/profileStore';
+import { calculateRevel } from '@/app/utils/calculateRevel';
 
 interface User {
     id: string;
@@ -63,7 +64,7 @@ export default function RankerCard({ user, loginUser }: RankerCardProps) {
                         }}
                     />
                     <p className={`${ZenMaruGothicFont_L.className} ${styles.name}`}>{user.name}</p>
-                    <p className={`${ZenMaruGothicFont_L.className} ${styles.level}`}>供養レベル：特級供養僧</p>
+                    <p className={`${ZenMaruGothicFont_L.className} ${styles.level}`}>供養レベル：{calculateRevel({kuyoCount: user.kuyouCount ?? 0})}</p>
                 </div>
             </div>
             <div className={`${ZenMaruGothicFont_M.className} ${styles.count}`}>

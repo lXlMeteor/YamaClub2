@@ -30,7 +30,7 @@ export default function DrawerMenu () {
         { title: 'とっぷ', href: '/top', icon: <Home /> },
         { title: 'ぷろふぃーる', href: '/profile', icon: <Person /> },
         { title: 'とうこう', href: '/createPost', icon: <Create /> },
-        { title: 'くよう', href: '/kuyo', icon: <DeleteSweep /> },
+        // { title: 'くよう', href: '/kuyo', icon: <DeleteSweep /> },
         { title: 'らんきんぐ', href: '/ranking', icon: <Leaderboard /> },
         { title: 'ろぐあうと', href: '/logOut', icon: <Logout /> },
     ];

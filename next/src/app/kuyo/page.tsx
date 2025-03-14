@@ -6,6 +6,8 @@ import KuyoCard from '../components/kuyo/kuyoCard';
 import KuyoButton from '../components/kuyo/kuyoButton';
 import Obousan from '../components/kuyo/obousan';
 import { useEffect, useState } from 'react';
+import { useSearchParams } from 'next/navigation';
+import { Suspense } from 'react';
 
 interface UserProfile {
     id: string;
@@ -39,20 +41,25 @@ interface UserProfile {
   }
 
 
-export default function Kuyo () {
+  function KuyoContent() {
     const [data, setData] = useState<ApiResponse | null>(null);
     const [loading, setLoading] = useState<boolean>(true);
     const [error, setError] = useState<string | null>(null);
-
     const [isKuyo, setIsKuyo] = useState<boolean>(false);
+
+    // クエリパラメータから postId を取得
+    const searchParams = useSearchParams();
+    const postId = searchParams.get('postId');
 
     useEffect(() => {
         async function fetchPost() {
           try {
             setLoading(true);
             // 指定した投稿IDで投稿データを取得
-            // postId={ここを取得したい投稿IDに置き換える}
-            const res = await fetch('/api/getShowPost?postId=54e36933-759d-4539-a50e-4e082ce8cf6c');
+            if (!postId) {
+              throw new Error('postId が指定されていません');
+            }
+            const res = await fetch(`/api/getShowPost?postId=${postId}`);
             
             if (!res.ok) {
               const errorData = await res.json();
@@ -61,6 +68,7 @@ export default function Kuyo () {
             
             const responseData: ApiResponse = await res.json();
             setData(responseData);
+            setIsKuyo(responseData.post.status);
             console.log('取得したデータ:', responseData);
           } catch (err: unknown) {
             console.error('エラー発生:', err);
@@ -75,7 +83,7 @@ export default function Kuyo () {
           }
         }
         fetchPost();
-      }, []);
+      }, [postId]);
     
       if (loading) {
         return <div>読み込み中...</div>;
@@ -108,6 +116,7 @@ export default function Kuyo () {
                 <Obousan />
                 <div className={styles.kuyoButton}>
                     <KuyoButton
+                        postId = {data.post.id}
                         isKuyo = {isKuyo}
                         setIsKuyo = {setIsKuyo}
                     />
@@ -116,4 +125,13 @@ export default function Kuyo () {
             </div>
         </div>
     )
+}
+
+// メインコンポーネントを Suspense でラップ
+export default function Kuyo() {
+  return (
+    <Suspense fallback={<div>読み込み中...</div>}>
+      <KuyoContent />
+    </Suspense>
+  );
 }

@@ -7,4 +7,5 @@ datetime
 openai
 diffusers
 requests
-dotenv
+python-dotenv
+flask-cors

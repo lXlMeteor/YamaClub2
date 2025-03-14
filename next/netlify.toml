@@ -1,0 +1,12 @@
+[build]
+  command = "npx prisma generate && next build"
+  publish = ".next"
+
+[[plugins]]
+  package = "@netlify/plugin-nextjs"
+
+# タイムアウト設定を環境変数で指定
+[build.environment]
+  NEXT_USE_NETLIFY_EDGE = "true"
+  AWS_LAMBDA_FUNCTION_TIMEOUT = "26"
+  NODE_OPTIONS = "--max-old-space-size=4096"

@@ -1,6 +1,11 @@
+'use client';
+
 import { Button } from "@mui/material";
 import { signIn } from 'next-auth/react';
 import { Zen_Maru_Gothic } from "next/font/google";
+import { useRouter } from 'next/navigation';
+import { useState } from 'react';
+import toast from 'react-hot-toast';
 
 const ZenMaruGothicFont = Zen_Maru_Gothic({
   weight: "700",
@@ -69,8 +74,11 @@ type SignUpPostButton = {
 }
 
 export function SignUpPostButton ({ setIsBlank, email, setEmail, userName, setUserName, passWord, setPassWord } : SignUpPostButton) {
+    const router = useRouter();
+    const [isLoading, setIsLoading] = useState<boolean>(false);
 
     const handleLogin = async() => {
+        setIsLoading(true);
         if (email && userName && passWord) {
             console.log("送信：ログイン開始");
             console.log(`メールアドレス：${email}`);
@@ -85,9 +93,13 @@ export function SignUpPostButton ({ setIsBlank, email, setEmail, userName, setUs
                 redirect: false,
             });
             if (responce?.ok) {
-                console.log("ログイン成功");
+                toast.success("ログイン成功");
+                setIsLoading(false);
+                router.replace("/top");
+                router.refresh();
             } else {
-                console.log("ログイン失敗");
+                toast.error("ログインに失敗しました");
+                setIsLoading(false);
             }
         } else {
             setIsBlank(true);
@@ -96,6 +108,7 @@ export function SignUpPostButton ({ setIsBlank, email, setEmail, userName, setUs
     
     const handleClick = async() => {
         if(email && userName && passWord) {
+            toast("認証中");
             console.log("送信：サインアップ開始");
             console.log(`メールアドレス：${email}`);
             console.log(`ユーザー名：${userName}`);
@@ -113,11 +126,14 @@ export function SignUpPostButton ({ setIsBlank, email, setEmail, userName, setUs
                 const data = await response.json();
                 if (response.ok) {
                     console.log(data);
+                    toast.success("サインアップ成功");
                     handleLogin();
                 } else {
+                    toast.error(data);
                     console.error(data.error);
                 }
             } catch (error) {
+                toast.error("サインアップに失敗しました");
                 console.error(error);
             }
         } else {
@@ -142,7 +158,7 @@ export function SignUpPostButton ({ setIsBlank, email, setEmail, userName, setUs
                 }}
             >
             <div className={`${ZenMaruGothicFont.className}`}>
-                確定
+                {isLoading ? "認証中" : "確定"}
             </div>
         </Button>
     )

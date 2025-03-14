@@ -1,6 +1,10 @@
+'use client';
+
 import { Button } from "@mui/material";
 import { signIn } from "next-auth/react";
 import { Zen_Maru_Gothic } from "next/font/google";
+import { useRouter } from "next/navigation";
+import toast from 'react-hot-toast';
 
 const ZenMaruGothicFont = Zen_Maru_Gothic({
   weight: "700",
@@ -69,6 +73,7 @@ type LogInPostButton = {
 }
 
 export function LogInPostButton ({ setIsBlank, email, setEmail, passWord, setPassWord } : LogInPostButton) {
+    const router = useRouter();
 
     const handleClick = async() => {
         if (email && passWord) {
@@ -85,9 +90,11 @@ export function LogInPostButton ({ setIsBlank, email, setEmail, passWord, setPas
                 redirect: false,
             });
             if (responce?.ok) {
-                console.log("ログイン成功");
+                toast.success("ログイン成功");
+                router.push("/top");
+                router.refresh();
             } else {
-                console.log("ログイン失敗");
+                toast.error("ログインに失敗しました");
             }
         } else {
             setIsBlank(true);

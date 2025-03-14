@@ -5,10 +5,11 @@ import { Box, Typography, CircularProgress, Button } from '@mui/material';
 import { usePosts } from '@/hooks/usePosts';
 import NextPostButton from '../components/top/nextPostButton';
 import PreviousPostButton from '../components/top/previousPostButton';
-import LoadNewPostsButton from '../components/top/loadNewPostButton';
-import PaginationInfo from '../components/top/pagenationInfo';
+// import LoadNewPostsButton from '../components/top/loadNewPostButton';
+//import PaginationInfo from '../components/top/pagenationInfo';
 import NewPostsButton from '../components/top/newPostButton';
 import PostCard from '../components/top/postCard';
+import Loading from '../components/loading';
 
 
 export default function TopPage() {
@@ -35,7 +36,7 @@ export default function TopPage() {
     const [newPostsCount, setNewPostsCount] = useState(0);
     //////
 
-    const [isShowComments, setIsShowComments] = useState(false);
+    // const [isShowComments, setIsShowComments] = useState(false);
 
     // 初期データのロード
     useEffect(() => {
@@ -82,7 +83,7 @@ export default function TopPage() {
                 setNewPostsCount(data.posts.length);
                 setShowNewPostsAlert(true);
             }
-        }, 60000000000000000000); // 1分ごとにチェック 60000
+        }, 60000); // 1分ごとにチェック 60000
       
           return () => clearInterval(checkNewPostsInterval);
         }, [paginationInfo, loading, checkForNewPosts]);
@@ -124,12 +125,12 @@ export default function TopPage() {
         };
 
         //コメントを表示するかどうか
-        const handleShowComments = () => {
-            setIsShowComments(true);
-        } 
-        const handleHideComments = () => {
-            setIsShowComments(false);
-        }
+        // const handleShowComments = () => {
+        //     setIsShowComments(true);
+        // } 
+        // const handleHideComments = () => {
+        //     setIsShowComments(false);
+        // }
 
         // 現在表示中の投稿
         const currentPost = posts.length > 0 ? posts[currentIndex] : null;
@@ -143,10 +144,10 @@ export default function TopPage() {
                         handleLoadNewPosts={handleLoadNewPosts} 
                         loading={loading} 
                     /> */}
-                    <PaginationInfo 
+                    {/* <PaginationInfo 
                         currentIndex={currentIndex} 
                         postsLength={posts.length} 
-                    />
+                    /> */}
                 </div>
               
                 {/* 新着投稿アラート 他の人とかが投稿したら表示される(これは要相談かな？毎回出たらうるさいし) */}
@@ -160,11 +161,10 @@ export default function TopPage() {
                 )}
               
                 {/* ローディング状態　これはAIが作ってくれたよ♡ 要変更 */}
-                {loading && posts.length === 0 ? (
+                {/* {loading && posts.length === 0 ? (
 
                     <Box sx={{ flex: 1, display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
-                        {/* 最初の読み込み中 */}
-                        <CircularProgress />
+                        <Loading />
                     </Box>
                     
                 ) : error && posts.length === 0 ? (
@@ -177,7 +177,9 @@ export default function TopPage() {
                 ) : posts.length === 0 ? (
 
                     <Box sx={{ flex: 1, display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
-                        <Typography>投稿がありません</Typography>
+                        <Typography>
+                            <Loading />
+                        </Typography>
                     </Box>
 
                 ) : (
@@ -189,38 +191,71 @@ export default function TopPage() {
                             alignItems: 'center'
                         }}
                     >
-                        {/* 左矢印（次の投稿） */}
-                        <PreviousPostButton 
+                        {/* <PreviousPostButton 
                             handlePrevPost={handlePrevPost} 
                             currentIndex={currentIndex} 
                         />
 
-                        {/* 投稿表示エリア */}
-                        {/* 表示する投稿(一枚一枚表示) currentPost(投稿の情報が大量に入ってる) postsに配列で投稿が入ってて、
-                            currentIndexでその配列の何番目かを指定する感じ console.logで取得してる情報流してるからその番号振ってあるのと
-                            currentIndex->currentPostの情報がリンクしてるからわからんくなったら確認
-                            こっから下は必要そうな情報の出し方とかメモみたいに書いていく*/}
+                        
 
                         {currentPost && (
                             <div>
                                 <PostCard
                                     currentPost={currentPost}
-                                    isShowComments={isShowComments}
-                                    handleHideComments={handleHideComments}
-                                    handleShowComments={handleShowComments}
                                     formatDate={formatDate}
                                 />
-                          </div>
+                            </div>
                         )}
                     
-                        {/* 右矢印（次の投稿） */}
                         <NextPostButton 
                             handleNextPost={handleNextPost} 
                             currentIndex={currentIndex} 
                             postsLength={posts.length} 
                         />
                     </div>
-                )}
+                )}  */}
+                {loading ? (
+                        <Box sx={{ flex: 1, display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+                            <Loading />
+                        </Box>
+                    ) : error ? (
+                        <Box sx={{ flex: 1, display: 'flex', justifyContent: 'center', alignItems: 'center', flexDirection: 'column', gap: 2 }}>
+                            <Typography color="error">{error}</Typography>
+                            <Button variant="contained" onClick={loadInitialPosts}>再読み込み</Button>
+                        </Box>
+                    ) : posts.length === 0 ? (
+                        <Box sx={{ flex: 1, display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+                            {/* <Typography><Loading /></Typography> */}
+                        </Box>
+                    ) : (
+                        <div
+                            style={{
+                                display: 'flex',
+                                justifyContent: 'space-between',
+                                alignItems: 'center'
+                            }}
+                        >
+                            <PreviousPostButton 
+                                handlePrevPost={handlePrevPost} 
+                                currentIndex={currentIndex} 
+                            />
+
+                            {currentPost && (
+                                <div>
+                                    <PostCard
+                                        currentPost={currentPost}
+                                        formatDate={formatDate}
+                                    />
+                                </div>
+                            )}
+                        
+                            <NextPostButton 
+                                handleNextPost={handleNextPost} 
+                                currentIndex={currentIndex} 
+                                postsLength={posts.length} 
+                            />
+                        </div>
+                    )}
               
                 {/* 読み込み中インジケーター さらなる読み込み中*/}
                 {isLoadingMore && (

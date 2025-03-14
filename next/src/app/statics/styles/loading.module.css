@@ -1,0 +1,25 @@
+/* loading.module.css */
+.loading {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;  /* 中央に配置 */
+}
+
+.loadingText {
+    font-size: 3vw;
+    color: #FF9B83;
+    animation: textAnimation 1.5s ease-in-out infinite;
+}
+
+/* アニメーション */
+@keyframes textAnimation {
+    0%, 100% {
+        transform: scale(1);
+        opacity: 1;
+    }
+    50% {
+        transform: scale(1.1);
+        opacity: 0.7;
+    }
+}

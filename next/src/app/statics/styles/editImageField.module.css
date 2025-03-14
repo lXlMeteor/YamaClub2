@@ -1,0 +1,25 @@
+.imageFieldTitle {
+    font-size: 2vw;
+    color: #FF9B83;
+}
+
+.editImageField {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+}
+
+.avatar {
+    margin-top: 2vh;
+}
+
+.label {
+    font-size: 1.5vw;
+    margin-top: 3vh;
+}
+
+.input {
+    margin-top: 2vh;
+    margin-left: 1.2vw;
+}

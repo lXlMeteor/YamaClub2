@@ -27,7 +27,7 @@ export async function POST(request: Request) {
       data: {
         userId,
         postId: postId || null,
-        replyId: replyId || null,
+        replyId,
         content,
       },
     });

@@ -8,7 +8,7 @@ const ZenMaruGothicFont = Zen_Maru_Gothic({
 });
 
 type KuyoHeaderProps = {
-    userImage: string | null;
+    userImage: string;
     userName: string;
     createdAt: string;
 };

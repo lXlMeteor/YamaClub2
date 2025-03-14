@@ -55,7 +55,7 @@ const ReactionButton: React.FC<ReactionButtonProps> = ({ count, currentPostId, t
       <div className={hasReacted[currentPostId] && hasReacted[currentPostId][type] 
         ? `${styles.hasReacted} ${ZenMaruGothicFont.className}`
         : `${styles.reactionButton} ${ZenMaruGothicFont.className}`}>
-        {label}:
+        {label}
         <p>{emoji} {count}</p>
       </div>
     </Button>

@@ -1,0 +1,18 @@
+.postDetail {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-top: 3vh;
+}
+
+.separator {
+    width: 100%;
+    border: none;
+    border-top: 0.2vh solid #ccc; /* 線の色 */
+    margin: 20px 0; /* 上下の余白 */
+}
+
+.commentList {
+    margin-bottom: 7vh;
+}

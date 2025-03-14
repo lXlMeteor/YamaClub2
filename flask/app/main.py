@@ -1,4 +1,5 @@
 from flask import Flask, send_file, request
+from flask_cors import CORS
 from datetime import datetime
 import openai
 import requests
@@ -6,6 +7,7 @@ import os
 from dotenv import load_dotenv
 
 app = Flask(__name__)
+CORS(app)
 
 load_dotenv()
 
@@ -25,7 +27,7 @@ def home():
 
     return f"Hello, Flask with Docker! Current time: {current_time}<br>AI says: {ai_response}"
 
-@app.route('/generate')
+@app.route('/generate', methods=['POST'])
 def generate():
 
     data = request.get_json()
@@ -33,6 +35,8 @@ def generate():
     name = data['name']
 
     save_dir = "image"
+    # ディレクトリが存在しない場合は作成する
+    os.makedirs(save_dir, exist_ok=True)
     save_path = os.path.join(save_dir, f"{name}.png")
 
     client = openai.OpenAI(api_key=API_KEY)
@@ -54,6 +58,7 @@ def generate():
         n=1,
         size="1024x1024"
     )
+    
 
     image_url = response.data[0].url
     print(f"Generated Image URL: {image_url}")
