@@ -34,5 +34,6 @@
 .postContentBG {
     background-color: rgba(0, 0, 0, 0.654);
     margin: 1.5vh;
+    min-height: 12vh;
     border-radius: 20px;
 }

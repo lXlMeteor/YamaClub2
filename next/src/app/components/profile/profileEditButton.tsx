@@ -51,11 +51,19 @@ export default function ProfileEditButton ({ profileImage , profileName, profile
                 onClick={handleClick}
                 sx = {{
                     width: "12.5vw",
-                    height: "3.8vh",
+                    height: "3.6vh",
                     fontSize: "1.2vw",
                     backgroundColor: "#FF9B83",
                     borderRadius: "50px",
-                    color: "#ffffff"
+                    color: "#ffffff",
+                    textAlign: "center",
+                    paddingBottom: "0.7vh",
+                    "&:hover": {
+                        backgroundColor: "#E68570", // ホバー時の色（少し暗めのオレンジ）
+                    },
+                    "&:active": {
+                        backgroundColor: "#D06D5C", // クリック時の色（さらに暗め）
+                    },
                 }}
                 >
                 <div className={ZenMaruGothicFont.className}>
@@ -75,7 +83,7 @@ export default function ProfileEditButton ({ profileImage , profileName, profile
                         top: "50%",
                         left: "50%",
                         transform: "translate(-50%, -50%)",
-                        width: "75vw",
+                        width: "55vw",
                         maxWidth: "80vw",
                         height: "65vh",
                         backgroundColor: "#fbe9be",

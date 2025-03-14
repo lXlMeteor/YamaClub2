@@ -1,6 +1,19 @@
 import { useState } from "react";
 import { Avatar, Button } from "@mui/material";
 import { EditStepType, EditValueType } from "./profileEditButton";
+import { Zen_Maru_Gothic } from "next/font/google";
+import styles from "@/app/statics/styles/editImageField.module.css";
+
+const ZenMaruGothicFontL = Zen_Maru_Gothic({
+  weight: "700",
+  subsets: ["latin"],
+});
+
+
+const ZenMaruGothicFontM = Zen_Maru_Gothic({
+    weight: "500",
+    subsets: ["latin"],
+});
 
 type EditImageFieldProps = {
     setEditStep: React.Dispatch<React.SetStateAction<EditStepType>>;
@@ -31,33 +44,60 @@ export default function EditImageField({ setEditStep, profileImage, setEditValue
     };
 
     return (
-        <div style={{ textAlign: "center", padding: "20px" }}>
-            <Avatar
-                src={previewImage || ""}
-                sx={{
-                    width: "5vw",
-                    height: "5vw",
-                    margin: "auto",
-                }}
-            />
-            <p>アイコン変更</p>
-
-            <form style={{ display: "block", marginTop: "10px" }}>
-                <label htmlFor="image-upload" style={{ display: "block", fontSize: "1.2rem", cursor: "pointer", color: "#007bff", marginBottom: "5px" }}>
-                    画像を選択してください
-                </label>
-                <input
-                    type="file"
-                    id="image-upload"
-                    accept="image/*"
-                    onChange={handleImageChange}
-                    style={{ display: "block", margin: "0 auto" }}
+        <div className={styles.editImageField}>
+            <div className={`${ZenMaruGothicFontL.className} ${styles.imageFieldTitle}`}>
+                アイコン変更
+            </div>
+            <div className={styles.avatar}>
+                <Avatar
+                    src={previewImage || ""}
+                    sx={{
+                        width: "15vw",
+                        height: "15vw",
+                        margin: "auto",
+                    }}
                 />
-            </form>
+            </div>
 
-            <Button onClick={handleClick} sx={{ marginTop: "15px" }}>
-                <div>次へ</div>
-            </Button>
+            <form>
+                <div className={`${styles.label} ${ZenMaruGothicFontM.className}`}>
+                    画像を選択してください
+                </div>
+                <div className={styles.input}>
+                    <input
+                        type="file"
+                        id="image-upload"
+                        accept="image/*"
+                        onChange={handleImageChange}
+                    />
+                </div>
+            </form>
+            <div>
+                <Button
+                    onClick={handleClick} 
+                    sx={{
+                        marginTop: "5vh",
+                        paddingBottom: "1vh",
+                        backgroundColor: "#71BFFF",
+                        width: "6vw",
+                        height: "4.5vh",
+                        fontSize: "1.5vw",
+                        borderRadius: "30px",
+                        color: "#ffffff",
+                        transition: "background-color 0.3s ease", // スムーズな色変化
+                        "&:hover": {
+                            backgroundColor: "#5FAAEF", // ホバー時の色（少し濃い青）
+                        },
+                        "&:active": {
+                            backgroundColor: "#4D98DF", // クリック時の色（さらに濃い青）
+                        },
+                    }}
+                >
+                    <div className={ZenMaruGothicFontM.className}>
+                        次へ
+                    </div>
+                </Button>
+            </div>
         </div>
     );
 }

@@ -1,8 +1,9 @@
 .profile {
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    justify-content: space-between;
     align-items: center;
+    margin-top: 4vh;
 }
 
 .profileButtons {
@@ -15,4 +16,16 @@
 .line {
     border-top: 0.25vh solid rgba(0, 0, 0, 0.3);
     width: 100vw;
+}
+
+.userStatus {
+    display: flex;
+    justify-content: space-between;
+    margin-left: 12.5vw;
+}
+
+.profileUnder {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
 }

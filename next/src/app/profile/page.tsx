@@ -78,52 +78,65 @@ export default function ProfilePage() {
     , [profileData]);
 
     return (
-        <div style={{padding: "50px 0"}}>
+        <div>
             {profileData && (
-                <div className={styles.profile}>
-                    <UserStatus
-                        userImage = {profileData.profiles.image}
-                        userName = {profileData.profiles.name}
-                        userIntro = {profileData.profiles.intro}
-                        kuyoCount = {profileData.counts.kuyoCount}
-                    />
-                    <ProfileEditButton
-                        profileImage = {profileData.profiles.image}
-                        profileName = {profileData.profiles.name}
-                        profileIntro = {profileData.profiles.intro}
-                    />
-                    <div className={styles.profileButtons}>
-                        <PastPostButton
-                            switchProfile = {switchProfile}
-                            setSwitchProfile = {setSwitchProfile}
-                        />
-                        <KuyoRevelButton
-                            switchProfile = {switchProfile}
-                            setSwitchProfile = {setSwitchProfile}
-                        />
-                    </div>
-                    <hr></hr>
-                    <div className={styles.line}></div>
-                    {switchProfile ? 
-                        <div>
-                            {profileData.posts.map((post, index) => (
-                                <ProfilePostCard
-                                    key={index}
-                                    data={post}
-                                    profile={profileData.profiles}
+                <div>
+                    <div className={styles.profile}>
+                        <div className={styles.userStatus}>
+                            <div className={styles.blank}>
+                                {/* あえて何も書いていない。CSSの都合上 */}
+                            </div>
+                            <UserStatus
+                                userImage = {profileData.profiles.image}
+                                userName = {profileData.profiles.name}
+                                userIntro = {profileData.profiles.intro}
+                                kuyoCount = {profileData.counts.kuyoCount}
+                            />
+                            <div className={styles.profileEditButton}>
+                                <ProfileEditButton
+                                    profileImage = {profileData.profiles.image}
+                                    profileName = {profileData.profiles.name}
+                                    profileIntro = {profileData.profiles.intro}
                                 />
-                            ))}
+                            </div>
                         </div>
-                    :
-                        <div>
-                            <ProfileAchievement
-                                kuyo = {profileData.counts.kuyoCount}
-                                empathy = {profileData.counts.reactionCounts.EMPATHY}
-                                lol = {profileData.counts.reactionCounts.LOL}
-                                bigLol = {profileData.counts.reactionCounts.BIGLOL}
+                        <div className={styles.profileButtons}>
+                            <PastPostButton
+                                switchProfile = {switchProfile}
+                                setSwitchProfile = {setSwitchProfile}
+                            />
+                            <KuyoRevelButton
+                                switchProfile = {switchProfile}
+                                setSwitchProfile = {setSwitchProfile}
                             />
                         </div>
-                    }
+                    </div>
+                    <div>
+                        <hr></hr>
+                        <div className={styles.line}></div>
+                        <div className={styles.profileUnder}>
+                            {switchProfile ? 
+                                <div>
+                                    {profileData.posts.map((post, index) => (
+                                        <ProfilePostCard
+                                            key={index}
+                                            data={post}
+                                            profile={profileData.profiles}
+                                        />
+                                    ))}
+                                </div>
+                            :
+                                <div>
+                                    <ProfileAchievement
+                                        kuyo = {profileData.counts.kuyoCount}
+                                        empathy = {profileData.counts.reactionCounts.EMPATHY}
+                                        lol = {profileData.counts.reactionCounts.LOL}
+                                        bigLol = {profileData.counts.reactionCounts.BIGLOL}
+                                    />
+                                </div>
+                            }
+                        </div>
+                    </div>
                 </div>
             )}
         </div>
