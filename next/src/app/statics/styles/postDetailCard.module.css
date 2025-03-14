@@ -1,0 +1,38 @@
+.kuyoCardBrind {
+    background-color: rgba(143, 143, 143, 0.379);
+    height: 100%;
+    border-radius: 15px;
+    border: 0.5vh solid #FFE097;
+}
+
+.isKuyo {
+    background-color: rgba(0, 0, 0, 0.7);
+    height: 100%;
+    border-radius: 15px;
+    border: 0.5vh solid #FFE097;
+    z-index: 100;
+    position: relative;
+    transition: background-color 0.5s ease;
+}
+
+.kuyoCardFooter {
+    display: flex;
+    justify-content: space-between;
+    margin-right: 2vw;
+    margin-top: 2vh;
+    position: relative;
+    margin-bottom: 1svh;
+}
+
+.postDetailContent {
+    font-size: 1.2vw;
+    color: #FFFFFF;
+    line-height: 1.8;
+    padding: 1vh;
+}
+
+.postContentBG {
+    background-color: rgba(0, 0, 0, 0.654);
+    margin: 1.5vh;
+    border-radius: 20px;
+}
